@@ -34,12 +34,9 @@ jobs:
           sudo apt-get install -y doxygen graphviz
 
       - name: Setup TeX Live
-        uses: teatimeguest/setup-texlive-action@v3
+        uses: xu-cheng/setup-texlive-action@v3
         with:
-          packages: >-
-            scheme-full
-            collection-fontsrecommended
-            latexml
+          packages: scheme-full collection-fontsrecommended latexml
 
       - name: Create output directory
         run: mkdir -p _site/docs
