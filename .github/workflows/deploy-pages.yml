@@ -28,11 +28,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Doxygen
-        uses: denis-sokolov/gh-action-doxygen@v1.2
-        with:
-          # We will generate a Doxyfile on the fly
-          build_docs: false
+      - name: Install Doxygen
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y doxygen graphviz
 
       - name: Setup TeX Live
         uses: teatimeguest/setup-texlive-action@v3
@@ -60,6 +59,7 @@ jobs:
           INPUT             = .
           RECURSIVE         = YES
           FILE_PATTERNS     = *.h *.cpp
+          HAVE_DOT          = YES
           GENERATE_LATEX    = NO
           EOF
           
