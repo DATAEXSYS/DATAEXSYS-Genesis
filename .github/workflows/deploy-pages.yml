@@ -19,7 +19,7 @@ jobs:
     name: Build LaTeX + Doxygen Docs
     runs-on: ubuntu-latest
     steps:
-      # 1️⃣ Checkout repo
+      # 1️⃣ Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -29,11 +29,12 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y doxygen graphviz
 
-      # 3️⃣ Setup TeX Live + LaTeXML
-      - name: Setup TeX Live
-        uses: teatimeguest/setup-texlive-action@v3
-        with:
-          packages: scheme-small collection-fontsrecommended latexml
+      # 3️⃣ Install TeX Live + LaTeXML manually
+      - name: Install TeX Live + LaTeXML
+        run: |
+          sudo apt-get update
+          # Minimal TeX Live + LaTeXML for HTML conversion
+          sudo apt-get install -y texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended latexml
 
       # 4️⃣ Create output directories
       - name: Create output directory
@@ -42,7 +43,7 @@ jobs:
       # 5️⃣ Build LaTeX FYP to HTML
       - name: Build LaTeX Report to HTML
         run: |
-          # Make sure the path to your main.tex is correct
+          # Update the path to your main.tex if needed
           latexmlc --dest=_site/index.html F25_079/main.tex
 
       # 6️⃣ Generate Doxygen documentation
