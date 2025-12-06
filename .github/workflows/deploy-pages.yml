@@ -29,7 +29,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Doxygen
-        uses: crazy-max/ghaction-doxygen@v3
+        uses: denis-sokolov/gh-action-doxygen@v1.2
         with:
           # We will generate a Doxyfile on the fly
           build_docs: false
