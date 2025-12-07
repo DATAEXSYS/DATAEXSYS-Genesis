@@ -36,6 +36,162 @@ jobs:
           # Minimal TeX Live + LaTeXML for HTML conversion
           sudo apt-get install -y texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended latexml
 
+      # Create source and include directories
+      - name: Create src and inc directories
+        run: mkdir -p src inc
+
+      # Create doc directory for Doxyfile
+      - name: Create doc directory
+        run: mkdir -p doc
+
+      # Create Doxyfile.in template
+      - name: Create Doxyfile.in
+        run: |
+          cat <<'EOF' > doc/Doxyfile.in
+          PROJECT_NAME           = "@PROJECT_NAME@ - C++ Simulator"
+          OUTPUT_DIRECTORY       = "@CMAKE_BINARY_DIR@/_site/docs"
+          INPUT                  = "@CMAKE_SOURCE_DIR@/inc" "@CMAKE_SOURCE_DIR@/src" "@CMAKE_SOURCE_DIR@/test" "@CMAKE_SOURCE_DIR@/README.md"
+          FILE_PATTERNS          = *.h *.cpp *.md
+          RECURSIVE              = YES
+          HAVE_DOT               = YES
+          GENERATE_LATEX         = NO
+          EXTRACT_ALL            = YES
+          QUIET                  = YES
+          EOF
+
+      # Create C++ source and header files
+      - name: Create C++ source files
+        run: |
+          # Create inc/functions.h
+          cat <<'EOF' > inc/functions.h
+          #ifndef FUNCTIONS_H
+          #define FUNCTIONS_H
+          /**
+           * @brief Adds two integers.
+           * @param a The first integer.
+           * @param b The second integer.
+           * @return The sum of a and b.
+           */
+          int add(int a, int b);
+          #endif // FUNCTIONS_H
+          EOF
+
+          # Create src/functions.cpp
+          cat <<'EOF' > src/functions.cpp
+          #include "functions.h"
+          int add(int a, int b) {
+              return a + b;
+          }
+          EOF
+
+          # Create src/main.cpp
+          cat <<'EOF' > src/main.cpp
+          #include <iostream>
+          #include "functions.h"
+          int main() {
+              std::cout << "The sum is: " << add(5, 7) << std::endl;
+              return 0;
+          }
+          EOF
+
+      # Create test directory
+      - name: Create test directory
+        run: mkdir -p test
+
+      # Create test implementation file
+      - name: Create test/test.cpp
+        run: |
+          cat <<'EOF' > test/test.cpp
+          /**
+           * @file test.cpp
+           * @brief Implementation of test functions for the DATAEXSYS-Genesis simulator.
+           */
+          
+          #include <iostream>
+          #include "testInc.h"
+          #include "functions.h" // Include the functions to be tested
+          
+          // A simple macro for reporting test results
+          #define RUN_TEST(test_func, test_name) \
+              std::cout << "  Running " << test_name << "... "; \
+              if (test_func()) { \
+                  std::cout << "PASSED" << std::endl; \
+              } else { \
+                  std::cout << "FAILED" << std::endl; \
+              }
+          
+          bool test_add_positive_numbers() {
+              return add(5, 7) == 12;
+          }
+          
+          bool test_add_negative_numbers() {
+              return add(-5, -7) == -12;
+          }
+          
+          void run_all_tests() {
+              // Run the hello world function to confirm test executable works
+              hello_world();
+              
+              std::cout << "--- Running All Unit Tests ---" << std::endl;
+              RUN_TEST(test_add_positive_numbers, "test_add_positive_numbers");
+              RUN_TEST(test_add_negative_numbers, "test_add_negative_numbers");
+              std::cout << "--- Test Execution Finished ---" << std::endl;
+          }
+
+          void hello_world() {
+              std::cout << "Hello, World from the test suite!" << std::endl;
+          }
+          EOF
+
+      # Create test header file with Doxygen comments
+      - name: Create test/testInc.h
+        run: |
+          cat <<'EOF' > test/testInc.h
+          /**
+           * @file testInc.h
+           * @brief Declarations for test functions for the DATAEXSYS-Genesis simulator.
+           *
+           * This file contains the function declarations for the unit tests. Each test
+           * is designed to verify a specific piece of functionality.
+           */
+          
+          #ifndef TEST_INC_H
+          #define TEST_INC_H
+          
+          /**
+           * @brief Test case for the add() function with positive numbers.
+           * @return True if the test passes, false otherwise.
+           */
+          bool test_add_positive_numbers();
+          
+          /**
+           * @brief Test case for the add() function with negative numbers.
+           * @return True if the test passes, false otherwise.
+           */
+          bool test_add_negative_numbers();
+          
+          /**
+           * @brief Runs all declared test suites and reports the results.
+           */
+          void run_all_tests();
+          
+          /**
+           * @brief Prints a hello world message to the console.
+           * A simple function to verify the test executable is built and running.
+           */
+          void hello_world();
+
+          /**
+           * @brief Main entry point for the test runner executable.
+           *
+           * This function calls the master test runner function. It is compiled
+           * only when building the test executable.
+           */
+          int main();
+          
+          #endif // TEST_INC_H
+          EOF
+
       # 4️⃣ Create output directories
       - name: Create output directory
         run: mkdir -p _site/docs
@@ -46,22 +202,71 @@ jobs:
           # Update the path to your main.tex if needed
           latexmlc --dest=_site/index.html F25_079/main.tex
 
-      # 6️⃣ Generate Doxygen documentation
-      - name: Create Doxyfile and Build Code Docs
+      # 6️⃣ Create a professional CMakeLists.txt
+      - name: Create CMakeLists.txt
         run: |
-          cat <<EOF > Doxyfile
-          PROJECT_NAME      = "DATAEXSYS-Genesis"
-          OUTPUT_DIRECTORY  = _site/docs
-          INPUT             = src inc
-          RECURSIVE         = YES
-          FILE_PATTERNS     = *.h *.cpp
-          HAVE_DOT          = YES
-          GENERATE_LATEX    = NO
-          EXTRACT_ALL       = YES
-          QUIET             = YES
+          cat <<'EOF' > CMakeLists.txt
+          cmake_minimum_required(VERSION 3.12)
+          project(DATAEXSYS-Genesis VERSION 1.0.0)
+          
+          set(CMAKE_CXX_STANDARD 23)
+          set(CMAKE_CXX_STANDARD_REQUIRED ON)
+          
+          # --- Executable Target ---
+          # Find all .cpp files in the src directory
+          file(GLOB SOURCES "src/*.cpp")
+          
+          # Create the main simulator executable
+          add_executable(dataexsys_simulator ${SOURCES})
+          
+          # Add the 'inc' directory to the include path
+          target_include_directories(dataexsys_simulator PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/inc)
+          
+          # --- Testing ---
+          # Enable testing for this project
+          enable_testing()
+          
+          # Create a separate executable for our tests
+          add_executable(run_tests
+              test/test.cpp
+              src/functions.cpp # Also compile the functions we are testing
+          )
+          
+          # Add include directories for the test executable
+          target_include_directories(run_tests PUBLIC
+              ${CMAKE_CURRENT_SOURCE_DIR}/inc
+              ${CMAKE_CURRENT_SOURCE_DIR}/test
+          )
+          
+          # Add a CTest test case
+          add_test(NAME unit_tests COMMAND run_tests)
+          
+          # --- Doxygen Integration ---
+          find_package(Doxygen)
+          if(DOXYGEN_FOUND)
+              set(DOXYGEN_PROJECT_NAME ${PROJECT_NAME})
+              set(DOXYGEN_PROJECT_NUMBER ${PROJECT_VERSION})
+          
+              # Configure the Doxyfile from our template
+              configure_file(${CMAKE_SOURCE_DIR}/doc/Doxyfile.in ${CMAKE_BINARY_DIR}/Doxyfile @ONLY)
+          
+              # Add a custom target to run Doxygen
+              add_custom_target(doc ALL
+                  COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/Doxyfile
+                  WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+                  COMMENT "Generating API documentation with Doxygen..."
+                  VERBATIM)
+          else()
+              message(WARNING "Doxygen not found. Documentation will not be generated.")
+          endif()
           EOF
 
-          doxygen Doxyfile
+      # 7️⃣ Configure, Build, and Test with CMake
+      - name: Build, Test, and Generate Docs
+        run: |
+          cmake -B build .
+          cmake --build build
+          ctest --test-dir build
 
       # 7️⃣ Setup GitHub Pages environment
       - name: Setup GitHub Pages
@@ -71,7 +276,7 @@ jobs:
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './_site'
+          path: './build/_site'
 
   deploy:
     name: Deploy Website
