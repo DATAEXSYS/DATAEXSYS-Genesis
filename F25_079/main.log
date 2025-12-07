@@ -1,0 +1,1521 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.12.7)  7 DEC 2025 23:29
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**main
+(./main.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-22>
+(/usr/share/texlive/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2023/05/17 v1.4n Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/bk12.clo
+File: bk12.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count187
+\c@chapter=\count188
+\c@section=\count189
+\c@subsection=\count190
+\c@subsubsection=\count191
+\c@paragraph=\count192
+\c@subparagraph=\count193
+\c@figure=\count194
+\c@table=\count195
+\abovecaptionskip=\skip48
+\belowcaptionskip=\skip49
+\bibindent=\dimen140
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2023-11-01 v4.19 Multi-page Table package (DPC)
+\LTleft=\skip50
+\LTright=\skip51
+\LTpre=\skip52
+\LTpost=\skip53
+\LTchunksize=\count196
+\LTcapwidth=\dimen141
+\LT@head=\box51
+\LT@firsthead=\box52
+\LT@foot=\box53
+\LT@lastfoot=\box54
+\LT@gbox=\box55
+\LT@cols=\count197
+\LT@rows=\count198
+\c@LT@tables=\count199
+\c@LT@chunks=\count266
+\LT@p@ftn=\toks17
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks18
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 107.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen142
+\Gin@req@width=\dimen143
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/tabularx.sty
+Package: tabularx 2023/07/08 v2.11c `tabularx' package (DPC)
+
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+Package: array 2023/10/16 v2.5g Tabular extension package (FMi)
+\col@sep=\dimen144
+\ar@mcellbox=\box56
+\extrarowheight=\dimen145
+\NC@list=\toks19
+\extratabsurround=\skip54
+\backup@length=\skip55
+\ar@cellbox=\box57
+)
+\TX@col@width=\dimen146
+\TX@old@table=\dimen147
+\TX@old@col=\dimen148
+\TX@target=\dimen149
+\TX@delta=\dimen150
+\TX@cols=\count267
+\TX@ftn=\toks20
+)
+(/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen151
+\lightrulewidth=\dimen152
+\cmidrulewidth=\dimen153
+\belowrulesep=\dimen154
+\belowbottomsep=\dimen155
+\aboverulesep=\dimen156
+\abovetopsep=\dimen157
+\cmidrulesep=\dimen158
+\cmidrulekern=\dimen159
+\defaultaddspace=\dimen160
+\@cmidla=\count268
+\@cmidlb=\count269
+\@aboverulesep=\dimen161
+\@belowrulesep=\dimen162
+\@thisruleclass=\count270
+\@lastruleclass=\count271
+\@thisrulewidth=\dimen163
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2023/05/13 v2.17o AMS math features
+\@mathmargin=\skip56
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2021/08/26 v2.01 AMS text
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks21
+\ex@=\dimen164
+))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen165
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count272
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count273
+\leftroot@=\count274
+LaTeX Info: Redefining \overline on input line 399.
+LaTeX Info: Redefining \colon on input line 410.
+\classnum@=\count275
+\DOTSCASE@=\count276
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box58
+\strutbox@=\box59
+LaTeX Info: Redefining \big on input line 722.
+LaTeX Info: Redefining \Big on input line 723.
+LaTeX Info: Redefining \bigg on input line 724.
+LaTeX Info: Redefining \Bigg on input line 725.
+\big@size=\dimen166
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count277
+LaTeX Info: Redefining \bmod on input line 905.
+LaTeX Info: Redefining \pmod on input line 910.
+LaTeX Info: Redefining \smash on input line 940.
+LaTeX Info: Redefining \relbar on input line 970.
+LaTeX Info: Redefining \Relbar on input line 971.
+\c@MaxMatrixCols=\count278
+\dotsspace@=\muskip16
+\c@parentequation=\count279
+\dspbrk@lvl=\count280
+\tag@help=\toks22
+\row@=\count281
+\column@=\count282
+\maxfields@=\count283
+\andhelp@=\toks23
+\eqnshift@=\dimen167
+\alignsep@=\dimen168
+\tagshift@=\dimen169
+\tagwidth@=\dimen170
+\totwidth@=\dimen171
+\lineht@=\dimen172
+\@envbody=\toks24
+\multlinegap=\skip57
+\multlinetaggap=\skip58
+\mathdisplay@stack=\toks25
+LaTeX Info: Redefining \[ on input line 2953.
+LaTeX Info: Redefining \] on input line 2954.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count284
+\float@exts=\toks26
+\float@box=\box60
+\@float@everytoks=\toks27
+\@floatcapt=\box61
+)
+(/usr/share/texlive/texmf-dist/tex/latex/placeins/placeins.sty
+Package: placeins 2005/04/18  v 2.2
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+Package: fancyhdr 2022/11/09 v4.1 Extensive control of page headers and footers
+
+\f@nch@headwidth=\skip59
+\f@nch@O@elh=\skip60
+\f@nch@O@erh=\skip61
+\f@nch@O@olh=\skip62
+\f@nch@O@orh=\skip63
+\f@nch@O@elf=\skip64
+\f@nch@O@erf=\skip65
+\f@nch@O@olf=\skip66
+\f@nch@O@orf=\skip67
+)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2024-01-20 v7.01h Hypertext links for LaTeX
+
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
+)
+(/usr/share/texlive/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+))
+(/usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2023-11-26 v2.56 Cross-referencing by name of section
+
+(/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+
+(/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+))
+\c@section@level=\count285
+)
+(/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count286
+)
+\@linkdim=\dimen173
+\Hy@linkcounter=\count287
+\Hy@pagecounter=\count288
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2024-01-20 v7.01h Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+)
+(/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+\Hy@SavedSpaceFactor=\count289
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2024-01-20 v7.01h Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
+Package hyperref Info: Hyper figures OFF on input line 4179.
+Package hyperref Info: Link nesting OFF on input line 4184.
+Package hyperref Info: Hyper index ON on input line 4187.
+Package hyperref Info: Plain pages OFF on input line 4194.
+Package hyperref Info: Backreferencing OFF on input line 4199.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4446.
+\c@Hy@tempcnt=\count290
+
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip17
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4784.
+\XeTeXLinkMargin=\dimen174
+
+(/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
+))
+\Fld@menulength=\count291
+\Field@Width=\dimen175
+\Fld@charsize=\dimen176
+Package hyperref Info: Hyper figures OFF on input line 6063.
+Package hyperref Info: Link nesting OFF on input line 6068.
+Package hyperref Info: Hyper index ON on input line 6071.
+Package hyperref Info: backreferencing OFF on input line 6078.
+Package hyperref Info: Link coloring OFF on input line 6083.
+Package hyperref Info: Link coloring with OCG OFF on input line 6088.
+Package hyperref Info: PDF/A mode OFF on input line 6093.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/atbegshi-ltx.sty
+Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+)
+\Hy@abspage=\count292
+\c@Item=\count293
+\c@Hfootnote=\count294
+)
+Package hyperref Info: Driver (autodetected): hpdftex.
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2024-01-20 v7.01h Hyperref driver for pdfTeX
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
+kage
+with kernel methods
+)
+\Fld@listcount=\count295
+\c@bookmark@seq@number=\count296
+
+(/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+85.
+)
+\Hy@SectionHShift=\skip68
+)
+(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2023/11/15 v3.01 LaTeX color extensions (UK)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 274.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1350.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1354.
+Package xcolor Info: Model `RGB' extended on input line 1366.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1368.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1371.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1372.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1373.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/colortbl/colortbl.sty
+Package: colortbl 2022/06/20 v1.0f Color table columns (DPC)
+\everycr=\toks28
+\minrowclearance=\skip69
+\rownum=\count297
+)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen177
+\captionmargin=\dimen178
+\caption@leftmargin=\dimen179
+\caption@rightmargin=\dimen180
+\caption@width=\dimen181
+\caption@indent=\dimen182
+\caption@parindent=\dimen183
+\caption@hangindent=\dimen184
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count298
+\c@continuedfloat=\count299
+Package caption Info: float package is loaded.
+Package caption Info: hyperref package is loaded.
+Package caption Info: longtable package is loaded.
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/ltcaption.sty
+Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count300
+\l__pdf_internal_box=\box62
+)
+(./main.aux)
+\openout1 = `main.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 18.
+LaTeX Font Info:    ... okay on input line 18.
+ (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count301
+\scratchdimen=\dimen185
+\scratchbox=\box63
+\nofMPsegments=\count302
+\nofMParguments=\count303
+\everyMPshowfont=\toks29
+\MPscratchCnt=\count304
+\MPscratchDim=\dimen186
+\MPnumerator=\count305
+\makeMPintoPDFobject=\count306
+\everyMPtoPDFconversion=\toks30
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+Package hyperref Info: Link coloring OFF on input line 18.
+
+(./main.out) (./main.out)
+\@outlinefile=\write3
+\openout3 = `main.out'.
+
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+ [1
+
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
+<Ahmed.png, id=570, 821.0675pt x 198.7425pt>
+File: Ahmed.png Graphic file (type png)
+<use Ahmed.png>
+Package pdftex.def Info: Ahmed.png  used on input line 61.
+(pdftex.def)             Requested size: 56.90428pt x 14.22574pt.
+<aanish.png, id=572, 821.0675pt x 198.7425pt>
+File: aanish.png Graphic file (type png)
+<use aanish.png>
+Package pdftex.def Info: aanish.png  used on input line 65.
+(pdftex.def)             Requested size: 56.90428pt x 14.22574pt.
+<Salman.png, id=573, 821.0675pt x 198.7425pt>
+File: Salman.png Graphic file (type png)
+<use Salman.png>
+Package pdftex.def Info: Salman.png  used on input line 70.
+(pdftex.def)             Requested size: 56.90428pt x 14.22574pt.
+ [3 <./Ahmed.png> <./aanish.png> <./Salman.png>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [4]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [5]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [6]
+(./main.toc
+Overfull \hbox (9.56544pt too wide) in paragraph at lines 25--25
+ [][] [][]\OT1/cmr/m/n/12 ABCD: ad-vanced blockchain DSR al-go-rithm for MANET 
+
+ []
+
+
+Overfull \hbox (13.03343pt too wide) in paragraph at lines 26--26
+ [][] [][]\OT1/cmr/m/n/12 A scal-able blockchain based trust man-age-ment in VA
+NET 
+ []
+
+[7
+
+]
+Overfull \hbox (7.94313pt too wide) in paragraph at lines 27--27
+ [][] [][]\OT1/cmr/m/n/12 Traffic Pre-ven-tion and Se-cu-rity En-hance-ment in 
+VANET 
+ []
+
+[8] [9]
+Overfull \hbox (15.56119pt too wide) in paragraph at lines 137--137
+ [][] [][]\OT1/cmr/m/n/12 Contrast be-tween nor-mal DSR ver-sus pro-posed block
+chain 
+ []
+
+[10])
+\tf@toc=\write4
+\openout4 = `main.toc'.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [11]
+[12
+
+] (./main.lof
+Overfull \hbox (20.1487pt too wide) in paragraph at lines 11--11
+ [][] [][]\OT1/cmr/m/n/12 MetaBlockchain is re-spon-si-ble for rout-ing ei-ther
+ to PKI Blockchain 
+ []
+
+)
+\tf@lof=\write5
+\openout5 = `main.lof'.
+
+ [13] [14
+
+] (./main.lot
+Overfull \hbox (0.15712pt too wide) in paragraph at lines 8--8
+ [][] [][]\OT1/cmr/m/n/12 Use case for new node reg-is-tra-tion, en-sur-ing onl
+y ver-i-fied nodes 
+ []
+
+)
+\tf@lot=\write6
+\openout6 = `main.lot'.
+
+ [15] [16
+
+]
+Chapter 1.
+[17]
+Overfull \hbox (6.58783pt too wide) in paragraph at lines 115--115
+[]\OT1/cmr/bx/n/17.28 Definitions, Acronyms, and Ab-bre-vi-a-tions 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 116--117
+
+ []
+
+[18]
+Overfull \hbox (3.54732pt too wide) in paragraph at lines 140--148
+\OT1/cmr/m/n/12 sharing sys-tem that uses content-addressing in-stead of tra-di
+-tional URLs. 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 140--148
+
+ []
+
+[19] [20]
+Chapter 2.
+[21
+
+] [22] [23] [24
+
+]
+<Figures/SDG 9.jpg, id=910, 3011.25pt x 3011.25pt>
+File: Figures/SDG 9.jpg Graphic file (type jpg)
+<use Figures/SDG 9.jpg>
+Package pdftex.def Info: Figures/SDG 9.jpg  used on input line 219.
+(pdftex.def)             Requested size: 107.24762pt x 107.24243pt.
+ [25 <./Figures/SDG 9.jpg>] [26] [27
+
+] [28
+
+]
+Chapter 3.
+
+Underfull \hbox (badness 10000) in paragraph at lines 234--235
+
+ []
+
+
+Overfull \hbox (3.39447pt too wide) in paragraph at lines 235--235
+\OT1/cmr/bx/n/14.4 MANET to mit-i-gate the dif-fer-ent se-cu-rity threats 
+ []
+
+[29] [30]
+Overfull \hbox (0.2265pt too wide) in paragraph at lines 249--252
+\OT1/cmr/m/n/12 The pa-per is quite rel-e-vant to the pro-posed core con-cept o
+f us-ing a blockchain-
+ []
+
+[31]
+Overfull \hbox (2.75606pt too wide) in paragraph at lines 254--254
+[]\OT1/cmr/bx/n/14.4 Lightweight Cryp-tog-ra-phy and IDS for Edge Net-
+ []
+
+
+Overfull \hbox (24.50298pt too wide) in paragraph at lines 261--261
+\OT1/cmr/bx/n/14.4 gre-ga-tion scheme for risk-aware zone-based MANET 
+ []
+
+[32
+
+]
+Overfull \hbox (10.50618pt too wide) in paragraph at lines 266--266
+\OT1/cmr/bx/n/14.4 age-ment Model Based on Dou-ble Layer Blockchain
+ []
+
+
+Overfull \hbox (0.37337pt too wide) in paragraph at lines 276--279
+\OT1/cmr/m/n/12 The pa-per in-te-grates blockchain with stan-dard DSR pro-to-co
+l. The blockchain
+ []
+
+[33] [34] [35] [36] [37]
+Overfull \hbox (7.60947pt too wide) in paragraph at lines 319--319
+[]\OT1/cmr/bx/n/14.4 A regression-based tech-nique for link fail-ure time
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 367--367
+[]|\OT1/cmr/m/n/8 DSR with blockchain,
+ []
+
+
+Underfull \hbox (badness 5548) in paragraph at lines 367--367
+\OT1/cmr/m/n/8 89.6% de-tec-tion; CPU
+ []
+
+
+Underfull \hbox (badness 4765) in paragraph at lines 367--367
+[]|\OT1/cmr/m/n/8 High cost from ho-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 367--367
+[]|\OT1/cmr/m/n/8 Two-level trust via
+ []
+
+
+Underfull \hbox (badness 5274) in paragraph at lines 367--367
+[]|\OT1/cmr/m/n/8 97.4% ac-cu-racy, 96.1%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 367--367
+[]|\OT1/cmr/m/n/8 High com-pu-ta-tional
+ []
+
+
+Underfull \hbox (badness 7221) in paragraph at lines 367--367
+\OT1/cmr/m/n/8 pseudo-identities, group
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 367--367
+[]|\OT1/cmr/m/n/8 Centralized group
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 367--367
+[]|\OT1/cmr/m/n/8 +27% life-time, 95.6%
+ []
+
+
+Underfull \hbox (badness 6220) in paragraph at lines 367--367
+[]|\OT1/cmr/m/n/8 DBREMM: double-layer
+ []
+
+
+Underfull \hbox (badness 4279) in paragraph at lines 367--367
+[]|\OT1/cmr/m/n/8 Latency in real-time
+ []
+
+
+Underfull \hbox (badness 1270) in paragraph at lines 367--367
+[]|\OT1/cmr/m/n/8 93.8% PDR, 31 ms la-
+ []
+
+
+Underfull \hbox (badness 1286) in paragraph at lines 367--367
+[]|\OT1/cmr/m/n/8 Mouchfiq et al.
+ []
+
+
+Underfull \hbox (badness 5847) in paragraph at lines 367--367
+[]|\OT1/cmr/m/n/8 60{70% re-duced ledger
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 367--367
+[]|\OT1/cmr/m/n/8 ECC en-cryp-tion +
+ []
+
+
+Underfull \hbox (badness 5022) in paragraph at lines 367--367
+[]|\OT1/cmr/m/n/8 No com-par-i-son with
+ []
+
+
+Underfull \hbox (badness 1803) in paragraph at lines 367--367
+[]|\OT1/cmr/m/n/8 PBAG: blockchain auth
+ []
+
+
+Underfull \hbox (badness 2326) in paragraph at lines 367--367
+[]|\OT1/cmr/m/n/8 Ignores de-vice power
+ []
+
+
+Underfull \hbox (badness 4954) in paragraph at lines 367--367
+[]|\OT1/cmr/m/n/8 Agrawal et al.
+ []
+
+
+Underfull \hbox (badness 5954) in paragraph at lines 367--367
+[]|\OT1/cmr/m/n/8 Complex ar-chi-tec-ture
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 367--367
+[]|\OT1/cmr/m/n/8 GNL: tem-po-ral graph
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 367--367
+[]|\OT1/cmr/m/n/8 97.1% ac-cu-racy, 21%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 367--367
+[]|\OT1/cmr/m/n/8 High com-pu-ta-tional
+ []
+
+
+Underfull \hbox (badness 6412) in paragraph at lines 367--367
+\OT1/cmr/m/n/8 cost; un-suit-able for
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 367--367
+[]|\OT1/cmr/m/n/8 Ghaleb et al.
+ []
+
+
+Underfull \hbox (badness 1997) in paragraph at lines 367--367
+[]|\OT1/cmr/m/n/8 Direct + in-di-rect trust
+ []
+
+
+Underfull \hbox (badness 2726) in paragraph at lines 367--367
+[]|\OT1/cmr/m/n/8 92.5% de-tec-tion, 93.7%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 367--367
+[]|\OT1/cmr/m/n/8 95.2% ac-cu-racy, -17%
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 367--367
+[]|\OT1/cmr/m/n/8 Signal-based pre-dic-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 367--367
+\OT1/cmr/m/n/8 tion un-re-li-able in
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [38]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [39]
+
+LaTeX Warning: Citation `ref:dorri2017lsb_arxiv' on page 40 undefined on input 
+line 376.
+
+
+Overfull \hbox (6.81276pt too wide) in paragraph at lines 378--378
+[]\OT1/cmr/bx/n/14.4 Blockchain-Based Lightweight Trust Man-age-ment
+ []
+
+
+LaTeX Warning: Citation `ref:lwin2020manet' on page 40 undefined on input line 
+379.
+
+
+LaTeX Warning: Citation `ref:briar2025' on page 40 undefined on input line 381.
+
+
+[40] [41] [42
+
+]
+Chapter 4.
+
+Overfull \hbox (13.8347pt too wide) in paragraph at lines 393--394
+[]\OT1/cmr/m/n/12 Each node cre-ates key pairs and gets dig-i-tal cer-tifi-cate
+s through blockchain
+ []
+
+[43] [44] [45] [46]
+Underfull \hbox (badness 2582) in paragraph at lines 503--503
+[]|\OT1/cmr/m/n/12 All in-ter-me-di-ate nodes have ver-i-fied the
+ []
+
+
+Underfull \hbox (badness 6725) in paragraph at lines 518--518
+[]|\OT1/cmr/m/n/12 Source node broad-casts
+ []
+
+
+Underfull \hbox (badness 1762) in paragraph at lines 533--533
+[]|\OT1/cmr/m/n/12 If blockchain ver-i-fi-ca-tion
+ []
+
+
+Overfull \hbox (49.68558pt too wide) in alignment at lines 489--535
+ [] [] [] [] [] 
+ []
+
+[47] [48]
+Underfull \hbox (badness 2035) in paragraph at lines 548--548
+\OT1/cmr/m/n/12 along the pre-established and blockchain-
+ []
+
+
+Underfull \hbox (badness 2990) in paragraph at lines 552--552
+[]|\OT1/cmr/m/n/12 The data packet is suc-cess-fully re-ceived
+ []
+
+
+Underfull \hbox (badness 3343) in paragraph at lines 552--552
+\OT1/cmr/m/n/12 and de-crypted by the des-ti-na-tion node,
+ []
+
+
+Underfull \hbox (badness 5924) in paragraph at lines 559--559
+\OT1/cmr/m/n/12 des-ti-na-tion's pub-lic key
+ []
+
+
+Underfull \hbox (badness 2426) in paragraph at lines 563--563
+[]|\OT1/cmr/m/n/12 Each In-ter-me-di-ate Node
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 571--571
+[]|\OT1/cmr/m/n/12 The Des-ti-na-tion Node
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 571--571
+\OT1/cmr/m/n/12 re-ceives the en-crypted
+ []
+
+[49]
+Underfull \hbox (badness 1668) in paragraph at lines 602--602
+\OT1/cmr/m/n/12 "join re-quest" to neigh-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 606--606
+\OT1/cmr/m/n/12 new node's cer-tifi-cate
+ []
+
+
+Underfull \hbox (badness 1540) in paragraph at lines 606--606
+\OT1/cmr/m/n/12 against the trusted CA.
+ []
+
+
+Underfull \hbox (badness 2065) in paragraph at lines 606--606
+\OT1/cmr/m/n/12 A con-sen-sus pro-to-col is
+ []
+
+
+Underfull \hbox (badness 2932) in paragraph at lines 606--606
+\OT1/cmr/m/n/12 ini-ti-ated among ex-ist-ing
+ []
+
+
+Underfull \hbox (badness 1571) in paragraph at lines 610--610
+\OT1/cmr/m/n/12 to a new block on the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 615--615
+[]|\OT1/cmr/m/n/12 If cer-tifi-cate val-i-da-tion
+ []
+
+
+Underfull \hbox (badness 2096) in paragraph at lines 615--615
+\OT1/cmr/m/n/12 reached, the sys-tem re-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 615--615
+\OT1/cmr/m/n/12 jects the reg-is-tra-tion
+ []
+
+[50]
+Underfull \hbox (badness 1968) in paragraph at lines 644--644
+[]|\OT1/cmr/m/n/12 The sys-tem gen-er-ates a
+ []
+
+
+Underfull \hbox (badness 2042) in paragraph at lines 644--644
+\OT1/cmr/m/n/12 sage and sends it back
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 652--652
+[]|\OT1/cmr/m/n/12 The sys-tem up-dates
+ []
+
+
+Underfull \hbox (badness 1803) in paragraph at lines 652--652
+\OT1/cmr/m/n/12 the blockchain with the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 652--652
+\OT1/cmr/m/n/12 new route in-for-ma-tion,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 652--652
+\OT1/cmr/m/n/12 and data trans-mis-sion
+ []
+
+
+Underfull \hbox (badness 6927) in paragraph at lines 657--657
+\OT1/cmr/m/n/12 cess fails to find any
+ []
+
+
+Underfull \hbox (badness 3482) in paragraph at lines 657--657
+\OT1/cmr/m/n/12 and in-forms the source
+ []
+
+[51]
+Underfull \hbox (badness 10000) in paragraph at lines 677--678
+[]|\OT1/cmr/m/n/12 intel core i5,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 677--678
+\OT1/cmr/m/n/12 8GB RAM,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 677--678
+\OT1/cmr/m/n/12 256GB SSD,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 677--678
+\OT1/cmr/m/n/12 Ubuntu 22.04
+ []
+
+
+Overfull \hbox (17.48578pt too wide) in paragraph at lines 669--687
+ [][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [52]
+Underfull \hbox (badness 10000) in paragraph at lines 704--705
+[]|\OT1/cmr/m/n/12 Ubuntu
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 706--707
+[]|\OT1/cmr/m/n/12 Operating sys-tem for run-ning
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 706--707
+\OT1/cmr/m/n/12 blockchian nodes, Python scripts
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 709--710
+[]|\OT1/cmr/m/n/12 Blockchain
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 709--710
+\OT1/cmr/m/n/12 Frame-
+ []
+
+
+Underfull \hbox (badness 2635) in paragraph at lines 710--711
+[]|\OT1/cmr/m/n/12 Pure C/C++, g++
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 711--712
+[]|\OT1/cmr/m/n/12 Implements Multi-layer blockchain,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 719--720
+[]|\OT1/cmr/m/n/12 Network
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 719--720
+\OT1/cmr/m/n/12 Sim-u-la-tion
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 720--721
+[]|\OT1/cmr/m/n/12 Custom Min-i-mal
+ []
+
+
+Underfull \hbox (badness 1546) in paragraph at lines 721--722
+[]|\OT1/cmr/m/n/12 Simulates PANET en-vi-ron-ments for
+ []
+
+
+Overfull \hbox (17.48578pt too wide) in paragraph at lines 697--725
+ [][] 
+ []
+
+
+Underfull \vbox (badness 3942) has occurred while \output is active []
+
+ [53]
+[54]
+Chapter 5.
+[55
+
+]
+<Figures/pan_local_trust_flowchart_colorful.pdf, id=1129, 540.0175pt x 933.4875
+pt>
+File: Figures/pan_local_trust_flowchart_colorful.pdf Graphic file (type pdf)
+<use Figures/pan_local_trust_flowchart_colorful.pdf>
+Package pdftex.def Info: Figures/pan_local_trust_flowchart_colorful.pdf  used o
+n input line 790.
+(pdftex.def)             Requested size: 342.47882pt x 592.0pt.
+
+Underfull \vbox (badness 1087) has occurred while \output is active []
+
+ [56]
+Overfull \vbox (38.99998pt too high) has occurred while \output is active []
+
+
+[57 <./Figures/pan_local_trust_flowchart_colorful.pdf>]
+Overfull \hbox (4.05928pt too wide) in paragraph at lines 807--808
+[]\OT1/cmr/m/n/12 Quorum-Based-Stratgy: Ini-tially \OT1/cmtt/m/n/12 MinThreshol
+d = 0  \OT1/cmr/m/n/12 ; if the num-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 808--810
+
+ []
+
+
+Overfull \hbox (95.64204pt too wide) detected at line 812
+[][][][][] \OT1/cmr/m/n/12 = [] + [][] \OMS/cmsy/m/n/12 ^^C [] \OT1/cmr/m/n/12 
++ [][] \OMS/cmsy/m/n/12 ^^C []
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 812--814
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 820--821
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 823--825
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 828--829
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 832--833
+
+ []
+
+[58]
+<Figures/PKCertChain_Node_Registration_Flowchart.pdf, id=1170, 507.8975pt x 831
+.105pt>
+File: Figures/PKCertChain_Node_Registration_Flowchart.pdf Graphic file (type pd
+f)
+<use Figures/PKCertChain_Node_Registration_Flowchart.pdf>
+Package pdftex.def Info: Figures/PKCertChain_Node_Registration_Flowchart.pdf  u
+sed on input line 845.
+(pdftex.def)             Requested size: 361.78773pt x 592.0pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [59]
+Overfull \vbox (24.49998pt too high) has occurred while \output is active []
+
+
+[60 <./Figures/PKCertChain_Node_Registration_Flowchart.pdf>]
+<Figures/PKCertChain_CertRenewal-1_page-0001.jpg, id=1189, 398.9304pt x 410.975
+4pt>
+File: Figures/PKCertChain_CertRenewal-1_page-0001.jpg Graphic file (type jpg)
+<use Figures/PKCertChain_CertRenewal-1_page-0001.jpg>
+Package pdftex.def Info: Figures/PKCertChain_CertRenewal-1_page-0001.jpg  used 
+on input line 856.
+(pdftex.def)             Requested size: 390.0pt x 401.79369pt.
+
+Underfull \vbox (badness 7379) has occurred while \output is active []
+
+ [61 <./Figures/PKCertChain_CertRenewal-1_page-0001.jpg>]
+Overfull \hbox (2.9895pt too wide) in paragraph at lines 865--865
+[]\OT1/cmr/bx/n/14.4 RouteLogChain (Packet Rout-ing and Path Trust) 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 870--871
+
+ []
+
+
+Overfull \hbox (0.44019pt too wide) in paragraph at lines 890--891
+ []\OT1/cmr/bx/n/12 Destination Node: [] \OT1/cmr/m/n/12 It will ver-ify by us-
+ing Rolling Sig-na-ture method
+ []
+
+<Figures/RouteLogChain_Sender_Flowchart-2.pdf, id=1196, 804.00375pt x 1155.3162
+5pt>
+File: Figures/RouteLogChain_Sender_Flowchart-2.pdf Graphic file (type pdf)
+<use Figures/RouteLogChain_Sender_Flowchart-2.pdf>
+Package pdftex.def Info: Figures/RouteLogChain_Sender_Flowchart-2.pdf  used on 
+input line 895.
+(pdftex.def)             Requested size: 411.97485pt x 592.0pt.
+
+Overfull \hbox (21.97485pt too wide) in paragraph at lines 895--897
+ [][] 
+ []
+
+[62]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [63]
+Overfull \vbox (38.99998pt too high) has occurred while \output is active []
+
+
+[64 <./Figures/RouteLogChain_Sender_Flowchart-2.pdf>]
+Overfull \hbox (14.71385pt too wide) in paragraph at lines 902--903
+\OT1/cmr/m/n/12 It is for au-dit-ing pur-pose and dis-patches the block to re-s
+pec-tive blockchain. 
+ []
+
+<Figures/Meta_Blockchain_page-0001.jpg, id=1234, 569.4876pt x 228.855pt>
+File: Figures/Meta_Blockchain_page-0001.jpg Graphic file (type jpg)
+<use Figures/Meta_Blockchain_page-0001.jpg>
+Package pdftex.def Info: Figures/Meta_Blockchain_page-0001.jpg  used on input l
+ine 906.
+(pdftex.def)             Requested size: 312.00119pt x 125.38174pt.
+
+Underfull \hbox (badness 1057) in paragraph at lines 907--907
+[]\OT1/cmr/m/n/12 Figure 5.5: |MetaBlockchain is re-spon-si-ble for rout-ing ei
+-ther to PKI
+ []
+
+[65 <./Figures/Meta_Blockchain_page-0001.jpg>] [66] [67] [68
+
+]
+Chapter 6.
+
+Underfull \vbox (badness 2088) has occurred while \output is active []
+
+ [69]
+[70] [71]
+<Figures/blockchain.PNG, id=1269, 773.38937pt x 370.38374pt>
+File: Figures/blockchain.PNG Graphic file (type png)
+<use Figures/blockchain.PNG>
+Package pdftex.def Info: Figures/blockchain.PNG  used on input line 1005.
+(pdftex.def)             Requested size: 312.00119pt x 149.42247pt.
+ [72]
+<Figures/SybilDFD2.pdf, id=1274, 185.69376pt x 505.89pt>
+File: Figures/SybilDFD2.pdf Graphic file (type pdf)
+<use Figures/SybilDFD2.pdf>
+Package pdftex.def Info: Figures/SybilDFD2.pdf  used on input line 1017.
+(pdftex.def)             Requested size: 173.84662pt x 473.61456pt.
+ [73 <./Figures/blockchain.PNG>] [74 <./Figures/SybilDFD2.pdf>]
+<Figures/blackhole_attack_DFD.pdf, id=1294, 381.425pt x 650.43pt>
+File: Figures/blackhole_attack_DFD.pdf Graphic file (type pdf)
+<use Figures/blackhole_attack_DFD.pdf>
+Package pdftex.def Info: Figures/blackhole_attack_DFD.pdf  used on input line 1
+029.
+(pdftex.def)             Requested size: 277.7337pt x 473.60905pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [75 <./Figures/blackhole_attack_DFD.pdf>]
+<Figures/wormhole_level2_DFD.pdf, id=1314, 244.915pt x 650.43pt>
+File: Figures/wormhole_level2_DFD.pdf Graphic file (type pdf)
+<use Figures/wormhole_level2_DFD.pdf>
+Package pdftex.def Info: Figures/wormhole_level2_DFD.pdf  used on input line 10
+41.
+(pdftex.def)             Requested size: 200.63725pt x 532.83997pt.
+ [76] [77 <./Figures/wormhole_level2_DFD.pdf>]
+<Figures/replay_level2_DFD.pdf, id=1331, 371.3875pt x 650.43pt>
+File: Figures/replay_level2_DFD.pdf Graphic file (type pdf)
+<use Figures/replay_level2_DFD.pdf>
+Package pdftex.def Info: Figures/replay_level2_DFD.pdf  used on input line 1055
+.
+(pdftex.def)             Requested size: 338.04814pt x 592.04109pt.
+
+
+LaTeX Warning: Float too large for page by 24.54108pt on input line 1057.
+
+[78] [79 <./Figures/replay_level2_DFD.pdf>] [80]
+<Figures/architecture.png, id=1355, 407.5225pt x 426.09187pt>
+File: Figures/architecture.png Graphic file (type png)
+<use Figures/architecture.png>
+Package pdftex.def Info: Figures/architecture.png  used on input line 1080.
+(pdftex.def)             Requested size: 312.00119pt x 326.23228pt.
+
+Underfull \vbox (badness 2495) has occurred while \output is active []
+
+ [81 <./Figures/architecture.png>]
+Overfull \hbox (5.44867pt too wide) in paragraph at lines 1100--1101
+\OT1/cmr/m/n/12 The cor-rect-ness, per-for-mance, and se-cu-rity of the sys-tem
+ are val-i-dated through
+ []
+
+[82] [83] [84
+
+]
+Chapter 7.
+
+Underfull \hbox (badness 6032) in paragraph at lines 1131--1132
+[]|\OT1/cmr/m/n/12 Language use for sim-u-la-tions,
+ []
+
+
+Underfull \hbox (badness 1817) in paragraph at lines 1131--1132
+\OT1/cmr/m/n/12 blockchain de-vel-op-ment, test-ing
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1133--1133
+[]|\OT1/cmr/m/n/12 mutex, thread,
+ []
+
+
+Underfull \hbox (badness 2042) in paragraph at lines 1133--1134
+[]|\OT1/cmr/m/n/12 Multi-threading, syn-chro-niza-tion
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1135--1135
+[]|\OT1/cmr/m/n/12 Process Man-age-
+ []
+
+
+Underfull \hbox (badness 1072) in paragraph at lines 1136--1136
+[]|\OT1/cmr/m/n/12 PKCertChain and
+ []
+
+
+Underfull \hbox (badness 3009) in paragraph at lines 1137--1138
+[]|\OT1/cmr/m/n/12 Encryption, De-crp-tion, Singing
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1138--1138
+[]|\OT1/cmr/m/n/12 Route Man-age-
+ []
+
+
+Underfull \hbox (badness 2080) in paragraph at lines 1138--1138
+[]|\OT1/cmr/m/n/12 Adjacency List /
+ []
+
+
+Overfull \hbox (18.09879pt too wide) in paragraph at lines 1125--1143
+ [][] 
+ []
+
+[85] [86] [87]
+Underfull \hbox (badness 10000) in paragraph at lines 1202--1203
+[]|\OT1/cmr/m/n/12 Guarantee full requirement-to-test
+ []
+
+
+Overfull \hbox (5.69879pt too wide) in paragraph at lines 1193--1205
+ [][] 
+ []
+
+[88]
+Underfull \hbox (badness 1748) in paragraph at lines 1219--1220
+[]|\OT1/cmr/m/n/12 Detect and iso-late packet-dropping
+ []
+
+
+Underfull \hbox (badness 3039) in paragraph at lines 1220--1220
+[]|\OT1/cmr/m/n/12 Wormhole At-tack De-tec-tion &
+ []
+
+
+Underfull \hbox (badness 2837) in paragraph at lines 1220--1221
+[]|\OT1/cmr/m/n/12 Prevent out-of-band tun-nelling at-
+ []
+
+
+Overfull \hbox (5.69879pt too wide) in paragraph at lines 1213--1226
+ [][] 
+ []
+
+[89]
+Underfull \hbox (badness 7777) in paragraph at lines 1241--1241
+[]|\OT1/cmr/m/n/12 Average RouteL-ogChain Block
+ []
+
+
+Underfull \hbox (badness 6741) in paragraph at lines 1242--1242
+[]|\OT1/cmr/m/n/12 Bayesian Trust Di-ary Up-date
+ []
+
+
+Underfull \hbox (badness 1831) in paragraph at lines 1242--1243
+[]|\OT1/cmr/m/n/12 Assess real-time trust com-pu-ta-tion
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1243--1243
+[]|\OT1/cmr/m/n/12 Rolling-Signature Ver-i-fi-ca-tion
+ []
+
+
+Overfull \hbox (5.69879pt too wide) in paragraph at lines 1235--1249
+ [][] 
+ []
+
+
+Underfull \hbox (badness 2726) in paragraph at lines 1266--1266
+[]|\OT1/cmr/m/n/12 Optimal Se-cure Path Se-lec-tion
+ []
+
+
+Underfull \hbox (badness 3291) in paragraph at lines 1269--1269
+[]|\OT1/cmr/m/n/12 Routing + Blockchain Con-trol
+ []
+
+
+Underfull \hbox (badness 1859) in paragraph at lines 1272--1272
+[]|\OT1/cmr/m/n/12 Convergence Time af-ter Topol-
+ []
+
+
+Overfull \hbox (5.69879pt too wide) in paragraph at lines 1257--1275
+ [][] 
+ []
+
+[90
+
+] [91] [92
+
+]
+Chapter 8.
+<Figures/simulation_graph.jpg, id=1409, 513.92pt x 388.95313pt>
+File: Figures/simulation_graph.jpg Graphic file (type jpg)
+<use Figures/simulation_graph.jpg>
+Package pdftex.def Info: Figures/simulation_graph.jpg  used on input line 1289.
+
+(pdftex.def)             Requested size: 272.99881pt x 206.61896pt.
+<Figures/pdr_blackhole.png, id=1413, 355.82938pt x 227.34938pt>
+File: Figures/pdr_blackhole.png Graphic file (type png)
+<use Figures/pdr_blackhole.png>
+Package pdftex.def Info: Figures/pdr_blackhole.png  used on input line 1299.
+(pdftex.def)             Requested size: 272.99881pt x 174.43166pt.
+<Figures/pdr_wormhole.png, id=1414, 346.79562pt x 237.88875pt>
+File: Figures/pdr_wormhole.png Graphic file (type png)
+<use Figures/pdr_wormhole.png>
+Package pdftex.def Info: Figures/pdr_wormhole.png  used on input line 1306.
+(pdftex.def)             Requested size: 272.99881pt x 187.27303pt.
+<Figures/pdr_sybil.png, id=1415, 396.48125pt x 253.44687pt>
+File: Figures/pdr_sybil.png Graphic file (type png)
+<use Figures/pdr_sybil.png>
+Package pdftex.def Info: Figures/pdr_sybil.png  used on input line 1313.
+(pdftex.def)             Requested size: 272.99881pt x 174.515pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1349--1349
+[]|\OT1/cmr/bx/n/12 End-to-End
+ []
+
+
+Underfull \hbox (badness 4242) in paragraph at lines 1349--1349
+[]\OT1/cmr/m/n/12 Overhead from re-cal-cu-la-tion can lead to
+ []
+
+
+Underfull \hbox (badness 10000) in alignment at lines 1349--1349
+[][] 
+ []
+
+
+Underfull \vbox (badness 1708) has occurred while \output is active []
+
+ [93]
+Underfull \vbox (badness 2111) has occurred while \output is active []
+
+ [94 <./Figures/simulation_graph.jpg> <./Figures/pdr_blackhole.png>]
+Underfull \hbox (badness 6792) in paragraph at lines 1395--1395
+\OT1/cmr/m/n/12 to blockchain meta-
+ []
+
+
+Underfull \hbox (badness 1052) in paragraph at lines 1395--1395
+[]|\OT1/cmr/m/n/12 Delay per packet for
+ []
+
+
+Underfull \hbox (badness 6001) in paragraph at lines 1395--1395
+\OT1/cmr/m/n/12 de-cryp-tion and pro-
+ []
+
+[95 <./Figures/pdr_wormhole.png> <./Figures/pdr_sybil.png>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [96]
+[97] [98
+
+]
+Chapter 9.
+[99] [100] [101] (./main.bbl [102] [103] [104
+
+] [105]
+Underfull \hbox (badness 3375) in paragraph at lines 57--61
+\OT1/cmr/m/n/12 preserving Blockchain-based au-then-ti-ca-tion pro-to-col with 
+global-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 83--88
+[]\OT1/cmr/m/n/12 G. Prisco, ``Fil-a-ment de-vel-ops ad-hoc mesh
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 83--88
+\OT1/cmr/m/n/12 net-works of smart sen-sors op-er-at-ing on the
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 83--88
+\OT1/cmr/m/n/12 Blockchain.'' []$\OT1/cmtt/m/n/12 https : / / bitcoinmagazine .
+ com / business /
+ []
+
+
+Overfull \hbox (161.11664pt too wide) in paragraph at lines 83--88
+\OT1/cmtt/m/n/12 filament-[]develops-[]ad-[]hoc-[]mesh-[]networks-[]smart-[]sen
+sors-[]operating-[]blockchain-[]1435352121$[]\OT1/cmr/m/n/12 ,
+ []
+
+[106]
+Underfull \hbox (badness 4819) in paragraph at lines 100--103
+[]\OT1/cmr/m/n/12 B. Project, ``Briar | se-cure mes-sag-ing any-where.'' []$\OT
+1/cmtt/m/n/12 https : / /
+ []
+
+) [107] (./main.aux)
+ ***********
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-22>
+ ***********
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 675A45FD77215D71D2A1B2A11AF56EC2;26386.
+ ) 
+Here is how much of TeX's memory you used:
+ 12266 strings out of 476182
+ 194644 string characters out of 5795595
+ 1950975 words of memory out of 5000000
+ 33779 multiletter control sequences out of 15000+600000
+ 565344 words of font info for 61 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 75i,13n,79p,1315b,614s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </home/lenovo/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.60
+0pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmsl12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+msy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on main.pdf (107 pages, 1858380 bytes).
+PDF statistics:
+ 1635 PDF objects out of 1728 (max. 8388607)
+ 1408 compressed objects within 15 object streams
+ 338 named destinations out of 1000 (max. 500000)
+ 1200 words of extra memory for PDF output out of 10000 (max. 10000000)
+

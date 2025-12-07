@@ -1,4 +1,4 @@
-\documentclass{FastFyp}
+\documentclass[12pt,a4paper]{book}
 \usepackage{longtable}
 \usepackage{graphicx} % Required for inserting images
 \usepackage{tabularx} % Add this in the preamble
@@ -8,7 +8,13 @@
 \usepackage{float}
 \usepackage{placeins}
 \usepackage{lscape}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
 \usepackage[table]{xcolor}
+\usepackage{caption}
+
+\setlength{\headheight}{15pt}
+\addtolength{\topmargin}{-2pt}
 \begin{document}
 \newcommand{\supervisor}{Mr. Naveed}
 \newcommand{\cosupervisor}{Dr. Rana Asif ur Rehman}
@@ -21,23 +27,19 @@
 \date{\today}
 \renewcommand{\contentsname}{Table of Contents}
 
-\makeatletter
-    \begin{titlepage}
-        \includegraphics[width=0.2\linewidth]{Figures/nulogo.png}\hfill
-        \includegraphics[width=0.2\linewidth]{Figures/fast.png}\\
-        \begin{center} 
-            {\large\bfseries \university}\\[7ex]
-            \includegraphics[width=0.4\linewidth]{Figures/fastlogo.png}\\[8ex]
-            {\huge \bfseries  \fyptitle }\\[10ex] 
-            {\Studentone}\\{\Studenttwo}\\{\Studentthree}\\[4ex] 
-            {Supervisor: \supervisor} \\
-            {Co-Supervisor: \cosupervisor}\\[10ex]
-            {Final Year Project}\\
-            {\large \@date}
-        \end{center}
-    \end{titlepage}    
-\makeatother
-\frontmatter
+\begin{titlepage}
+\begin{center}
+\vspace*{2cm}
+{\Huge \bfseries \fyptitle \par}
+\vspace{2cm}
+{\Large \degree\ Thesis \par}
+\vfill
+Supervisors: \supervisor, \cosupervisor \par
+Students: \Studentone, \Studenttwo, \Studentthree \par
+\university \par
+\today
+\end{center}
+\end{titlepage}
 
 \newpage \thispagestyle{empty} \mbox{} \newpage %Aatira
 
@@ -98,9 +100,6 @@ The system, called Linux Data Exchange (LDX), is a Linux application. To conclud
 \pagebreak
 \listoftables % comment this if there are no tables
 \addcontentsline{toc}{chapter}{List of Tables}
-
-\mainmatter
-
 
 \chapter{Introduction}
 Secure and efficient communication in personal area ad-hoc networks is a critical challenge in modern networking applications. The DSR protocol, widely used for routing in ad-hoc networks, faces several security vulnerabilities.These threats include blackhole, wormhole and Sybil attacks. This causes the need for a robust solution to enhance the security of DSR protocol.
@@ -374,12 +373,12 @@ Industry applications used blockchain to secure the communication. Many of them 
 Filament builds mesh-network devices called “Taps” for industrial IoT. These devices use long-range radios and cryptographic chips to set up temporary mesh networks without needing a central system. They also use blockchain technologies such as Bitcoin and Ethereum to create decentralized trust, keep data secure, and support smart contracts. This matters for your PANETs context because the nodes talk to each other directly and use blockchain to handle trust and data checks\cite{prisco2015filament}.
 
 \subsection{Lightweight Scalable Blockchain for IoT}
-LSB is a research architecture designed for IoT devices that have limited resources. It uses a tiered or clustered blockchain structure, so only some devices handle full blockchain validation. High-resource nodes serve as cluster heads. The consensus and trust mechanisms are set up to lower cost, latency, and overhead. This method is similar to your idea of combining blockchain, trust, and routing in networks with limited resources\cite{dorri2017lsb_arxiv}.
+LSB is a research architecture designed for IoT devices that have limited resources. It uses a tiered or clustered blockchain structure, so only some devices handle full blockchain validation. High-resource nodes serve as cluster heads. The consensus and trust mechanisms are set up to lower cost, latency, and overhead. This method is similar to your idea of combining blockchain, trust, and routing in networks with limited resources\cite{ref:dorri2017lsb_arxiv}.
 
 \subsection{Blockchain-Based Lightweight Trust Management in MANETs}
-There is a published system that uses blockchain to create distributed trust among routing nodes in a MANET. It works with the OLSR routing protocol and uses a lightweight consensus method to keep validation costs low. This approach is closely related to your work because it also uses blockchain-based trust management in a fully ad hoc, multi-hop network\cite{lwin2020manet}.
+There is a published system that uses blockchain to create distributed trust among routing nodes in a MANET. It works with the OLSR routing protocol and uses a lightweight consensus method to keep validation costs low. This approach is closely related to your work because it also uses blockchain-based trust management in a fully ad hoc, multi-hop network\cite{ref:lwin2020manet}.
 \subsection{Briar(Secure Mesh Messaging)}
-Briar is an open-source app that allows peer-to-peer messaging using Bluetooth, Wi-Fi, or removable storage. It is designed for strong and decentralized communication without central servers. It also offers end-to-end encryption for added security. While it doesn't use blockchain, it serves as a solid example of secure and fully decentralized communication in an ad hoc network\cite{briar2025}.
+Briar is an open-source app that allows peer-to-peer messaging using Bluetooth, Wi-Fi, or removable storage. It is designed for strong and decentralized communication without central servers. It also offers end-to-end encryption for added security. While it doesn't use blockchain, it serves as a solid example of secure and fully decentralized communication in an ad hoc network\cite{ref:briar2025}.
 
 \section{Conclusion}
 The relevant studies worked on applying different technologies and implement security in ad-hoc network. Different technologies like cryptographic methods, intelligent clustering and use of blockchain has been explored. Many of them achieved malicious node detection accuracy by 90\%. However, a study of literature also revealed gaps. A major challenge is the performance issue associated with integrating blockchain e.g high computational overhead  and latency, which make it impractical for real time vehicular environment, as seen in ABCD framework  \cite{ref:Sugumaran:2025}. Also, relying on specific nodes for validation centralized points of failure, a significant risk in a decentralized network \cite{ref:kudva:2021}. Our proposed protocol addresses the scalability issue by replacing the single, slow ledger with a specialized multi-layer blockchain architecture. Moreover, our system's Bayesian Trust Diary for reputation management ensures that there is no single point of failure. By opting for PKI system over heavy encryptions, our protocol is explicitly designed for the resource-constrained nature of nodes. 
@@ -755,7 +754,7 @@ This chapter explains the proposed approach and working methodology of the syste
                 \begin{itemize}
                     \item In a Sybil attack, an attacker makes several fake nodes.
                     \item In a Blackhole attack, bad nodes take in packets but do not send them on.
-                    \item \textbfIn a Wormhole attack, attackers set up hidden shortcut paths that reroute traffic to bad nodes.
+                    \item \textbf{In} a Wormhole attack, attackers set up hidden shortcut paths that reroute traffic to bad nodes.
                     \item Replay attacks happen when someone captures packets and sends them again to overwhelm or confuse the network.
                 \end{itemize}
         Following are the important components of the  Security Framework
@@ -845,7 +844,7 @@ This chapter explains the proposed approach and working methodology of the syste
                     \centering
                     \includegraphics[height=1\textheight]{Figures/PKCertChain_Node_Registration_Flowchart.pdf}
                     \caption{PKCertChain}
-                    \label{fig:LTDs}
+                    \label{fig:PKCertChain_Flowchart}
                 \end{figure}
 
             \FloatBarrier
@@ -906,7 +905,7 @@ packet. The Destination node will verify by using Rolling Signature.}
                 \centering
                 \includegraphics[width=0.8\linewidth]{Figures/Meta_Blockchain_page-0001.jpg}
                 \captionof{figure}{MetaBlockchain is responsible for routing either to PKI Blockchain or Route Log Blockchain}
-            \label{fig:RLC}
+            \label{fig:MetaBlockchain}
             \end{figure}
             
             \end{enumerate}
@@ -1491,5 +1490,3 @@ The project shows the secure, modular and adaptive security system for low mobil
 
 
 \end{document}
-
-
