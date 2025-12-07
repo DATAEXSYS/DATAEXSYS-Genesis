@@ -1,0 +1,154 @@
+\contentsline {chapter}{List of Figures}{13}{chapter*.6}%
+\contentsline {chapter}{List of Tables}{15}{chapter*.7}%
+\contentsline {chapter}{\numberline {1}Introduction}{17}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Purpose of this Document}{17}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Intended Audience}{18}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Definitions, Acronyms, and Abbreviations}{18}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Conclusion}{20}{section.1.4}%
+\contentsline {chapter}{\numberline {2}Project Vision}{21}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Problem Domain Overview}{21}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Problem Statement}{21}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Problem Elaboration}{22}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Lack of security}{22}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Inefficient Routing}{22}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Trust Management}{22}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}Lightweight Consensus and Scalability}{22}{subsection.2.3.4}%
+\contentsline {subsection}{\numberline {2.3.5}Real Time Scheduling and Data Freshness}{23}{subsection.2.3.5}%
+\contentsline {subsection}{\numberline {2.3.6}Traditional PKI}{23}{subsection.2.3.6}%
+\contentsline {section}{\numberline {2.4}Goals and Objectives}{24}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Project Scope}{24}{section.2.5}%
+\contentsline {section}{\numberline {2.6}Sustainable Development Goal (SDG)}{25}{section.2.6}%
+\contentsline {section}{\numberline {2.7}Constraints}{25}{section.2.7}%
+\contentsline {section}{\numberline {2.8}Conclusion}{27}{section.2.8}%
+\contentsline {chapter}{\numberline {3}Literature Review / Related Work}{29}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Detailed Literature Review}{29}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}ABCD: advanced blockchain DSR algorithm for MANET to mitigate the different security threats}{29}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}A scalable blockchain based trust management in VANET routing protocol }{31}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}Traffic Prevention and Security Enhancement in VANET }{31}{subsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.1.4}Lightweight Cryptography and IDS for Edge Networks}{32}{subsection.3.1.4}%
+\contentsline {subsection}{\numberline {3.1.5}Distributed blockchain assisted secure data aggregation scheme for risk-aware zone-based MANET}{32}{subsection.3.1.5}%
+\contentsline {subsection}{\numberline {3.1.6}VANET Secure Reputation Evaluation \& Management Model Based on Double Layer Blockchain (DBREMM)}{33}{subsection.3.1.6}%
+\contentsline {subsection}{\numberline {3.1.7}Blockchain-Enhanced Secure Routing Protocols for Vehicular Ad Hoc Networks}{33}{subsection.3.1.7}%
+\contentsline {subsection}{\numberline {3.1.8}Security in MANETs}{34}{subsection.3.1.8}%
+\contentsline {subsection}{\numberline {3.1.9}Clustering strategy (ICRA)}{34}{subsection.3.1.9}%
+\contentsline {subsection}{\numberline {3.1.10}Cryptography based Clustering}{35}{subsection.3.1.10}%
+\contentsline {subsection}{\numberline {3.1.11}Introduction to PBAG Protocol}{35}{subsection.3.1.11}%
+\contentsline {subsection}{\numberline {3.1.12}Cluster Based MANET Security}{36}{subsection.3.1.12}%
+\contentsline {subsection}{\numberline {3.1.13}Graph Neural Lasso for Dynamic Network Regression}{37}{subsection.3.1.13}%
+\contentsline {subsection}{\numberline {3.1.14}A Novel Trust Mechanism for Addressing Black hole Attacks}{37}{subsection.3.1.14}%
+\contentsline {subsection}{\numberline {3.1.15}A regression-based technique for link failure time prediction in MANET}{38}{subsection.3.1.15}%
+\contentsline {section}{\numberline {3.2}Literature Review Summary Table}{38}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Related Work}{40}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Filament (IoT + Ad-Hoc Mesh + Blockchain)}{40}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Lightweight Scalable Blockchain for IoT}{40}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Blockchain-Based Lightweight Trust Management in MANETs}{40}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}Briar(Secure Mesh Messaging)}{40}{subsection.3.3.4}%
+\contentsline {section}{\numberline {3.4}Conclusion}{41}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Software Requirement Specifications}{43}{chapter.4}%
+\contentsline {section}{\numberline {4.1}List of Features}{43}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Functional Requirements}{44}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Security and Encryption}{44}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Attack Mitigation}{44}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Node Registration and Authentication}{44}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Receipt Generation and Management}{45}{subsection.4.2.4}%
+\contentsline {section}{\numberline {4.3}Quality Attributes}{45}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Security}{45}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Reliability}{45}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Performance and Efficiency}{45}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Scalability}{46}{subsection.4.3.4}%
+\contentsline {subsection}{\numberline {4.3.5}Non-Functional Requirements}{46}{subsection.4.3.5}%
+\contentsline {subsubsection}{Performance}{46}{section*.10}%
+\contentsline {subsubsection}{Usability}{46}{section*.11}%
+\contentsline {subsubsection}{Scalability}{47}{section*.12}%
+\contentsline {subsubsection}{Security}{47}{section*.13}%
+\contentsline {section}{\numberline {4.4}Assumptions}{47}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Use Cases}{48}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Hardware and Software Requirements}{53}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}Hardware Requirements}{53}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}Software Requirements}{53}{subsection.4.6.2}%
+\contentsline {section}{\numberline {4.7} Risk Analysis}{54}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Security Risks}{54}{subsection.4.7.1}%
+\contentsline {subsection}{\numberline {4.7.2}Operational Risks}{54}{subsection.4.7.2}%
+\contentsline {subsection}{\numberline {4.7.3}Performance Risk}{54}{subsection.4.7.3}%
+\contentsline {section}{\numberline {4.8}Conclusion}{54}{section.4.8}%
+\contentsline {chapter}{\numberline {5}Proposed Approach and Methodology}{55}{chapter.5}%
+\contentsline {section}{\numberline {5.1}PANET Security Framework}{55}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Environment Assumption}{55}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Security Threats in PANETs}{55}{subsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.1.3}Local Trust Diaries}{56}{subsection.5.1.3}%
+\contentsline {subsection}{\numberline {5.1.4}PKCertChain}{58}{subsection.5.1.4}%
+\contentsline {subsubsection}{Node Registration Phase}{58}{section*.17}%
+\contentsline {subsubsection}{Certificate Renewal}{61}{section*.19}%
+\contentsline {subsection}{\numberline {5.1.5}RouteLogChain (Packet Routing and Path Trust)}{62}{subsection.5.1.5}%
+\contentsline {paragraph}{Sender Packet: }{62}{section*.21}%
+\contentsline {paragraph}{Intermediate Nodes Packet and Rolling Signatures:}{62}{section*.22}%
+\contentsline {paragraph}{Each Node verification process: }{62}{section*.23}%
+\contentsline {paragraph}{Destination Node: }{63}{section*.24}%
+\contentsline {section}{\numberline {5.2}Meta Blockchain}{65}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Route Cache}{65}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Synchronization}{66}{section.5.4}%
+\contentsline {paragraph}{PKCertChain Sync:}{66}{section*.27}%
+\contentsline {paragraph}{RouteLogChain Sync:}{66}{section*.28}%
+\contentsline {paragraph}{Local Trust Diaries:}{66}{section*.29}%
+\contentsline {section}{\numberline {5.5}Conclusion}{67}{section.5.5}%
+\contentsline {chapter}{\numberline {6}High-Level and Low-Level Design}{69}{chapter.6}%
+\contentsline {section}{\numberline {6.1}System Overview}{69}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}System Description}{69}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}Functional Overview}{70}{subsection.6.1.2}%
+\contentsline {section}{\numberline {6.2}Design Considerations}{70}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Assumptions and Dependencies}{70}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}General Constraints}{71}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}Goals and Guidelines}{71}{subsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.2.4} Development Methods}{71}{subsection.6.2.4}%
+\contentsline {section}{\numberline {6.3}System Architecture}{71}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Overview}{72}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}System Decomposition}{72}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.3}Sybil Attack Mitigation}{73}{subsection.6.3.3}%
+\contentsline {subsection}{\numberline {6.3.4}Blackhole Attack Mitigation}{75}{subsection.6.3.4}%
+\contentsline {subsection}{\numberline {6.3.5}Wormhole Attack Mitigation}{76}{subsection.6.3.5}%
+\contentsline {subsection}{\numberline {6.3.6}Replay Attacks}{78}{subsection.6.3.6}%
+\contentsline {section}{\numberline {6.4}Architectural Strategies}{80}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Blockchain as Data Storage}{80}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.2}Algorithmic Reuse and Scalability}{80}{subsection.6.4.2}%
+\contentsline {subsection}{\numberline {6.4.3}Wireless Communication}{80}{subsection.6.4.3}%
+\contentsline {section}{\numberline {6.5}Process diagram}{81}{section.6.5}%
+\contentsline {section}{\numberline {6.6}Policies and Tactics}{81}{section.6.6}%
+\contentsline {subsection}{\numberline {6.6.1}Coding and Implementation Policy}{82}{subsection.6.6.1}%
+\contentsline {subsection}{\numberline {6.6.2}Performance Optimization Tactics}{82}{subsection.6.6.2}%
+\contentsline {subsection}{\numberline {6.6.3}Testing and Validation Policy}{82}{subsection.6.6.3}%
+\contentsline {subsection}{\numberline {6.6.4}Maintenance and Extensibility Policy}{83}{subsection.6.6.4}%
+\contentsline {section}{\numberline {6.7}Conclusion}{83}{section.6.7}%
+\contentsline {chapter}{\numberline {7}Implementation and Test Cases}{85}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Implementation}{85}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Tools and Technologies}{85}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}Simulation Setup}{86}{subsection.7.1.2}%
+\contentsline {subsection}{\numberline {7.1.3}Normal Nodes}{87}{subsection.7.1.3}%
+\contentsline {subsection}{\numberline {7.1.4}Sybil Nodes}{88}{subsection.7.1.4}%
+\contentsline {subsection}{\numberline {7.1.5}Blackhole Nodes}{88}{subsection.7.1.5}%
+\contentsline {subsection}{\numberline {7.1.6}Wormhole Attacks}{88}{subsection.7.1.6}%
+\contentsline {subsection}{\numberline {7.1.7}Replay Nodes}{88}{subsection.7.1.7}%
+\contentsline {section}{\numberline {7.2}Test Metrics}{88}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}Security Effectiveness Metrics}{89}{subsection.7.2.1}%
+\contentsline {subsection}{\numberline {7.2.2}Computational Overhead Metrics}{90}{subsection.7.2.2}%
+\contentsline {subsection}{\numberline {7.2.3}Network Performance Metrics}{90}{subsection.7.2.3}%
+\contentsline {subsection}{\numberline {7.2.4}Conclusion}{91}{subsection.7.2.4}%
+\contentsline {chapter}{\numberline {8}Experiment Results and Discussion}{93}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Experiment setup}{93}{section.8.1}%
+\contentsline {subsection}{\numberline {8.1.1}Contrast between normal DSR versus proposed blockchain DSR for attack incidence}{93}{subsection.8.1.1}%
+\contentsline {section}{\numberline {8.2}Discussion}{94}{section.8.2}%
+\contentsline {subsection}{\numberline {8.2.1}Impact of Recalculation on Performance Metrics}{94}{subsection.8.2.1}%
+\contentsline {subsection}{\numberline {8.2.2}Comparison with DSR}{95}{subsection.8.2.2}%
+\contentsline {subsection}{\numberline {8.2.3}Processing delay}{95}{subsection.8.2.3}%
+\contentsline {section}{\numberline {8.3}Conclusion}{97}{section.8.3}%
+\contentsline {chapter}{\numberline {9}Conclusion and Future Work}{99}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Overall Project Summary}{99}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Achievements of Objectives}{99}{section.9.2}%
+\contentsline {section}{\numberline {9.3}System Limitations}{100}{section.9.3}%
+\contentsline {section}{\numberline {9.4}Goals for FYP-II}{100}{section.9.4}%
+\contentsline {subsection}{\numberline {9.4.1}Demonstration}{101}{subsection.9.4.1}%
+\contentsline {subsection}{\numberline {9.4.2}Application}{101}{subsection.9.4.2}%
+\contentsline {subsubsection}{Frontend}{101}{section*.48}%
+\contentsline {subsubsection}{Middleware}{102}{section*.49}%
+\contentsline {subsubsection}{Networking Layer}{102}{section*.50}%
+\contentsline {section}{\numberline {9.5}Future Works}{102}{section.9.5}%
+\contentsline {section}{\numberline {9.6}Conclusion}{103}{section.9.6}%

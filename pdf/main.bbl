@@ -1,0 +1,104 @@
+\begin{thebibliography}{10}
+
+\bibitem{ref:majumder:2025a}
+S.~Majumder, D.~Bhattacharyya, and S.~Chowdhuri, ``{ABCD}: Advanced
+  {Blockchain} {DSR} algorithm for {MANET} to mitigate the different security
+  threats,'' {\em EURASIP Journal on Wireless Communications and Networking},
+  vol.~2025, Feb 2025.
+
+\bibitem{ref:kudva:2021}
+S.~Kudva, S.~Badsha, S.~Sengupta, H.~La, I.~Khalil, and M.~Atiquzzaman, ``A
+  scalable {Blockchain}-based trust management in {VANET} routing protocol,''
+  {\em Journal of Parallel and Distributed Computing}, vol.~152, 2021.
+
+\bibitem{ref:swamy:2024}
+C.~Swamynathan, R.~Shanmugam, K.~Kumar, and B.~Subbiyan, ``Traffic prevention
+  and security enhancement in {VANET} using deep learning with trusted routing
+  aided {Blockchain} technology,'' {\em Transactions on Emerging
+  Telecommunications Technologies}, vol.~35, 2024.
+
+\bibitem{ref:morin:2025}
+L.~Morin and B.~Princy, ``Lightweight cryptography and {IDS} for edge
+  networks,'' in {\em Proc. Int. Conf. on Electronics, Communication and
+  Aerospace Technology (ICOECA)}, pp.~107--112, 2025.
+
+\bibitem{ref:Sugumaran:2025}
+V.~Sugumaran, E.~Dinesh, R.~Ramya, and E.~Muniyandy, ``Distributed
+  {Blockchain}-assisted secure data aggregation scheme for risk-aware
+  zone-based {MANET},'' {\em Scientific Reports}, vol.~15, 2025.
+
+\bibitem{ref:hou:2023}
+B.~Hou, Y.~Xin, H.~Zhu, Y.~Yang, and J.~Yang, ``{VANET} secure reputation
+  evaluation and management model based on double layer {Blockchain},'' {\em
+  Applied Sciences}, vol.~13, no.~9, 2023.
+
+\bibitem{ref:kamel:2024}
+H.~Kamel and A.~Abed, ``{Blockchain}-enhanced secure routing protocols for
+  vehicular ad hoc networks: A comprehensive review,'' in {\em Proc. Int. Conf.
+  on Automation and Electrical Engineering (AUTEEE)}, pp.~624--630, 2024.
+
+\bibitem{ref:mouchfiq:2020}
+N.~Mouchfiq, C.~Benjbara, and A.~Habbani, ``Security in {MANETs}: The
+  {Blockchain} issue,'' in {\em Advanced Communication Systems and Information
+  Security}, pp.~219--232, Springer, 2020.
+
+\bibitem{ref:guo:2023}
+J.~Guo, H.~Gao, Z.~Liu, F.~Huang, J.~Zhang, X.~Li, and J.~Ma, ``{ICRA}: An
+  intelligent clustering routing approach for {UAV} ad hoc networks,'' {\em
+  IEEE Transactions on Intelligent Transportation Systems}, vol.~24, no.~2,
+  pp.~2447--2460, 2023.
+
+\bibitem{ref:mohindra:2021}
+A.~Mohindra and C.~Gandhi, ``A secure cryptography-based clustering mechanism
+  for improving data transmission in {MANET},'' {\em Walailak Journal of
+  Science and Technology}, vol.~18, 2021.
+
+\bibitem{ref:feng:2024}
+X.~Feng, K.~Cui, L.~Wang, Z.~Liu, and J.~Ma, ``{PBAG}: A privacy-preserving
+  {Blockchain}-based authentication protocol with global-updated commitment in
+  {IoVs},'' {\em IEEE Transactions on Intelligent Transportation Systems},
+  vol.~25, no.~10, pp.~13524--13545, 2024.
+
+\bibitem{ref:agrawal:2023}
+R.~Agrawal, R.~Tripathi, and S.~Tiwari, ``Cluster based {MANET} security with
+  {N-TH} degree truncated polynomial ring ({NTRU}) public key cryptosystem,''
+  in {\em Proc. Int. Conf. on Computational Intelligence and Knowledge Economy
+  (ICCIKE)}, pp.~126--133, 2023.
+
+\bibitem{ref:Yixin:2019}
+Y.~Chen, L.~Meng, and J.~Zhang, ``Graph neural lasso for dynamic network
+  regression,'' {\em arXiv preprint arXiv:1907.11114}, 2019.
+
+\bibitem{ref:Blackhole:2021}
+H.~Jari, A.~Alzahrani, and N.~Thomas, ``A novel indirect trust mechanism for
+  addressing black hole attacks in {MANET},'' in {\em Proc. Int. Conf. on
+  Computer Science and Engineering}, pp.~27--34, 2021.
+
+\bibitem{ref:patel:2020}
+S.~Patel and H.~Pathak, ``A regression-based technique for link failure time
+  prediction in {MANET},'' {\em International Journal of High Performance
+  Computing and Networking}, vol.~16, pp.~95--104, 2020.
+
+\bibitem{prisco2015filament}
+G.~Prisco, ``{Filament} develops ad-hoc mesh networks of smart sensors
+  operating on the {Blockchain}.''
+  \url{https://bitcoinmagazine.com/business/filament-develops-ad-hoc-mesh-networks-smart-sensors-operating-blockchain-1435352121},
+  June 2015.
+\newblock Bitcoin Magazine.
+
+\bibitem{ref:dorri2017lsb_arxiv}
+A.~Dorri, S.~S. Kanhere, R.~Jurdak, and P.~Gauravaram, ``Lsb: A lightweight
+  scalable blockchain for iot security and privacy,'' {\em arXiv preprint
+  arXiv:1712.02969}, 2017.
+
+\bibitem{ref:lwin2020manet}
+M.~T. Lwin, J.~Yim, and Y.-B. Ko, ``{Blockchain}-based lightweight trust
+  management in mobile ad-hoc networks,'' {\em Sensors}, vol.~20, no.~3,
+  p.~698, 2020.
+
+\bibitem{ref:briar2025}
+B.~Project, ``{Briar} — secure messaging anywhere.''
+  \url{https://briarproject.org/}, 2025.
+\newblock [Accessed: 20-Oct-2025].
+
+\end{thebibliography}
