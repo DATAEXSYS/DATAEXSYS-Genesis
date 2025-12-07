@@ -1,0 +1,248 @@
+/* ----------------------------- */
+/* GOOGLE FONTS                   */
+/* ----------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto+Mono&display=swap');
+
+/* ----------------------------- */
+/* RESET & BASIC                  */
+/* ----------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0a0a14;
+    color: #e0e0e0;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+/* ----------------------------- */
+/* LINKS & HOVER EFFECTS          */
+/* ----------------------------- */
+a {
+    color: #00ffe0;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+a:hover {
+    color: #ff6ec7;
+    text-shadow: 0 0 5px #ff6ec7, 0 0 10px #ff6ec7;
+}
+
+/* ----------------------------- */
+/* HEADER & NAVIGATION           */
+/* ----------------------------- */
+header {
+    background-color: rgba(10, 10, 20, 0.95);
+    border-bottom: 1px solid #00ffe0;
+    padding: 15px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav .logo {
+    font-weight: 700;
+    font-size: 1.8em;
+    color: #00ffe0;
+    letter-spacing: 1px;
+    font-family: 'Inter', sans-serif;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+nav ul li a {
+    font-weight: 600;
+    font-size: 1em;
+    position: relative;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -3px;
+    left: 0;
+    background-color: #ff6ec7;
+    transition: 0.3s;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* ----------------------------- */
+/* HERO SECTION                  */
+/* ----------------------------- */
+.hero {
+    background: linear-gradient(135deg, #0a0a14 0%, #1f1f3f 100%);
+    text-align: center;
+    padding: 100px 20px;
+    border-bottom: 1px solid #00ffe0;
+    backdrop-filter: blur(5px);
+}
+
+.hero h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    color: #00ffe0;
+    text-shadow: 0 0 10px #00ffe0;
+}
+
+.hero p {
+    font-size: 1.3em;
+    max-width: 800px;
+    margin: auto;
+    color: #c0c0c0;
+}
+
+/* ----------------------------- */
+/* SECTIONS & CARDS               */
+/* ----------------------------- */
+section {
+    padding: 60px 20px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+section h1, section h2, section h3 {
+    margin-bottom: 25px;
+    color: #00ffe0;
+    border-left: 4px solid #ff6ec7;
+    padding-left: 12px;
+    font-family: 'Inter', sans-serif;
+}
+
+section p {
+    margin-bottom: 20px;
+    font-size: 1em;
+    color: #d0d0d0;
+}
+
+/* Glassmorphism cards for highlights */
+.card {
+    background: rgba(20, 20, 35, 0.7);
+    border: 1px solid rgba(0, 255, 224, 0.3);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(0, 255, 224, 0.7);
+}
+
+/* ----------------------------- */
+/* CODE SNIPPETS & TABLES         */
+/* ----------------------------- */
+pre, code {
+    font-family: 'Roboto Mono', monospace;
+    background-color: #121224;
+    color: #00ffe0;
+    padding: 10px 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.95em;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+table, th, td {
+    border: 1px solid #333;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #1a1a2e;
+}
+
+/* ----------------------------- */
+/* IMAGES                         */
+/* ----------------------------- */
+img {
+    max-width: 100%;
+    display: block;
+    margin: 20px 0;
+    border-radius: 12px;
+    border: 2px solid #00ffe0;
+    box-shadow: 0 0 15px rgba(0, 255, 224, 0.5);
+}
+
+/* ----------------------------- */
+/* BUTTONS & CTA                  */
+/* ----------------------------- */
+button, .btn {
+    background: linear-gradient(90deg, #00ffe0, #ff6ec7);
+    color: #121224;
+    padding: 12px 25px;
+    font-size: 1em;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 255, 224, 0.5);
+}
+
+button:hover, .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 20px rgba(255, 110, 199, 0.8);
+}
+
+/* ----------------------------- */
+/* FOOTER                         */
+/* ----------------------------- */
+footer {
+    background-color: rgba(10, 10, 20, 0.95);
+    text-align: center;
+    padding: 25px;
+    margin-top: 40px;
+    border-top: 1px solid #00ffe0;
+    color: #888;
+    font-size: 0.9em;
+}
+
+/* ----------------------------- */
+/* RESPONSIVE DESIGN             */
+/* ----------------------------- */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .hero h1 {
+        font-size: 2em;
+    }
+
+    section {
+        padding: 40px 15px;
+    }
+}

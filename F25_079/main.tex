@@ -1,21 +1,78 @@
-\documentclass[12pt,a4paper]{book}
-\usepackage{longtable}
-\usepackage{graphicx} % Required for inserting images
-\usepackage{tabularx} % Add this in the preamble
-\usepackage{booktabs}
-\usepackage{array}  % add to preamble for p{} column type
-\usepackage{amsmath}
-\usepackage{float}
-\usepackage{placeins}
-\usepackage{lscape}
-\usepackage{fancyhdr}
-\usepackage{hyperref}
-\usepackage[table]{xcolor}
-\usepackage{caption}
+\documentclass[12pt,a4paper,titlepage]{book}
 
+% ---------- Encoding & Fonts ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% ---------- Page Layout ----------
+\usepackage[margin=1in]{geometry}
+\usepackage{microtype}
 \setlength{\headheight}{15pt}
 \addtolength{\topmargin}{-2pt}
-\begin{document}
+
+% ---------- Graphics & Tables ----------
+\usepackage{graphicx}
+\usepackage{booktabs, tabularx, longtable}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{placeins}
+\usepackage{pdflscape}
+
+% ---------- Maths ----------
+\usepackage{amsmath, amssymb}
+
+% ---------- Colors & Hyperlinks ----------
+\usepackage[dvipsnames]{xcolor}
+\definecolor{lightgray}{rgb}{0.95,0.95,0.95}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
+
+% ---------- Header & Footer ----------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+
+% ---------- Lists ----------
+\usepackage{enumitem}
+
+% ---------- Custom Use Case Box ----------
+% NOTE: Pandoc IGNORES advanced boxes → we keep it simple
+\newenvironment{usecase}[1]{%
+    \begin{quote}
+    \textbf{#1}
+    \begin{description}[leftmargin=0pt]
+}{%
+    \end{description}
+    \end{quote}
+}
+
+\newcommand{\addheading}[1]{%
+    \item[\textbf{#1:}]
+}
+
+\title{Secure Data Exchange System for Ad-hoc Networks Using Blockchain-Enhanced DSR}
+
+\author{
+Ahmed Nasir (22L-6644) \\ 
+Aanish Waseem (22L-6887) \\
+Muhammad Salman Amir (22L-6830)
+\\[1em]
+\degree\ Thesis
+\\[1em]
+Supervisors: Mr. Naveed, Dr. Rana Asif ur Rehman
+\\ \university
+}
+
+\date{\today}
+
 \newcommand{\supervisor}{Mr. Naveed}
 \newcommand{\cosupervisor}{Dr. Rana Asif ur Rehman}
 \newcommand{\university}{National University of Computer and Emerging Sciences, Lahore}
@@ -24,80 +81,65 @@
 \newcommand{\Studentone}{Ahmed Nasir    22L-6644    BSCS} 
 \newcommand{\Studenttwo}{Aanish Waseem     22L-6887    BSCS}
 \newcommand{\Studentthree}{Muhammad Salman Amir     22L-6830    BSCS}
-\date{\today}
+
+\begin{document}
 \renewcommand{\contentsname}{Table of Contents}
 
-\begin{titlepage}
-\begin{center}
-\vspace*{2cm}
-{\Huge \bfseries \fyptitle \par}
-\vspace{2cm}
-{\Large \degree\ Thesis \par}
-\vfill
-Supervisors: \supervisor, \cosupervisor \par
-Students: \Studentone, \Studenttwo, \Studentthree \par
-\university \par
-\today
-\end{center}
-\end{titlepage}
+\frontmatter
+\maketitle
 
-\newpage \thispagestyle{empty} \mbox{} \newpage %Aatira
-
-\pagestyle{empty}  %Aatira
-\section*{\begin{center}{Anti-Plagiarism Declaration} \end{center}} %Aatira
+\chapter*{Anti-Plagiarism Declaration}
 This is to declare that the above publication was produced under the:
 \begin{flushleft}
 \bf Title: \fyptitle
 \end{flushleft}
 
-is the sole contribution of the author(s), and no part hereof has been reproduced as it is the basis (cut and paste) that can be considered Plagiarism. All referenced parts have been used to argue the idea and cited properly. I/We will be responsible and liable for any consequence if a violation of this declaration is determined.
-\\[4ex]
-%% FYPTODO add the date and your names here
+is the sole contribution of the author(s), and no part hereof has been reproduced as it is the basis that can be considered Plagiarism. All referenced parts have been used to argue the idea and cited properly. I/We will be responsible and liable for any consequence if a violation of this declaration is determined.
+
+\vspace{2em}
 Date: 17-10-2025
 
 \begin{flushright}
 Name: Ahmed Nasir
-\\[3ex]
-Signature: \includegraphics[height=0.5cm,width=2cm]{Ahmed.png}
-\\[6ex]
-Name: Aanish Waseem
-\\[3ex]
-Signature: \includegraphics[height=0.5cm,width=2cm]{aanish.png}
-\\[6ex]
-Name: Muhammad Salman Amir
-\\[3ex]
-Signature: \includegraphics[height=0.5cm,width=2cm]{Salman.png
-}
+\vspace{1em}
 
+Signature: \includegraphics[height=0.5cm,width=2cm]{Ahmed.png}
+\vspace{2em}
+
+Name: Aanish Waseem
+\vspace{1em}
+
+Signature: \includegraphics[height=0.5cm,width=2cm]{aanish.png}
+\vspace{2em}
+
+Name: Muhammad Salman Amir
+\vspace{1em}
+
+Signature: \includegraphics[height=0.5cm,width=2cm]{Salman.png}
 \end{flushright} 
 
-\vspace{5 cm} %Aatira
+\vspace{5 cm}
 
-\hrule %Aatira
+\hrule
 
-\section*{Author's Declaration}
+\chapter*{Author's Declaration}
 This states the Authors’ declaration that the work presented in the report is their own and has not been submitted/presented previously to any other institution or organization.
-\pagebreak
-\section*{Abstract}
 
+\chapter*{Abstract}
 Low-Mobility Personal Area Ad hoc Networks make use of wireless in short-range communications of sensitive data. Classical DSR is vulnerable to Sybil, Blackhole, Wormhole, and Replay attacks and requires a decentralized lightweight security. This paper proposes to deploy the blockchain-enhanced DSR protocol with a small overhead. Bayesian trust diaries make decisions based on the past experience. PKCertChain authenticates the devices using lightweight Proof-of-Work and density-aware quorum. The RouteLog Chain monitors the routes and offers a secure routing according to a multi-metric Dijkstra algorithm. The protocol is experimented to be lightweight, adaptive and secure.
-\pagebreak 
 
-\section*{Executive Summary}
+\chapter*{Executive Summary}
 The project titled {\fyptitle} offers a software approach to enable secure peer-to-peer communications in a decentralized personal area network. In this way, multiple nodes in such networks communicate directly with each other without using any centralized infrastructure. These are subject to Blackhole, Wormhole, Sybil, and Replay based Attacks affecting the Consistency of communication, Data Path, and Trust between Nodes of the network.
-To tackle these challenges, the system uses a secure routing protocol, Advanced Blockchain Dynamic Source Routing (ABCD) \cite{ref:majumder:2025a} and a decentralized PKI for authentication. Digital Ids Each node in the system are assigned a digital ID along with a set of cryptographic keys which can be used to prove its identity and keep the data exchanges secure.
+To tackle these challenges, the system uses a secure routing protocol, Advanced Blockchain Dynamic Source Routing (ABCD) \cite{majumder2025} and a decentralized PKI for authentication. Digital Ids Each node in the system are assigned a digital ID along with a set of cryptographic keys which can be used to prove its identity and keep the data exchanges secure.
 A Bayesian Trust Diary keeps appraising nodes trust worthiness from previous interactions. Malicious nodes or those that drop packets are assigned low trust values while trustworthy nodes are given higher values. All routes and trust management information are securely stored inside blockchain making it immutable and tampering proof.
 The system, called Linux Data Exchange (LDX), is a Linux application. To conclude, through this paper we have presented a full-fledged, strong software based product utilizing blockchain, secure routing, PKI based authentication and bayesian trust evaluation to achieve a secure data exchange in personal area ad hoc network. It is engineered to offer a real-world, scalable, and reliable approach for decentralized, peer-to-peer communication. 
-\pagebreak
 
-
-\pagestyle{fancy} %Aatira
+\mainmatter
+\pagestyle{fancy} % Apply fancy page style to the main matter
 \tableofcontents
 
-\pagebreak
 \listoffigures	% comment this if there are no figures
 \addcontentsline{toc}{chapter}{List of Figures}
-\pagebreak
 \listoftables % comment this if there are no tables
 \addcontentsline{toc}{chapter}{List of Tables}
 
@@ -177,7 +219,7 @@ procedure uses lightweight consensus mechanisms like
 Android based systems are not time-critical and deterministic. Our scheduling proposes deterministic results by prioritizing urgency. Our buffer mechanism  is O(1) push/pop operation and use CPU instructions to find highest priority task instead of heap sort O(n log n)
 \subsection{Traditional PKI}
 Conventional PKI-based systems require the presence of a Certificate Authority, which is incompatible with the characteristics of PANETs because it would introduce a single point of failure, additional latency and demand for a static topology. The work addresses the challenge by introducing the notion of PKCertChain i.e. a blockchain for the certification issuance, renewal, public key and public key management. 
-\clearpage
+
 
 \section{Goals and Objectives} 
 The primary goals and objectives of this project are:
@@ -214,15 +256,15 @@ The project does not include the following:
 The Architecture and Technology Roadmap of the United Nations Sustainable Development Goal 9: Industry, Innovation, and Infrastructure promotes the development of resilient, inclusive and sustainable technological solutions. The proposed scheme is the first one enabling the formation of a secure and trustworthy data exchange system for PANETs by means of blockchain, bringing security, trust and reliability to the space of decentralized communication networks.
 This innovation leads to building robust and secure software-based communication frameworks which can enable applications in the future that need to exchange data between peers that are trusted, employ strong cybersecurity measures, and leverage a decentralized infrastructure applicable to smart digital networks in industrial, educational, and other areas. 
 \\
-\begin{figure}[!h]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.275\linewidth]{Figures/SDG 9.jpg}
+    \includegraphics{Figures/SDG 9.jpg}
     \caption{SDG 9. Industry, Innovation and Infrastructure}
     \label{fig:SDG}
 \end{figure}
 \section{Constraints}
 The project also has its limitations. It is all software and no hardware. The system is only tailored to small PANETs and hence, it is unable to support large networks. It is security and trust (authentication) centric, and not mobility, fast routing, or real-time network performance oriented. While it demonstrates secure data exchange and rudimentary attack mitigation, it does not connect to third party platforms or cloud services. The suggested implementation enables a practical secure communication system but not one with potentially very high scalability or correspondingly large network simulations.
-\clearpage
+
 
 \section{Conclusion}
 To summarize, this chapter described the vision and logic of the proposed work. In particular it underlines the security issues of the PANETs, and some of its attacks (Blackhole, Wormhole, Sybil and Replay). The innovations of the project are that it tackles these problems through the integration of blockchain, encryption, decentralized PKI, and secure routing to realize trusted peer-to-peer data trade.
@@ -233,38 +275,37 @@ This chapter includes the detailed literature review of studies relevant to prop
 \section{Detailed Literature Review} 
 The following sections provide each review material in detail including its summary, the critical analysis and its relevancy to our work.\\
  \subsection{ABCD: advanced blockchain DSR algorithm for MANET to mitigate the different security threats}
-This foundational paper introduces the ABCD protocol \cite{ref:majumder:2025a}. It is designed to make routing in MANETs more secure. The protocol combines DSR algorithm with blockchain to store route and node information safely. A key feature is the use of homomorphic encryption, which lets nodes process data without decrypting it, keeping the information private. The system builds trust by giving each node a reliability score based on its good and bad actions. Routes that include  less reliable nodes get a higher cost, so the system avoids them.
+This foundational paper introduces the ABCD protocol \cite{majumder2025}. It is designed to make routing in MANETs more secure. The protocol combines DSR algorithm with blockchain to store route and node information safely. A key feature is the use of homomorphic encryption, which lets nodes process data without decrypting it, keeping the information private. The system builds trust by giving each node a reliability score based on its good and bad actions. Routes that include  less reliable nodes get a higher cost, so the system avoids them.
 
-The main strength of the ABCD protocol \cite{ref:majumder:2025a} is its smart use of homomorphic encryption and a blockchain-based reputation system. However, it is not easy to use in real-time vehicular networks. Homomorphic encryption needs a lot of computing power, which makes it hard to run on small, low power devices. Also, the use of one single blockchain for all network tasks slows down performance and makes it difficult to scale.
+The main strength of the ABCD protocol \cite{majumder2025} is its smart use of homomorphic encryption and a blockchain-based reputation system. However, it is not easy to use in real-time vehicular networks. Homomorphic encryption needs a lot of computing power, which makes it hard to run on small, low power devices. Also, the use of one single blockchain for all network tasks slows down performance and makes it difficult to scale.
 
 This paper is the main reference for our research. Our project improves the ABCD protocol by fixing its main problems. We replace homomorphic encryption with a simpler and faster PKI system. the basic reliability score is upgraded to an adaptive Bayesian Trust Diary for better trust management. We also replace the single blockchain with a multilayer design that includes an Adaptive PKI Blockchain, a Routing Ledger, and a Meta Dispatcher to make the system faster and easier to scale.  
-\newpage
+
 \subsection{A scalable blockchain based trust management in VANET routing protocol }
 
-This study presents a two-level layer to address. At the first level, each node evaluates its neighbors’ behavior using response time, packet delivery ratio and various consistency metrics to calculate a local trust score. At the second level, RSUs act as blockchain validators, which maintains blacklist of malicious nodes. The routing protocol used is AODV \cite{ref:kudva:2021}.	\\
+This study presents a two-level layer to address. At the first level, each node evaluates its neighbors’ behavior using response time, packet delivery ratio and various consistency metrics to calculate a local trust score. At the second level, RSUs act as blockchain validators, which maintains blacklist of malicious nodes. The routing protocol used is AODV \cite{kudva2021}.	\\
 One of the strengths of the study includes the two level trust evaluation system. The RSU serves as blockchain validators, which reduces the computational overhead on individual nodes. However, the framework way of determining trust threshold is quite strict. Nodes may face difficulty in entering the network. Which makes the framework less feasible where public or random nodes may want to participate in the network. \\
     This study is quite relevant to the proposed study in terms of secure protocol design. The study relied on RSUs as validators for trust scores, the proposed study validates based on Bayesian trust diaries. Moreover, the proposed work extends the study by embedding PKI blockchain for node registration, renewal which also serves as confidentiality.
 
  \subsection{Traffic Prevention and Security Enhancement in VANET }
-The paper's summary integrates blockchain for a trusted routing environment, while deploying deep learning models for proactive traffic prediction and anomaly detection. A BHO algorithm is used, which selects the most stable and secure communication paths. This approach leverages the IPFS for decentralized data storage and a DPBFT consensus mechanism to validate transactions \cite{ref:swamy:2024}.\\
+The paper's summary integrates blockchain for a trusted routing environment, while deploying deep learning models for proactive traffic prediction and anomaly detection. A BHO algorithm is used, which selects the most stable and secure communication paths. This approach leverages the IPFS for decentralized data storage and a DPBFT consensus mechanism to validate transactions \cite{swamy2024}.\\
 Critically, the strength of this research lies in its multi-faceted approach. Using blockchain to address secure routing while deploying deep learning to address Traffic problems. However, its primary weakness may be its complexity and potential computational overhead. The blockchain consensus, deep learning frameworks for a vehicular node and optimization algorithms could be resource-intensive.\\
 The paper is quite relevant to the proposed core concept of using a blockchain-inspired architecture to establish trust and secure routing. The paper goes one step beyond. While the proposed idea focus is on the data transmission securely, the  paper introduces a deep learning component for traffic intelligence. In fact, it highlights a potential research gap in the proposed idea, suggesting how data transmitted can be leveraged for traffic mitigation.
 
-\clearpage
 \subsection{Lightweight Cryptography and IDS for Edge Networks}
-This research presents a secure and efficient group communication method for VANETs. It uses the LED, a lightweight encryption system. To work well on low-power hardware, the authors use a 64-bit key version. The  key management is decentralized  to protect privacy. Vehicles use fake identities to ask a group manager for a key and then create their own private keys. The system also changes keys regularly, keeping group communication secure and protecting each vehicle's identity \cite{ref:morin:2025}.
+This research presents a secure and efficient group communication method for VANETs. It uses the LED, a lightweight encryption system. To work well on low-power hardware, the authors use a 64-bit key version. The  key management is decentralized  to protect privacy. Vehicles use fake identities to ask a group manager for a key and then create their own private keys. The system also changes keys regularly, keeping group communication secure and protecting each vehicle's identity \cite{morin2025}.
 
 The main strength of this work is its practical and efficient design. The use of a lightweight cipher and pseudo identities work well for vehicle edge devices. However, it depends on a group manager, which is a weakness. If the group manager fails or is attacked, the security of whole group can be at risk.
 
 The idea of lightweight and hardware-aware security in this paper matches the goals of our protocol. Our system uses asymmetric PKI for strong authentication but still focuses on efficiency and privacy. The use of pseudo identities can also be added to our Adaptive PKI Blockchain to make nodes more anonymous.
 
 \subsection{Distributed blockchain assisted secure data aggregation scheme for risk-aware zone-based MANET}
-The study introduces a security framework named Block-DSD designed for MANETs, claimed to work in high-stakes environments like disaster management. The core arhitecture is Zone-based Clustering Approach that segments the network into zones to reduce overhead. Within each zone, an optimal Cluster Head is selected using an AI-driven ANFIS that evaluates nodes based on multiple criteria. The actual process of collecting data is secured using a combination of a Two-Step Secure method and lightweight ECC. Finally, to ensure data is transmitted efficiently between zones, an Improved Elephant Herd Optimization algorithm finds the optimal route. The blockchain serves as the decentralized trust anchor, ensuring the integrity of aggregated data and the overall state of the network \cite{ref:Sugumaran:2025}.\\
+The study introduces a security framework named Block-DSD designed for MANETs, claimed to work in high-stakes environments like disaster management. The core arhitecture is Zone-based Clustering Approach that segments the network into zones to reduce overhead. Within each zone, an optimal Cluster Head is selected using an AI-driven ANFIS that evaluates nodes based on multiple criteria. The actual process of collecting data is secured using a combination of a Two-Step Secure method and lightweight ECC. Finally, to ensure data is transmitted efficiently between zones, an Improved Elephant Herd Optimization algorithm finds the optimal route. The blockchain serves as the decentralized trust anchor, ensuring the integrity of aggregated data and the overall state of the network \cite{sugumaran2025}.\\
 The study, by providing a layered approach, directly tackles the MANET challenge of energy efficiency, which is a significant gain over ad-hoc networks. The zone-based structure is a practical solution for managing network topology and reducing broadcast storms inherent in ad-hoc networks. However, the system is heavily dependent on the availability and trustworthiness of the selected Cluster Heads, which could become localized points of failure.\\
 The paper uses an Improved Elephant Herd Optimization algorithm for routing. This highlights the value of using metaheuristic optimization, which can find a route that is balanced across multiple factors—not just distance. The proposed idea can be expanded in future from Local Trust Diaries into a more independent trust model inspired by this.
 
 \subsection{VANET Secure Reputation Evaluation \& Management Model Based on Double Layer Blockchain (DBREMM)}
-DBREMM is an advanced reputation system for VANETs that uses a double-layer blockchain. It measures trust using two parts, Direct Trust and Indirect Trust. Direct Trust comes from a vehicle's own sensor data and is calculated using Bayesian inference. Indirect Trust is based on opinions from nearby devices, which are given different weights depending on their past reputation. Both types of trust are combined to form a final score, which is then saved on the blockchain \cite{ref:hou:2023}.
+DBREMM is an advanced reputation system for VANETs that uses a double-layer blockchain. It measures trust using two parts, Direct Trust and Indirect Trust. Direct Trust comes from a vehicle's own sensor data and is calculated using Bayesian inference. Indirect Trust is based on opinions from nearby devices, which are given different weights depending on their past reputation. Both types of trust are combined to form a final score, which is then saved on the blockchain \cite{hou2023}.
 
 This hybrid trust model gives strong protection against both single malicious vehicles and group of attackers working together. It combines direct and indirect trust to make accurate decisions about vehicle behavior. However, it needs constant data from many fast-moving vehicles. Collecting, weighting and merging these trust scores in real time is complex and slow. This delay can be dangerous because V2V safety systems need to react instantly. Any latency in trust updates could lead to wrong decisions or late warnings during driving.
 
@@ -273,51 +314,51 @@ DBREMM trust model is a more complex version of our Bayesian Trust Diaries. Both
 
 
 \subsection{Blockchain-Enhanced Secure Routing Protocols for Vehicular Ad Hoc Networks}
-The paper integrates blockchain with standard DSR protocol. The blockchain stores the record of node interactions, which is used to compute trust metric for each vehicle. This trust metric is helpful in algorithm’s path selection logic. The source to destination packets are encrypted using Public Key Infrastructure i.e. asymmetric cryptography \cite{ref:kamel:2024}. \\
+The paper integrates blockchain with standard DSR protocol. The blockchain stores the record of node interactions, which is used to compute trust metric for each vehicle. This trust metric is helpful in algorithm’s path selection logic. The source to destination packets are encrypted using Public Key Infrastructure i.e. asymmetric cryptography \cite{kamel2024}. \\
 One of the strengths of this research lies in the use of blockchain to create an accumulating trust value. The neighboring nodes contribute in the verification during packet forwarding without relying solely on final destination to report a problem. However, the study’s limitation include also in its monitoring process. A group of malicious nodes can team up to provide false reports for one another in the network. The study also did not address mobility conditions where networks are changing rapidly.\\
 This research is directly relevant to the proposed work, where both aims to provide security. While the study focused primarily on how a route is find based on trust values, the proposed work extends the work by providing optimized path.
 
 \subsection{Security in MANETs}
-The paper proposed solution named "MPR Blockchain." This approach utilize the Multi-Point Relay (MPR) selection mechanism from the OLSR protocol. Instead of requiring every node in the network to manage a computationally intensive blockchain, only the elected MPR nodes are tasked with maintaining and sharing their own local blockchains. These "MPR Blockchains" are used to record transactions and calculate reliability estimates for nodes within their neighborhood. The decentralized zones of trust are managed by these key relay nodes \cite{ref:mouchfiq:2020}.\\
+The paper proposed solution named "MPR Blockchain." This approach utilize the Multi-Point Relay (MPR) selection mechanism from the OLSR protocol. Instead of requiring every node in the network to manage a computationally intensive blockchain, only the elected MPR nodes are tasked with maintaining and sharing their own local blockchains. These "MPR Blockchains" are used to record transactions and calculate reliability estimates for nodes within their neighborhood. The decentralized zones of trust are managed by these key relay nodes \cite{mouchfiq2020}.\\
 The paper proposes a resource-conscious design; by limiting the blockchain overhead to a subset of nodes (the MPRs). The rest of nodes interact less intensively. Confidentiality, integrity, availability are emphasized. However, the paper is purely a proposal and, as stated by the authors, lacks any implementation or simulation.\\
 This paper uses the "MPR Blockchain" concept, which is analogous to a zone-based or clustered approach. This concept is similiar to idea of your multi-layer architecture, as proposed in the idea that most of the nodes interact less while the ledger is managed somewhere else. The paper also suggests that segmenting the network distributes the security in ad-hoc networks, which is adopted in the proposed idea.
 
 \subsection{Clustering strategy (ICRA)}
 In 2023, Jingjing Guo et al. proposed several innovative methods aimed at improving routing protocols in UAV ad hoc networks. The key methods they discussed is Clustering module. This module is responsible for organizing the UAV nodes into clusters. Each node calculates its utility, which helps in determining its role within the cluster. They also devised a clustering strategy adjustment module. This module employs reinforcement learning to continuously adapt the clustering strategy based on the current network state. It learns the benefits of different strategies over time, allowing it to calculate the utility of nodes more accurately. Then comes the the routing phase where message 
-forwarding takes place between different clusters \cite{ref:guo:2023}.\\
+forwarding takes place between different clusters \cite{guo2023}.\\
 The key features of the paper is that clustering method aims to reduce end-to-end delay and enhance the packet delivery rate, addressing common challenges in UAV networks \\
 The paper and the proposed idea goals are similar but different in approach. The ICRA research paper addressing high mobility in V2V environment by adaptive clustering architecture. Whereas the proposed idea relies on PKI Blockchain and Bayesian Trust Diaries to address mobility as the idea is to adopt to unknown nodes.
 
 \subsection{Cryptography based Clustering}
-Roda Mohindra et al. proposed a Secure Cryptography Grouping Mechanism for MANET, including decryption, encryption, signature generation. Nodes are grouped into clusters (regions). Each cluster has a Region Head (RH) chosen based on energy, bandwidth, mobility, and lifetime. Member nodes register with RH. Packets are encrypted via ECC. Paths are discovered by AOMDV protocol \cite{ref:mohindra:2021}.\\
+Roda Mohindra et al. proposed a Secure Cryptography Grouping Mechanism for MANET, including decryption, encryption, signature generation. Nodes are grouped into clusters (regions). Each cluster has a Region Head (RH) chosen based on energy, bandwidth, mobility, and lifetime. Member nodes register with RH. Packets are encrypted via ECC. Paths are discovered by AOMDV protocol \cite{mohindra2021}.\\
 The primary strength includes the paper's successful mitigation in common ad-hoc network attacks. However, The framework used ECC but lacked comparisons with other techniques, suggesting the need for recent comparisons to better establish the framework’s efficiency. \\
 The study used cryptography to achieve end-to-end encryption and integrity. The proposed study also achieves integrity by lightweight means. The proposed study used PKI for end-to-end delivery while maintaining integrity. The proposed study also extended this work by finding shortest delivery to destination. 
 
 \subsection{Introduction to PBAG Protocol}
-The authors propose a blockchain-based authentication protocol (PBAG) that enhances the security of vehicle authentication in IoV environments. This protocol addresses the problems of existing schemes that require direct intervention with the blockchain for authentication, which was increasing latency \cite{ref:feng:2024}. \\
+The authors propose a blockchain-based authentication protocol (PBAG) that enhances the security of vehicle authentication in IoV environments. This protocol addresses the problems of existing schemes that require direct intervention with the blockchain for authentication, which was increasing latency \cite{feng2024}. \\
 A key feature of the PBAG protocol is the use of a public global commitment generated by the Root Authority. This global commitment is based on all valid certificates issued to authorized nodes, allowing for efficient verification without the need to ask the blockchain directly. Moreoever, PBAG protocol ensures strong privacy features, including unlinkability. It enables nodes to authenticate themselves anonymously using evaluation proofs, while also providing a mechanism for traceability in case of disputes. However, the study does not consider power consumption on ad-hoc network devices and did not optimize the methologies.\\
 The fact that PBAG addresses the most frequent and time-sensitive task: vehicle authentication by RA. The proposed study also uses concept similiar to RA i.e PKI Blockchain. Which not only stores secure certificates but also helps in timely delivery of node authentication. In fact, PBAG approach of providing this fast service of authentication is inspired in the proposed idea so that a specialized layer operates specially for this purpose.
 
 
 \subsection{Cluster Based MANET Security}
-Richa Agrawal et al. proposed an N-th Degree Truncated Polynomial Ring (NTRU) based key agreement scheme to determine pairwise and session keys for fully distributed MANET environments. The paper first organizes the network into a clustered topology. Within this structure, it implements the (NTRU) public key cryptosystem, a lattice-based cryptography method known for its resistance to quantum attacks. The framework uses NTRU for key agreement to establish secure communication between pairs of nodes and to generate group session keys. It employs a sophisticated secret sharing scheme based on Shamir's scheme and NTRU to distribute the secret keys of the vital clusterhead nodes among the participants \cite{ref:agrawal:2023}.\\
+Richa Agrawal et al. proposed an N-th Degree Truncated Polynomial Ring (NTRU) based key agreement scheme to determine pairwise and session keys for fully distributed MANET environments. The paper first organizes the network into a clustered topology. Within this structure, it implements the (NTRU) public key cryptosystem, a lattice-based cryptography method known for its resistance to quantum attacks. The framework uses NTRU for key agreement to establish secure communication between pairs of nodes and to generate group session keys. It employs a sophisticated secret sharing scheme based on Shamir's scheme and NTRU to distribute the secret keys of the vital clusterhead nodes among the participants \cite{agrawal2023}.\\
 The important strength is the paper's forward-thinking approach to security by using NTRU, which is faster than traditional cryptosystems like ECC and also secure against quantum threats. Structuring the network into clusters is also an effective way to manage a large network. However, a potential weakness is the architectural complexity in large networks. If a sufficient number of nodes within a cluster are subjected to common ad-hoc attacks, they could potentially reconstruct the clusterhead's key, disturbing the whole network.\\
 The paper's strategy of moving away from a flat network topology to a more hierarchical one to improve manageability, is relevant with the proposed multi-layer blockchain concept. Instead of one blockchain handling every task (identity, routing, trust scores, etc.), the proposed idea divides the task. The Routing Ledger is a specialized authority for path data. Just as the clusterhead unburdens regular nodes, the PKI layer unburdens the Routing Ledger from the backend computations of certificate or verification.
 \subsection{Graph Neural Lasso for Dynamic Network Regression}
-The GNL model is designed to predict how nodes in a changing network behave over time. It learns both the connections between nodes and their time based patterns together. A special unit called the GDU handles time information, while an attention layer identifies which nodes influence each other. It was tested on traffic datasets and showed better prediction results than older models \cite{ref:Yixin:2019}.
+The GNL model is designed to predict how nodes in a changing network behave over time. It learns both the connections between nodes and their time based patterns together. A special unit called the GDU handles time information, while an attention layer identifies which nodes influence each other. It was tested on traffic datasets and showed better prediction results than older models \cite{chen2019}.
 
 The strength of GNL is its ability to learn changing relationships between nodes over time. It captures both time and structure information in a smart way. The sparsity feature also removes weak links, making the model lightweight. However, it needs high computing power, as it keeps updating both the node data and graph structure. The learned connections are also hard to explain, which reduces clarity.
 
 The study GNL is relevant to the proposed system as both also works in dynamic and decentralized network. In our secure design, nodes may or may not move fast and make temporary links. The idea of learning changing relationships can help predict trust and route stability between nodes. 
 
 \subsection{A Novel Trust Mechanism for Addressing Black hole Attacks}
-The trust mechanism by the authors is designed to prevent blackhole attacks in MANETs. The concept used is direct and indrect trust. Direct trust is the node's own experience with its neighbors while the indirect trust is based on recommendations obtained from other nodes. The system combines both to calculate a node's trust score. They demonstrated an improved packet delivery ration and less data loss compared to traditional trust mechanisms \cite{ref:Blackhole:2021}.
+The trust mechanism by the authors is designed to prevent blackhole attacks in MANETs. The concept used is direct and indrect trust. Direct trust is the node's own experience with its neighbors while the indirect trust is based on recommendations obtained from other nodes. The system combines both to calculate a node's trust score. They demonstrated an improved packet delivery ration and less data loss compared to traditional trust mechanisms \cite{jari2021}.
 
 The main strength of this mechanism is its use of indirect trust to identify hidden or smart attackers. It works even when direct observation is not enough. It also improves network performance by finding and avoiding malicious nodes quickly. However, it has some weaknesses. Sharing recommendations increases communication overhead and may cause delay. It also depends on honest  nodes to give correct reports. If some nodes give false trust values, accuracy may drop.
 
 The study is useful for our FYP because we also aim to handle blackhole attacks in a decentralized network. The idea of combining direct and indirect trust can help improve our Bayesian trust diary model. In our system, this concept can be integrated through trust weighted updates or signed feedback stored in blockchain logs. While this paper uses cluster based indirect trust, our model works fully peer-to-peer.
 \subsection{A regression-based technique for link failure time prediction in MANET}
-The regression based technique is used to predict when a link in a MANET will break. It uses a least squares polynomial regression model to estimate link failure time. The method studies how signal strength changes as nodes move apart. It creates a polynomial curve to guess when the signal will become too weak for communication. The results show that it gives more accurate predictions of link failure time \cite{ref:patel:2020}.
+The regression based technique is used to predict when a link in a MANET will break. It uses a least squares polynomial regression model to estimate link failure time. The method studies how signal strength changes as nodes move apart. It creates a polynomial curve to guess when the signal will become too weak for communication. The results show that it gives more accurate predictions of link failure time \cite{patel2020}.
 
 The main strength of this method is its simplicity and low computation cost. It does not need any special hardware or large infrastructure. It helps predict link breaks before they happen. However, it assumes that signal strength always reflects link stability, which is not true in all cases. Interference, noise and obstacles can affect the signal. Polynomial regression can also overfit when the data is noisy or limited.
 
@@ -334,54 +375,54 @@ Following table \ref{tab:literature_review_summary} provides findings of past ar
 \hline
 \textbf{Author} & \textbf{Method} & \textbf{Results} & \textbf{Limitations} \\
 \hline
-Majumder et al. \cite{ref:majumder:2025a} & DSR with blockchain, homomorphic encryption, and reputation system. & Delay reduced by 18.5\%, 89.6\% detection; CPU +30\%. & High cost from homomorphic encryption; poor scalability. \\
+Majumder et al. \cite{majumder2025} & DSR with blockchain, homomorphic encryption, and reputation system. & Delay reduced by 18.5\%, 89.6\% detection; CPU +30\%. & High cost from homomorphic encryption; poor scalability. \\
 \hline
-Kudva et al. \cite{ref:kudva:2021} & Two-level trust via AODV; RSUs as validators. & 92.4\% PDR, 95\% detection, 21\% less overhead. & Strict trust threshold; low anonymity. \\
+Kudva et al. \cite{kudva2021} & Two-level trust via AODV; RSUs as validators. & 92.4\% PDR, 95\% detection, 21\% less overhead. & Strict trust threshold; low anonymity. \\
 \hline
-Swamy et al. \cite{ref:swamy:2024} & Blockchain + deep learning + BHO optimization. & 97.4\% accuracy, 96.1\% PDR, 42 ms latency. & High computational complexity. \\
+Swamy et al. \cite{swamy2024} & Blockchain + deep learning + BHO optimization. & 97.4\% accuracy, 96.1\% PDR, 42 ms latency. & High computational complexity. \\
 \hline
-Morin et al. \cite{ref:morin:2025} & Lightweight LED cipher, pseudo-identities, group key mgmt. & 1.7 ms enc/dec, 40\% lower energy vs AES-128. & Centralized group manager (single failure point). \\
+Morin et al. \cite{morin2025} & Lightweight LED cipher, pseudo-identities, group key mgmt. & 1.7 ms enc/dec, 40\% lower energy vs AES-128. & Centralized group manager (single failure point). \\
 \hline
-Sugumaran et al. \cite{ref:Sugumaran:2025} & Block-DSD using clustering, ANFIS, ECC, IEHO. & +27\% lifetime, 95.6\% PDR, -30\% energy. & Relies on cluster heads; localized failures. \\
+Sugumaran et al. \cite{sugumaran2025} & Block-DSD using clustering, ANFIS, ECC, IEHO. & +27\% lifetime, 95.6\% PDR, -30\% energy. & Relies on cluster heads; localized failures. \\
 \hline
-Hou et al. \cite{ref:hou:2023} & DBREMM: double-layer blockchain for trust. & 96.3\% accuracy, 94.7\% detection. & Latency in real-time trust aggregation. \\
+Hou et al. \cite{hou2023} & DBREMM: double-layer blockchain for trust. & 96.3\% accuracy, 94.7\% detection. & Latency in real-time trust aggregation. \\
 \hline
-Hiba et al. \cite{ref:kamel:2024} & Blockchain + DSR + PKI encryption. & 93.8\% PDR, 31 ms latency. & Vulnerable to collusion attacks. \\
+Hiba et al. \cite{kamel2024} & Blockchain + DSR + PKI encryption. & 93.8\% PDR, 31 ms latency. & Vulnerable to collusion attacks. \\
 \hline
-Mouchfiq et al. \cite{ref:mouchfiq:2020} & MPR nodes maintain local blockchains. & 60–70\% reduced ledger load (conceptual). & No simulation; theoretical only. \\
+Mouchfiq et al. \cite{mouchfiq2020} & MPR nodes maintain local blockchains. & 60–70\% reduced ledger load (conceptual). & No simulation; theoretical only. \\
 \hline
-Guo et al. \cite{ref:guo:2023} & RL-based ICRA clustering for UAVs. & 94.8\% PDR, +22\% stability. & RL overhead not ideal for small devices. \\
+Guo et al. \cite{guo2023} & RL-based ICRA clustering for UAVs. & 94.8\% PDR, +22\% stability. & RL overhead not ideal for small devices. \\
 \hline
-Mohindra et al. \cite{ref:mohindra:2021} & ECC encryption + AOMDV multipath routing. & 91\% PDR, 86\% detection. & No comparison with newer crypto schemes. \\
+Mohindra et al. \cite{mohindra2021} & ECC encryption + AOMDV multipath routing. & 91\% PDR, 86\% detection. & No comparison with newer crypto schemes. \\
 \hline
-Feng et al. \cite{ref:feng:2024} & PBAG: blockchain auth via global commitment. & 14.3 ms delay, 99.2\% success. & Ignores device power consumption. \\
+Feng et al. \cite{feng2024} & PBAG: blockchain auth via global commitment. & 14.3 ms delay, 99.2\% success. & Ignores device power consumption. \\
 \hline
-Agrawal et al. \cite{ref:agrawal:2023} & NTRU + Shamir scheme for cluster security. & 35\% faster key exchange; quantum-safe. & Complex architecture for large networks. \\
+Agrawal et al. \cite{agrawal2023} & NTRU + Shamir scheme for cluster security. & 35\% faster key exchange; quantum-safe. & Complex architecture for large networks. \\
 \hline
-Liu et al. \cite{ref:Yixin:2019} & GNL: temporal graph learning via Lasso. & 97.1\% accuracy, 21\% faster runtime. & High computational cost; unsuitable for real-time. \\
+Liu et al. \cite{chen2019} & GNL: temporal graph learning via Lasso. & 97.1\% accuracy, 21\% faster runtime. & High computational cost; unsuitable for real-time. \\
 \hline
-Ghaleb et al. \cite{ref:Blackhole:2021} & Direct + indirect trust for blackhole attack detection. & 92.5\% detection, 93.7\% PDR. & High overhead in recommendation sharing. \\
+Ghaleb et al. \cite{jari2021} & Direct + indirect trust for blackhole attack detection. & 92.5\% detection, 93.7\% PDR. & High overhead in recommendation sharing. \\
 \hline
-Patel et al. \cite{ref:patel:2020} & Polynomial regression for link failure prediction. & 95.2\% accuracy, -17\% packet loss. & Signal-based prediction unreliable in interference. \\
+Patel et al. \cite{patel2020} & Polynomial regression for link failure prediction. & 95.2\% accuracy, -17\% packet loss. & Signal-based prediction unreliable in interference. \\
 \hline
 \end{tabularx}
 \end{table}
-\pagebreak
+
 \section{Related Work}
 Industry applications used blockchain to secure the communication. Many of them applied security on vehicular communication and information sharing systems. The applications reveal the practicality of applying blockchain and distributed ledger technologies to enhance the trust, authentication, and security of data in ad hoc networks (PANETs).
 \subsection{Filament (IoT + Ad-Hoc Mesh + Blockchain)}
-Filament builds mesh-network devices called “Taps” for industrial IoT. These devices use long-range radios and cryptographic chips to set up temporary mesh networks without needing a central system. They also use blockchain technologies such as Bitcoin and Ethereum to create decentralized trust, keep data secure, and support smart contracts. This matters for your PANETs context because the nodes talk to each other directly and use blockchain to handle trust and data checks\cite{prisco2015filament}.
+Filament builds mesh-network devices called “Taps” for industrial IoT. These devices use long-range radios and cryptographic chips to set up temporary mesh networks without needing a central system. They also use blockchain technologies such as Bitcoin and Ethereum to create decentralized trust, keep data secure, and support smart contracts. This matters for your PANETs context because the nodes talk to each other directly and use blockchain to handle trust and data checks\cite{prisco2015}.
 
 \subsection{Lightweight Scalable Blockchain for IoT}
-LSB is a research architecture designed for IoT devices that have limited resources. It uses a tiered or clustered blockchain structure, so only some devices handle full blockchain validation. High-resource nodes serve as cluster heads. The consensus and trust mechanisms are set up to lower cost, latency, and overhead. This method is similar to your idea of combining blockchain, trust, and routing in networks with limited resources\cite{ref:dorri2017lsb_arxiv}.
+LSB is a research architecture designed for IoT devices that have limited resources. It uses a tiered or clustered blockchain structure, so only some devices handle full blockchain validation. High-resource nodes serve as cluster heads. The consensus and trust mechanisms are set up to lower cost, latency, and overhead. This method is similar to your idea of combining blockchain, trust, and routing in networks with limited resources\cite{dorri2017}.
 
 \subsection{Blockchain-Based Lightweight Trust Management in MANETs}
-There is a published system that uses blockchain to create distributed trust among routing nodes in a MANET. It works with the OLSR routing protocol and uses a lightweight consensus method to keep validation costs low. This approach is closely related to your work because it also uses blockchain-based trust management in a fully ad hoc, multi-hop network\cite{ref:lwin2020manet}.
+There is a published system that uses blockchain to create distributed trust among routing nodes in a MANET. It works with the OLSR routing protocol and uses a lightweight consensus method to keep validation costs low. This approach is closely related to your work because it also uses blockchain-based trust management in a fully ad hoc, multi-hop network\cite{lwin2020}.
 \subsection{Briar(Secure Mesh Messaging)}
-Briar is an open-source app that allows peer-to-peer messaging using Bluetooth, Wi-Fi, or removable storage. It is designed for strong and decentralized communication without central servers. It also offers end-to-end encryption for added security. While it doesn't use blockchain, it serves as a solid example of secure and fully decentralized communication in an ad hoc network\cite{ref:briar2025}.
+Briar is an open-source app that allows peer-to-peer messaging using Bluetooth, Wi-Fi, or removable storage. It is designed for strong and decentralized communication without central servers. It also offers end-to-end encryption for added security. While it doesn't use blockchain, it serves as a solid example of secure and fully decentralized communication in an ad hoc network\cite{briar2025}.
 
 \section{Conclusion}
-The relevant studies worked on applying different technologies and implement security in ad-hoc network. Different technologies like cryptographic methods, intelligent clustering and use of blockchain has been explored. Many of them achieved malicious node detection accuracy by 90\%. However, a study of literature also revealed gaps. A major challenge is the performance issue associated with integrating blockchain e.g high computational overhead  and latency, which make it impractical for real time vehicular environment, as seen in ABCD framework  \cite{ref:Sugumaran:2025}. Also, relying on specific nodes for validation centralized points of failure, a significant risk in a decentralized network \cite{ref:kudva:2021}. Our proposed protocol addresses the scalability issue by replacing the single, slow ledger with a specialized multi-layer blockchain architecture. Moreover, our system's Bayesian Trust Diary for reputation management ensures that there is no single point of failure. By opting for PKI system over heavy encryptions, our protocol is explicitly designed for the resource-constrained nature of nodes. 
+The relevant studies worked on applying different technologies and implement security in ad-hoc network. Different technologies like cryptographic methods, intelligent clustering and use of blockchain has been explored. Many of them achieved malicious node detection accuracy by 90\%. However, a study of literature also revealed gaps. A major challenge is the performance issue associated with integrating blockchain e.g high computational overhead  and latency, which make it impractical for real time vehicular environment, as seen in ABCD framework  \cite{sugumaran2025}. Also, relying on specific nodes for validation centralized points of failure, a significant risk in a decentralized network \cite{kudva2021}. Our proposed protocol addresses the scalability issue by replacing the single, slow ledger with a specialized multi-layer blockchain architecture. Moreover, our system's Bayesian Trust Diary for reputation management ensures that there is no single point of failure. By opting for PKI system over heavy encryptions, our protocol is explicitly designed for the resource-constrained nature of nodes. 
 
 
 \chapter{Software Requirement Specifications}
@@ -485,178 +526,145 @@ This section mentions several non-functional requirements to ensure performance 
 \section{Assumptions}
 The system assumes a network of up to 50 node so that the security processes remain manageable. Each node is considered to have limited processing power but still capable of performing encryption, digital signatures, trust score calculations, and lightweight blockchain tasks. The security model also assumes that PANETs face attacks similar to MANETs, such as blackhole, wormhole, and Sybil attacks. All nodes communicate directly in a peer-to-peer manner without any central server or authority. It is also assumed that nodes will participate honestly in blockchain consensus and trust reporting, although some may still try to behave maliciously. The model focuses only on securing data exchange and does not aim to improve routing speed, network efficiency, or mobility handling. Finally, all cryptographic and trust-related operations are expected to run smoothly on standard Linux PCs and using the data exchange application.
 \section{Use Cases}
-Following are the use cases identified in proposed system.
-\begin{longtable}{|lllll|}
-\caption{Use case for secure route discovery using Dijkstra’s algorithm and blockchain for trusted path verification.}
-\label{tab:route_discovery} \\
 
-\hline
-\multicolumn{2}{|l|}{\textbf{Name}} &
-  \multicolumn{3}{l|}{Route Discovery} \\ \hline
-\multicolumn{2}{|l|}{\textbf{Actors}} &
-  \multicolumn{3}{l|}{User} \\ \hline
-\multicolumn{2}{|l|}{\textbf{Summary}} &
-  \multicolumn{3}{l|}{\begin{tabular}[t]{@{}p{0.6\textwidth}@{}}The source node initiates a secure route discovery process to find the shortest path to the destination node using Dijkstra's algorithm and blockchain validation.\end{tabular}} \\ \hline
-\multicolumn{2}{|l|}{\textbf{Pre-Conditions}} &
-  \multicolumn{3}{l|}{Source node is registered in the network with a valid key pair.} \\ \hline
-\multicolumn{2}{|l|}{\textbf{Post-Conditions}} &
-  \multicolumn{3}{l|}{\begin{tabular}[t]{@{}p{0.6\textwidth}@{}}All intermediate nodes have verified the route, and route information is stored in the blockchain.\end{tabular}} \\ \hline
-\multicolumn{2}{|l|}{\textbf{\begin{tabular}[c]{@{}l@{}}Special\\ Requirements\end{tabular}}} &
-  \multicolumn{3}{l|}{None} \\ \hline
-\multicolumn{5}{|c|}{\textbf{Basic Flow}} \\ \hline
-\multicolumn{3}{|c|}{\textbf{Actor Action}} &
-  \multicolumn{2}{c|}{\textbf{System Response}} \\ \hline
-\multicolumn{1}{|l|}{1} &
-  \multicolumn{2}{l|}{\begin{tabular}[t]{@{}p{0.35\textwidth}@{}}The Source Node initiates a route discovery request to send data to a specific destination node.\end{tabular}} &
-  \multicolumn{1}{l|}{2} &
-  \begin{tabular}[t]{@{}p{0.35\textwidth}@{}}The system triggers Dijkstra’s algorithm to compute the shortest and most efficient route across available nodes.\end{tabular} \\ \hline
-\multicolumn{1}{|l|}{3} &
-  \multicolumn{2}{l|}{\begin{tabular}[t]{@{}p{0.35\textwidth}@{}}The source node digitally signs the Route Request (RREQ) and broadcasts it to neighboring nodes.\end{tabular}} &
-  \multicolumn{1}{l|}{4} &
-  \begin{tabular}[t]{@{}p{0.35\textwidth}@{}}The system attaches the route and security data to the blockchain ledger.\end{tabular} \\ \hline
-\multicolumn{1}{|l|}{5} &
-  \multicolumn{2}{l|}{\begin{tabular}[t]{@{}p{0.35\textwidth}@{}}Source node broadcasts RREQ message.\end{tabular}} &
-  \multicolumn{1}{l|}{6} &
-  \begin{tabular}[t]{@{}p{0.35\textwidth}@{}}System broadcasts RREQ to all neighbor nodes in the shortest path.\end{tabular} \\ \hline
-\multicolumn{1}{|l|}{} &
-  \multicolumn{2}{l|}{} &
-  \multicolumn{1}{l|}{7} &
-  \begin{tabular}[t]{@{}p{0.35\textwidth}@{}}System checks the certificate and signature at each hop.\end{tabular} \\ \hline
-\multicolumn{1}{|l|}{9} &
-  \multicolumn{2}{l|}{The source node receives the RREP.} &
-  \multicolumn{1}{l|}{8} &
-  \begin{tabular}[t]{@{}p{0.35\textwidth}@{}}System confirms successful route discovery once the destination node gets the RREQ and an RREP is generated back along the path.\end{tabular} \\ \hline
-\multicolumn{5}{|c|}{\textbf{Alternative Flow}} \\ \hline
-\multicolumn{1}{|l|}{} &
-  \multicolumn{2}{l|}{\begin{tabular}[t]{@{}p{0.35\textwidth}@{}}The source node signs the RREQ again and broadcasts it.\end{tabular}} &
-  \multicolumn{1}{l|}{7-A} &
-  \begin{tabular}[t]{@{}p{0.35\textwidth}@{}}If blockchain verification fails, the route discovery process is aborted, and a new RREQ is initiated.\end{tabular} \\ \hline
+% ===== Use Case 1: Route Discovery =====
+\subsection{Use Case 1: Route Discovery}
 
-\end{longtable}
+\begin{usecase}{Route Discovery}
+    \addheading{Actors}
+    \begin{itemize}
+        \item Source Node
+        \item Intermediate Nodes
+        \item Destination Node
+    \end{itemize}
+    
+    \addheading{Description}
+    The source node initiates a secure route discovery process to find the shortest path to the destination node using Dijkstra's algorithm and blockchain validation.
+    
+    \addheading{Preconditions}
+    \begin{itemize}
+        \item Source node is registered in the network with a valid key pair
+        \item Network has an established blockchain
+    \end{itemize}
+    
+    \addheading{Basic Flow}
+    \begin{enumerate}
+        \item The Source Node initiates a route discovery request to send data to a specific destination node.
+        \item The system triggers Dijkstra's algorithm to compute the shortest path.
+        \item The source node digitally signs the Route Request (RREQ).
+        \item The system attaches route and security data to the blockchain.
+        \item System broadcasts RREQ to neighbor nodes in the shortest path.
+        \item System verifies certificates and signatures at each hop.
+        \item Upon reaching destination, RREP is sent back to source.
+    \end{enumerate}
+    
+    \addheading{Alternative Flows}
+    \begin{itemize}
+        \item \textbf{Verification Failure}: If any node fails verification, the RREQ is dropped and the failure is logged.
+        \item \textbf{Time-out}: If no RREP is received within timeout period, the process is retried.
+    \end{itemize}
+    
+    \addheading{Postconditions}
+    \begin{itemize}
+        \item A secure route is established and recorded in the blockchain
+        \item All intermediate nodes have verified the route
+    \end{itemize}
+\end{usecase}
 
-\begin{longtable}{|lllll|}
-\caption{Use case for secure data transmission using encryption and blockchain-based signature verification across each hop.
-}
-\label{tab:data_transmission} \\
+% ===== Use Case 2: Data Transmission =====
+\subsection{Use Case 2: Secure Data Transmission}
 
-\hline
-\multicolumn{2}{|l|}{\textbf{Name}} &
-  \multicolumn{3}{l|}{Data Packet Transmission} \\ \hline
-\multicolumn{2}{|l|}{\textbf{Actors}} &
-  \multicolumn{3}{l|}{Source Node, Intermediate Nodes, Destination Node} \\ \hline
-\multicolumn{2}{|l|}{\textbf{Summary}} &
-  \multicolumn{3}{l|}{\begin{tabular}[t]{@{}p{0.6\textwidth}@{}}The source node sends an encrypted and signed data packet to the destination node along the pre-established and blockchain-verified route.\end{tabular}} \\ \hline
-\multicolumn{2}{|l|}{\textbf{Pre-Conditions}} &
-  \multicolumn{3}{l|}{\begin{tabular}[t]{@{}p{0.6\textwidth}@{}}A secure and verified route between the source and destination nodes has been discovered and logged in the blockchain.\end{tabular}} \\ \hline
-\multicolumn{2}{|l|}{\textbf{Post-Conditions}} &
-  \multicolumn{3}{l|}{\begin{tabular}[t]{@{}p{0.6\textwidth}@{}}The data packet is successfully received and decrypted by the destination node, with the transmission record updated in the blockchain.\end{tabular}} \\ \hline
-\multicolumn{2}{|l|}{\textbf{\begin{tabular}[c]{@{}l@{}}Special\\ Requirements\end{tabular}}} &
-  \multicolumn{3}{l|}{None} \\ \hline
-\multicolumn{5}{|c|}{\textbf{Basic Flow}} \\ \hline
-\multicolumn{3}{|c|}{\textbf{Actor Action}} &
-  \multicolumn{2}{c|}{\textbf{System Response}} \\ \hline
-\multicolumn{1}{|l|}{1} &
-  \multicolumn{2}{l|}{\begin{tabular}[t]{@{}p{0.35\textwidth}@{}}The Source Node encrypts the data packet with the destination's public key and signs it with its private key.\end{tabular}} &
-  \multicolumn{1}{l|}{2} &
-  \begin{tabular}[t]{@{}p{0.35\textwidth}@{}}The system forwards the packet to the first hop in the established route.\end{tabular} \\ \hline
-\multicolumn{1}{|l|}{3} &
-  \multicolumn{2}{l|}{\begin{tabular}[t]{@{}p{0.35\textwidth}@{}}Each Intermediate Node receives the packet.\end{tabular}} &
-  \multicolumn{1}{l|}{4} &
-  \begin{tabular}[t]{@{}p{0.35\textwidth}@{}}The system at each hop verifies the source's signature and the integrity of the route by checking the blockchain.\end{tabular} \\ \hline
-\multicolumn{1}{|l|}{} &
-  \multicolumn{2}{l|}{} &
-  \multicolumn{1}{l|}{5} &
-  \begin{tabular}[t]{@{}p{0.35\textwidth}@{}}If verification is successful, the node forwards the packet to the next hop.\end{tabular} \\ \hline
-\multicolumn{1}{|l|}{6} &
-  \multicolumn{2}{l|}{\begin{tabular}[t]{@{}p{0.35\textwidth}@{}}The Destination Node receives the encrypted packet.\end{tabular}} &
-  \multicolumn{1}{l|}{7} &
-  \begin{tabular}[t]{@{}p{0.35\textwidth}@{}}The system uses the destination's private key to decrypt the packet and verifies the source's signature.\end{tabular} \\ \hline
-\multicolumn{5}{|c|}{\textbf{No Alternative Flow}} \\ \hline
+\begin{usecase}{Secure Data Transmission}
+    \addheading{Actors}
+    \begin{itemize}
+        \item Source Node
+        \item Intermediate Nodes
+        \item Destination Node
+    \end{itemize}
+    
+    \addheading{Description}
+    Secure transmission of encrypted data packets along a verified route with integrity checks at each hop.
+    
+    \addheading{Preconditions}
+    \begin{itemize}
+        \item A secure route exists and is recorded in the blockchain
+        \item Source has data to send to destination
+    \end{itemize}
+    
+    \addheading{Basic Flow}
+    \begin{enumerate}
+        \item Source encrypts data with destination's public key
+        \item Source signs the packet with its private key
+        \item Packet is forwarded along the established route
+        \item Each intermediate node verifies the signature
+        \item Destination decrypts the packet and verifies the signature
+    \end{enumerate}
+    
+    \addheading{Alternative Flows}
+    \begin{itemize}
+        \item \textbf{Integrity Check Failure}: If any node detects tampering, packet is dropped
+        \item \textbf{Route Break}: If a link fails, route maintenance is triggered
+    \end{itemize}
+\end{usecase}
 
-\end{longtable}
+% ===== Use Case 3: Node Registration =====
+\subsection{Use Case 3: Node Registration}
 
-\begin{longtable}{|lllll|}
-\caption{Use case for new node registration, ensuring only verified nodes join the network for secure communication and data transmission.
-}
-\label{tab:node_registration} \\
+\begin{usecase}{Node Registration}
+    \addheading{Actors}
+    \begin{itemize}
+        \item New Node
+        \item Existing Network Nodes
+        \item Certificate Authority
+    \end{itemize}
+    
+    \addheading{Description}
+    Process for a new node to join the network and be authenticated.
+    
+    \addheading{Basic Flow}
+    \begin{enumerate}
+        \item New node generates key pair
+        \item Node requests certificate from CA
+        \item Node broadcasts join request with certificate
+        \item Network nodes validate certificate
+        \item On consensus, node is added to blockchain
+    \end{enumerate}
+    
+    \addheading{Alternative Flows}
+    \begin{itemize}
+        \item \textbf{Invalid Certificate}: Registration is rejected
+        \item \textbf{No Consensus}: Node is not added to network
+    \end{itemize}
+\end{usecase}
 
-\hline
-\multicolumn{2}{|l|}{\textbf{Name}} &
-  \multicolumn{3}{l|}{Node Registration} \\ \hline
-\multicolumn{2}{|l|}{\textbf{Actors}} &
-  \multicolumn{3}{l|}{New Node, Existing Network Nodes} \\ \hline
-\multicolumn{2}{|l|}{\textbf{Summary}} &
-  \multicolumn{3}{l|}{\begin{tabular}[t]{@{}p{0.6\textwidth}@{}}A new node requests to join the network, generates a key pair, and has its identity certificate validated and recorded on the blockchain by existing trusted nodes.\end{tabular}} \\ \hline
-\multicolumn{2}{|l|}{\textbf{Pre-Conditions}} &
-  \multicolumn{3}{l|}{\begin{tabular}[t]{@{}p{0.6\textwidth}@{}}The new node has the necessary software and is within communication range of the network. The network has an established blockchain.\end{tabular}} \\ \hline
-\multicolumn{2}{|l|}{\textbf{Post-Conditions}} &
-  \multicolumn{3}{l|}{\begin{tabular}[t]{@{}p{0.6\textwidth}@{}}The new node's public key and certificate are stored on the blockchain, allowing it to participate in secure network activities.\end{tabular}} \\ \hline
-\multicolumn{2}{|l|}{\textbf{\begin{tabular}[c]{@{}l@{}}Special\\ Requirements\end{tabular}}} &
-  \multicolumn{3}{l|}{\begin{tabular}[t]{@{}p{0.6\textwidth}@{}}Access to a trusted Certificate Authority (CA) or a decentralized trust mechanism.\end{tabular}} \\ \hline
-\multicolumn{5}{|c|}{\textbf{Basic Flow}} \\ \hline
-\multicolumn{3}{|c|}{\textbf{Actor Action}} &
-  \multicolumn{2}{c|}{\textbf{System Response}} \\ \hline
-\multicolumn{1}{|l|}{1} &
-  \multicolumn{2}{l|}{\begin{tabular}[t]{@{}p{0.35\textwidth}@{}}A New Node generates a public-private key pair and a Certificate Signing Request (CSR).\end{tabular}} &
-  \multicolumn{1}{l|}{2} &
-  \begin{tabular}[t]{@{}p{0.35\textwidth}@{}}The system broadcasts a "join request" to neighboring nodes, including its public key and certificate.\end{tabular} \\ \hline
-\multicolumn{1}{|l|}{3} &
-  \multicolumn{2}{l|}{\begin{tabular}[t]{@{}p{0.35\textwidth}@{}}Existing nodes receive the join request.\end{tabular}} &
-  \multicolumn{1}{l|}{4} &
-  \begin{tabular}[t]{@{}p{0.35\textwidth}@{}}The system validates the new node's certificate against the trusted CA. A consensus protocol is initiated among existing nodes to approve the new member.\end{tabular} \\ \hline
-\multicolumn{1}{|l|}{5} &
-  \multicolumn{2}{l|}{\begin{tabular}[t]{@{}p{0.35\textwidth}@{}}The new node receives confirmation of successful registration.\end{tabular}} &
-  \multicolumn{1}{l|}{6} &
-  \begin{tabular}[t]{@{}p{0.35\textwidth}@{}}Upon reaching consensus, the system adds the new node's public key, certificate, and initial trust score to a new block on the blockchain.\end{tabular} \\ \hline
-\multicolumn{5}{|c|}{\textbf{Alternative Flow}} \\ \hline
-\multicolumn{1}{|l|}{} &
-  \multicolumn{2}{l|}{\begin{tabular}[t]{@{}p{0.35\textwidth}@{}}The new node is denied entry to the network.\end{tabular}} &
-  \multicolumn{1}{l|}{4-A} &
-  \begin{tabular}[t]{@{}p{0.35\textwidth}@{}}If certificate validation fails or consensus is not reached, the system rejects the registration request and logs the failed attempt.\end{tabular} \\ \hline
+% ===== Use Case 4: Route Maintenance =====
+\subsection{Use Case 4: Route Maintenance}
 
-\end{longtable}
-
-
-\begin{longtable}{|lllll|}
-\caption{Use case for route recalculation after a link failure, ensuring continuous and secure communication through an alternate path.
-}
-\label{tab:route_recalculation} \\
-
-\hline
-\multicolumn{2}{|l|}{\textbf{Name}} &
-  \multicolumn{3}{l|}{Dynamic Route Recalculation} \\ \hline
-\multicolumn{2}{|l|}{\textbf{Actors}} &
-  \multicolumn{3}{l|}{Intermediate Node, Source Node} \\ \hline
-\multicolumn{2}{|l|}{\textbf{Summary}} &
-  \multicolumn{3}{l|}{\begin{tabular}[t]{@{}p{0.6\textwidth}@{}}When a link in an established route breaks, an intermediate node detects the failure, notifies the source, and a new secure route discovery is initiated to restore communication.\end{tabular}} \\ \hline
-\multicolumn{2}{|l|}{\textbf{Pre-Conditions}} &
-  \multicolumn{3}{l|}{\begin{tabular}[t]{@{}p{0.6\textwidth}@{}}An active and blockchain-verified route exists, and data packets are being transmitted between a source and destination node.\end{tabular}} \\ \hline
-\multicolumn{2}{|l|}{\textbf{Post-Conditions}} &
-  \multicolumn{3}{l|}{\begin{tabular}[t]{@{}p{0.6\textwidth}@{}}A new, secure route to the destination is established and recorded on the blockchain, or the destination is marked as unreachable if no new path can be found.\end{tabular}} \\ \hline
-\multicolumn{2}{|l|}{\textbf{\begin{tabular}[c]{@{}l@{}}Special\\ Requirements\end{tabular}}} &
-  \multicolumn{3}{l|}{\begin{tabular}[t]{@{}p{0.6\textwidth}@{}}Nodes must be able to detect link failures (e.g., via missing acknowledgments).\end{tabular}} \\ \hline
-\multicolumn{5}{|c|}{\textbf{Basic Flow}} \\ \hline
-\multicolumn{3}{|c|}{\textbf{Actor Action}} &
-  \multicolumn{2}{c|}{\textbf{System Response}} \\ \hline
-\multicolumn{1}{|l|}{1} &
-  \multicolumn{2}{l|}{\begin{tabular}[t]{@{}p{0.35\textwidth}@{}}An Intermediate Node fails to forward a packet to the next hop in the route (e.g., link break detected).\end{tabular}} &
-  \multicolumn{1}{l|}{2} &
-  \begin{tabular}[t]{@{}p{0.35\textwidth}@{}}The system generates a Route Error (RERR) message and sends it back towards the source node along the path the packet came from.\end{tabular} \\ \hline
-\multicolumn{1}{|l|}{3} &
-  \multicolumn{2}{l|}{\begin{tabular}[t]{@{}p{0.35\textwidth}@{}}The Source Node receives the RERR message.\end{tabular}} &
-  \multicolumn{1}{l|}{4} &
-  \begin{tabular}[t]{@{}p{0.35\textwidth}@{}}The system invalidates the broken route in its records and initiates a new "Secure Route Discovery" process to find an alternative path to the destination.\end{tabular} \\ \hline
-\multicolumn{1}{|l|}{5} &
-  \multicolumn{2}{l|}{\begin{tabular}[t]{@{}p{0.35\textwidth}@{}}A new route is successfully discovered.\end{tabular}} &
-  \multicolumn{1}{l|}{6} &
-  \begin{tabular}[t]{@{}p{0.35\textwidth}@{}}The system updates the blockchain with the new route information, and data transmission resumes.\end{tabular} \\ \hline
-\multicolumn{5}{|c|}{\textbf{Alternative Flow}} \\ \hline
-\multicolumn{1}{|l|}{} &
-  \multicolumn{2}{l|}{\begin{tabular}[t]{@{}p{0.35\textwidth}@{}}The source node is notified that a new route cannot be found.\end{tabular}} &
-  \multicolumn{1}{l|}{4-A} &
-  \begin{tabular}[t]{@{}p{0.35\textwidth}@{}}If the route discovery process fails to find any valid path to the destination, the system marks the destination as unreachable and informs the source node.\end{tabular} \\ \hline
-
-\end{longtable}
+\begin{usecase}{Route Maintenance}
+    \addheading{Actors}
+    \begin{itemize}
+        \item Intermediate Nodes
+        \item Source Node
+    \end{itemize}
+    
+    \addheading{Description}
+    Handles route failures and initiates route rediscovery when needed.
+    
+    \addheading{Basic Flow}
+    \begin{enumerate}
+        \item Node detects link failure
+        \item Generates RERR (Route Error) message
+        \item Sends RERR back to source
+        \item Source initiates new route discovery
+        \item Updates blockchain with new route
+    \end{enumerate}
+    
+    \addheading{Alternative Flows}
+    \begin{itemize}
+        \item \textbf{No Alternative Route}: Notify source of unreachable destination
+        \item \textbf{Multiple Failures}: Implement backoff algorithm
+    \end{itemize}
+\end{usecase}
 
 \section{Hardware and Software Requirements}
 \subsection{Hardware Requirements}
@@ -785,9 +793,9 @@ This chapter explains the proposed approach and working methodology of the syste
                     
             \end{itemize}
             \FloatBarrier
-            \begin{figure}[H]
+            \begin{figure}[htbp]
                 \centering
-                \includegraphics[height=1\textheight]{Figures/pan_local_trust_flowchart_colorful.pdf}
+                \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{Figures/pan_local_trust_flowchart_colorful.pdf}
                 \caption{Local Trust Diary Flowchart. Trust is represented as a probability distribution and computed on each node.}
                 \label{fig:LTDs}
             \end{figure}
@@ -840,10 +848,10 @@ This chapter explains the proposed approach and working methodology of the syste
 
                 \end{itemize}
                 \FloatBarrier
-                \begin{figure}[H]
+                \begin{figure}[htbp]
                     \centering
-                    \includegraphics[height=1\textheight]{Figures/PKCertChain_Node_Registration_Flowchart.pdf}
-                    \caption{PKCertChain}
+                    \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{Figures/PKCertChain_Node_Registration_Flowchart.pdf}
+                    \caption{PKCertChain Node Registration Flowchart}
                     \label{fig:PKCertChain_Flowchart}
                 \end{figure}
 
@@ -851,14 +859,13 @@ This chapter explains the proposed approach and working methodology of the syste
                 
             \subsubsection{Certificate Renewal} If a node’s certification has expired then it will be sent to blockchain (like to another node). It will send \texttt{<ID, PK, Signature, PrevCert>} if PrevCert is validated then it will be automatically assign another certification by preserving the certificate link.
             \FloatBarrier
-            \begin{figure}[H]
+            \begin{figure}[htbp]
                 \centering
-                \includegraphics[width=\linewidth]{Figures/PKCertChain_CertRenewal-1_page-0001.jpg}
-                \captionof{figure}{Certification Renewal takes place when it has expired. The request will be sent to blockchain.}
-            \label{fig:CertificateRenewal}
+                \includegraphics{Figures/PKCertChain_CertRenewal-1_page-0001.jpg}
+                \caption{Certification Renewal takes place when it has expired. The request will be sent to blockchain.}
+                \label{fig:CertificateRenewal}
             \end{figure}
             \FloatBarrier
-            \pagebreak
             
                 
             
@@ -890,22 +897,21 @@ This chapter explains the proposed approach and working methodology of the syste
                 \paragraph{Destination Node: } It will verify by using Rolling Signature method and then decrypt the message with its Secret Key
 
                 \FloatBarrier
-                \begin{figure}[H]
-                \centering
-                \includegraphics[height=\textheight]{Figures/RouteLogChain_Sender_Flowchart-2.pdf}
-                \captionof{figure}{Every node has to verify signature. If packet not received then re-transmit
-packet. The Destination node will verify by using Rolling Signature.}
-            \label{fig:RLC}
-            \end{figure}
+                \begin{figure}[htbp]
+                    \centering
+                    \includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{Figures/RouteLogChain_Sender_Flowchart-2.pdf}
+                    \caption{RouteLogChain Packet Routing and Path Trust. Every node verifies signatures, and packets are re-transmitted if not received. The destination node verifies using Rolling Signature.}
+                    \label{fig:RLC}
+                \end{figure}
             \FloatBarrier
             \section{Meta Blockchain}
                 It is for auditing purpose and dispatches the block to respective blockchain.
                 \FloatBarrier
-                \begin{figure}[H]
+                \begin{figure}[htbp]
                 \centering
-                \includegraphics[width=0.8\linewidth]{Figures/Meta_Blockchain_page-0001.jpg}
-                \captionof{figure}{MetaBlockchain is responsible for routing either to PKI Blockchain or Route Log Blockchain}
-            \label{fig:MetaBlockchain}
+                \includegraphics{Figures/Meta_Blockchain_page-0001.jpg}
+                \caption{MetaBlockchain is responsible for routing either to PKI Blockchain or Route Log Blockchain}
+                \label{fig:MetaBlockchain}
             \end{figure}
             
             \end{enumerate}
@@ -1000,9 +1006,9 @@ To achieve its objectives, the system is decomposed into a set of high-level mod
 \end{itemize}
 \vspace{4\baselineskip}
 
-\begin{figure}[!h]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.8\textwidth]{Figures/blockchain.PNG} % adjust width as needed
+    \includegraphics{Figures/blockchain.PNG}
     \caption{Transaction request is generated by Minor. Once broadcasted through tokens and verified by Intermediate nodes, it is then stored in the blockchain.}
     \label{fig:blockchain-transaction}
 \end{figure}
@@ -1014,7 +1020,7 @@ To achieve its objectives, the system is decomposed into a set of high-level mod
 % Include PDF full-page, responsive
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.8\textwidth,height=0.8\textheight,keepaspectratio]{Figures/SybilDFD2.pdf}
+    \includegraphics{Figures/SybilDFD2.pdf}
     \caption{Level-2 DFD for Sybil Attack Mitigation}
 \end{figure}
 
@@ -1026,19 +1032,18 @@ To achieve its objectives, the system is decomposed into a set of high-level mod
 % Include PDF full-page, responsive
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.8\textwidth,height=0.8\textheight,keepaspectratio]{Figures/blackhole_attack_DFD.pdf}
+    \includegraphics{Figures/blackhole_attack_DFD.pdf}
     \caption{Level-2 DFD for Blackhole Attack Mitigation}
 \end{figure}
 
 \FloatBarrier
-\pagebreak
 \subsection{Wormhole Attack Mitigation}
 \FloatBarrier
 
 % Include PDF full-page, responsive
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.95\textwidth,height=0.9\textheight,keepaspectratio]{Figures/wormhole_level2_DFD.pdf}
+    \includegraphics{Figures/wormhole_level2_DFD.pdf}
     \caption{Level-2 DFD for Wormhole Attack Mitigation}
 \end{figure}
 
@@ -1052,7 +1057,7 @@ It simply check the data packet duplications in the RouteLogChain and decrease t
 % Include PDF full-page, responsive
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{Figures/replay_level2_DFD.pdf}
+    \includegraphics{Figures/replay_level2_DFD.pdf}
     \caption{Level-2 DFD for Replay Attack Mitigation}
 \end{figure}
 
@@ -1075,9 +1080,9 @@ The DSR in the routing process is responsible for detecting link failures by gen
 \section{Process  diagram}
 The routing flow is shown by the figure \ref{fig:system-architecture}, the routing logic is based on a combination of on-demand character of Dynamic Source Routing (DSR) protocol and trust-weighted Dijkstra algorithm. 
 \FloatBarrier
-\begin{figure}[!h]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.8\textwidth]{Figures/architecture.png} % adjust width as needed
+    \includegraphics{Figures/architecture.png}
     \caption{Flow process from a route request initiation to the final packet and compute a optimal path.}
     \label{fig:system-architecture}
 \end{figure}
@@ -1118,7 +1123,7 @@ This chapter contains a detailed setup of the demonstration and implementation o
 \subsection{Tools and Technologies}
 The implementation of the project requires a careful realistic simulation that demands a custom made simulation setup, the core algorithmic development management, and dependencies.
 \FloatBarrier
-\begin{table}[!ht]
+\begin{table}[htbp]
     \centering
     \caption{Tools and Technologies}
     \label{tab:toolsTech}
@@ -1186,7 +1191,7 @@ These nodes will flood the network by sending multiple same packets.
 \section{Test Metrics}
 The following metrics form the comprehensive evaluation framework for the proposed secure PANET system. They will be measured first in the single-PC virtual topology (FYP-I) and then validated in a real multi-PC environment (FYP-II). All metrics will also quantify the overhead introduced by the security mechanisms.
 \FloatBarrier
-\begin{table}[!ht]
+\begin{table}[htbp]
     \centering
     \caption{Overall Test Campaign Plan}
     \label{tab:testMetricOverall}
@@ -1206,7 +1211,7 @@ The following metrics form the comprehensive evaluation framework for the propos
 \FloatBarrier
 \subsection{Security Effectiveness Metrics}
 \FloatBarrier
-\begin{table}[!ht]
+\begin{table}[htbp]
     \centering
     \caption{Security Effectiveness Metrics}
     \label{tab:securityMetrics}
@@ -1225,10 +1230,9 @@ The following metrics form the comprehensive evaluation framework for the propos
     \end{tabular}
 \end{table}
 \FloatBarrier
-\clearpage
 \subsection{Computational Overhead Metrics}
 \FloatBarrier
-\begin{table}[!ht]
+\begin{table}[htbp]
     \centering
     \caption{Computational Overhead Metrics}
     \label{tab:compOverhead}
@@ -1250,7 +1254,7 @@ The following metrics form the comprehensive evaluation framework for the propos
 \FloatBarrier
 \subsection{Network Performance Metrics}
 \FloatBarrier
-\begin{table}[!ht]
+\begin{table}[htbp]
     \centering
     \caption{Network Performance Metrics}
     \label{tab:networkMetrics}
@@ -1286,7 +1290,7 @@ The chapter is separated into two sections. One section demonstrates the packets
 The entire simulation was conducted using C++ simulator. Number of nodes were 20 and among which 7 nodes are malicious. The normal DSR algorithm was applied first. After that, the proposed protocol is applied on 20 nodes in different security threats. The entire simulation consisted of 200 rounds. The nodes distribution is visualized in \ref{fig:simulation_graph}.
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.7\linewidth]{Figures/simulation_graph.jpg} % Replace with your file name
+    \includegraphics{Figures/simulation_graph.jpg}
     \caption{Node distribution scenario where blackholes (blue colored) are placed in different locations.}
     \label{fig:simulation_graph} % Place the label *after* the caption
 \end{figure}
@@ -1296,21 +1300,21 @@ The entire simulation was conducted using C++ simulator. Number of nodes were 20
 Fig. \ref{fig:pdr_sybil} depicts the packets delivered in Sybil occurance, which was quite less as compared to standard DSR as the algorithm successfully detected the Sybil attack. Similarly, the modified DSR protocol proved to be a better approach after the wormhole and blackhole occurrence scenario. The rate of packets received was increased in both wormhole and blackhole occurrence as shown in Fig. \ref{fig:pdr_wormhole} and \ref{fig:pdr_blackhole} respectively, which is much better compared to normal DSR. 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.7\linewidth]{Figures/pdr_blackhole.png} % Replace with your file name
+    \includegraphics{Figures/pdr_blackhole.png}
     \caption{More Packets are delivered during blackhole as green curve represents the proposed algorithm and red is the normal DSR.}
     \label{fig:pdr_blackhole} % Place the label *after* the caption
 \end{figure}
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.7\linewidth]{Figures/pdr_wormhole.png} % Replace with your file name
+    \includegraphics{Figures/pdr_wormhole.png}
     \caption{More Packets are delivered to host during wormhole occurrence v/s rounds.}
     \label{fig:pdr_wormhole} % Place the label *after* the caption
 \end{figure}
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=0.7\linewidth]{Figures/pdr_sybil.png} % Replace with your file name
+    \includegraphics{Figures/pdr_sybil.png}
     \caption{Less Packets are delivered during Sybil occurrence as shown in green curve.}
     \label{fig:pdr_sybil} % Place the label *after* the caption
 \end{figure}
@@ -1320,7 +1324,7 @@ Fig. \ref{fig:pdr_sybil} depicts the packets delivered in Sybil occurance, which
 \section{Discussion}
 \subsection{Impact of Recalculation on Performance Metrics}
 Frequent recalculation impact performance metrics such as end-to-end delay, packet delivery ratio (PDR), and scalability. \ref{tab:freq_recalc_impact} presents the analysis.
-\begin{table}[!ht]
+\begin{table}[htbp]
     \centering
     \caption{Impact of Frequency Recalculation on Performance Metrics}
     \label{tab:freq_recalc_impact}
@@ -1351,7 +1355,7 @@ Frequent recalculation impact performance metrics such as end-to-end delay, pack
 
 \subsection{Comparison with DSR}
 The comparison in \ref{tab:dsr_abcd_comparison} analyze the security considerations, performance impacts, and associated computational costs observed under simulation.
-\begin{table}[!ht]
+\begin{table}[htbp]
     \centering
     \caption{Performance and Security of Standard DSR versus modified DSR protocol.}
     \label{tab:dsr_abcd_comparison}
@@ -1372,7 +1376,7 @@ The comparison in \ref{tab:dsr_abcd_comparison} analyze the security considerati
 
 \subsection{Processing delay}
 Table \ref{tab:comp_load_metrics} shows the average time overhead measured in various modules of the algorithm during the simulation.
-\begin{table}[!ht]
+\begin{table}[htbp]
     \centering
     \caption{Average processing delays in various modules calculated during simulation}
     \label{tab:comp_load_metrics}
@@ -1481,6 +1485,7 @@ Following are the future works related to it:
 
 \section{Conclusion}
 The project shows the secure, modular and adaptive security system for low mobility PANETs under 50 nodes. Currently implementing the custom system effectively mitigates Blackhole, Wormhole, Sybil and Replay attacks. The project achieved its objectives by robust attack mitigation and asynchronous event driven autonomic operations and layered design for maintainability, modularity and scalability. FYP-2 aims for the linux-ready application that is practical and deployable real time monitoring data exchange system. The platform also provides support practical product and research testbed for future extensions.
+\backmatter
 {
 \bibliographystyle{ieeetr}
 \bibliography{fypbib.bib} %specify your .bib file here
