@@ -2,114 +2,124 @@ import os
 import shutil
 from pathlib import Path
 from bs4 import BeautifulSoup
-import subprocess
 
 # --- Paths ---
 BASE_DIR = Path(__file__).resolve().parent
 TEX_FILE = BASE_DIR / "main.tex"
+CSS_FILE = BASE_DIR.parent / "Theme" / "theme.css"
 OUTPUT_DIR = BASE_DIR
 ASSETS_DIR = OUTPUT_DIR / "assets"
 
-# Ensure assets folder exists
+# --- Ensure assets directory exists ---
 ASSETS_DIR.mkdir(exist_ok=True)
 
-CUSTOM_CSS = """
+# --- CSS overrides ---
+CUSTOM_OVERRIDE_CSS = """
+/* Light background and full page */
 html, body {
-    margin:0 !important;
-    padding:0 !important;
-    width:100% !important;
-    background:white !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    background: #ffffff !important;
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
 }
-body {
-    max-width:100% !important;
-    padding:20px !important;
-}
+
+/* Images: max 50% width & height, centered, no scroll */
 img, figure img {
-    width:100% !important;
-    height:auto !important;
-    max-width:100% !important;
-    display:block !important;
-    margin:20px 0 !important;
-    object-fit:contain !important;
+    max-width: 50% !important;
+    max-height: 50vh !important;
+    width: auto !important;
+    height: auto !important;
+    display: block !important;
+    margin: 20px auto !important;
+    object-fit: contain !important;
 }
+
+/* Remove wrappers shrinking images */
 div, figure {
-    max-width:100% !important;
-    width:100% !important;
+    max-width: 100% !important;
+    width: 100% !important;
 }
-.table-container { overflow: visible !important; }
-p, li, td { font-size:1rem !important; line-height:1.6 !important; }
+
+/* Tables: scrollable if necessary */
+.table-container {
+    overflow-x: auto;
+    width: 100%;
+}
+
+/* Keep background light */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: white !important;
+        color: black !important;
+    }
+}
 """
 
-# --- Convert LaTeX to HTML using Pandoc ---
 def convert_tex_to_html():
-    html_file = OUTPUT_DIR / "index.html"
-    cmd = [
-        "pandoc",
-        str(TEX_FILE),
-        "-f", "latex",
-        "-t", "html5",
-        "--standalone",
-        "--toc",
-        "--mathjax",
-        "-o", str(html_file)
-    ]
-    subprocess.run(cmd, check=True)
-    return html_file
+    os.chdir(BASE_DIR)
+    output_html = OUTPUT_DIR / "index.html"
+    
+    cmd = f"""
+    pandoc "{TEX_FILE}" \
+    -f latex \
+    -t html5 \
+    --standalone \
+    --mathjax \
+    --toc \
+    --toc-depth=3 \
+    --css="{CSS_FILE}" \
+    -o "{output_html}"
+    """
+    os.system(cmd)
+    print(f"HTML created → {output_html}")
+    return output_html
 
-# --- Enhance HTML: embed all images + convert PDFs to PNG ---
 def enhance_html(html_file):
-    soup = BeautifulSoup(open(html_file, "r", encoding="utf-8"), "html.parser")
-
-    # Add viewport
+    with open(html_file, "r", encoding="utf-8") as f:
+        soup = BeautifulSoup(f.read(), "html.parser")
+    
+    # Add viewport meta
     if not soup.find("meta", {"name": "viewport"}):
         viewport = soup.new_tag("meta", name="viewport", content="width=device-width, initial-scale=1.0")
         soup.head.append(viewport)
 
-    # Force custom CSS
+    # Add custom CSS
     style = soup.new_tag("style")
-    style.string = CUSTOM_CSS
+    style.string = CUSTOM_OVERRIDE_CSS
     soup.head.append(style)
 
-    # Process <img> tags
+    # Strip width/height from images to prevent stretching
     for img in soup.find_all("img"):
-        src = img.get("src")
-        if src:
-            src_path = BASE_DIR / src
-            if src_path.exists():
-                target = ASSETS_DIR / src_path.name
-                shutil.copy2(src_path, target)
-                img["src"] = f"assets/{src_path.name}"
-                img["style"] = "width:100%;height:auto;display:block;"
+        if img.has_attr("width"): del img["width"]
+        if img.has_attr("height"): del img["height"]
+        img["style"] = "max-width:50%; max-height:50vh; width:auto; height:auto; display:block; margin:20px auto; object-fit:contain;"
 
-    # Process <embed> PDFs
-    for embed in soup.find_all("embed"):
-        src = embed.get("src")
-        if src and src.lower().endswith(".pdf"):
-            pdf_path = BASE_DIR / src
-            if pdf_path.exists():
-                # Convert PDF to PNG
-                png_name = pdf_path.stem + ".png"
-                png_path = ASSETS_DIR / png_name
-                subprocess.run([
-                    "pdftoppm",
-                    "-singlefile",
-                    "-png",
-                    str(pdf_path),
-                    str(png_path.with_suffix(""))
-                ], check=True)
-
-                # Replace embed with img tag
-                new_img = soup.new_tag("img", src=f"assets/{png_name}")
-                embed.replace_with(new_img)
-
-    # Save modified HTML
     with open(html_file, "w", encoding="utf-8") as f:
         f.write(str(soup))
 
-# --- Main ---
+    print("HTML enhanced: images constrained to max 50% width/height")
+
+def copy_images():
+    print("Copying images...")
+    folders_to_scan = [BASE_DIR, BASE_DIR / "Figures"]
+    extensions = (".png", ".jpg", ".jpeg", ".gif", ".svg")
+    
+    for folder in folders_to_scan:
+        if not folder.exists():
+            continue
+        for img in folder.rglob("*"):
+            if img.suffix.lower() in extensions:
+                target = ASSETS_DIR / img.name
+                if img.resolve() != target.resolve():  # avoid SameFileError
+                    shutil.copy2(img, target)
+    print("Images copied to assets/")
+
 if __name__ == "__main__":
-    print("Converting LaTeX to HTML...")
-    html_file = convert_tex_to_html()
-    print("Enhancing HTML and embedding images...")
-    enhance_html(html_file)
-    print(f"\n✅ Website generated: {html_file}")
+    html = convert_tex_to_html()
+    enhance_html(html)
+    copy_images()
+    
+    print("\n✅ DONE: Website version successfully generated!")
+    print(f"📍 Location: {html}")
