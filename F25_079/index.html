@@ -137,6 +137,343 @@ div, figure {
         color: black !important;
     }
 }
+</style><style>
+:root {
+    --primary: #1b263b;
+    --secondary: #ff6f61;
+    --accent: #0a9396;
+    --background: #f5f5f5;
+    --text: #111;
+    --code-bg: #e0e0e0;
+    --border-radius: 6px;
+    --spacing: 1rem;
+}
+
+body {
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text);
+    background-color: var(--background);
+    margin: 0;
+    padding: var(--spacing);
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5 {
+    color: var(--primary);
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+/* Links */
+a {
+    color: var(--secondary);
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: var(--spacing) 0;
+}
+th, td {
+    border: 1px solid #ccc;
+    padding: 0.5em 0.75em;
+    text-align: left;
+}
+th {
+    background-color: var(--primary);
+    color: white;
+}
+tr:nth-child(even) {
+    background-color: #e9ecef;
+}
+
+/* Code blocks */
+pre, code {
+    background-color: var(--code-bg);
+    padding: 0.5em;
+    border-radius: var(--border-radius);
+    overflow-x: auto;
+    font-family: "Fira Code", Consolas, monospace;
+}
+
+/* Images: responsive, max 50% width and height, no scrollbars */
+img, figure img, embed {
+    display: block;
+    margin: var(--spacing) auto;
+    max-width: 50%;
+    max-height: 50%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Figures */
+figure {
+    margin: var(--spacing) 0;
+    text-align: center;
+}
+figcaption {
+    font-size: 0.9em;
+    color: #555;
+    margin-top: 0.25em;
+}
+
+/* Disable overflow / scrollbars */
+html, body {
+    overflow-x: hidden;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    img, figure img, embed {
+        max-width: 100%;
+        max-height: auto;
+    }
+    body {
+        padding: 0.5rem;
+    }
+}
+
+/* MathJax styling */
+.MathJax {
+    font-size: 1.1em !important;
+    max-width: 100%;
+    overflow-x: auto;
+}
+</style><style>
+:root {
+    --primary: #0d1117;       /* Dark background for headers */
+    --secondary: #58a6ff;     /* Bright accent */
+    --accent: #39d353;
+    --background: #0d1117;    /* Page background */
+    --text: #c9d1d9;          /* Light gray text */
+    --code-bg: #161b22;       /* Dark code blocks */
+    --border-radius: 6px;
+    --spacing: 1rem;
+}
+
+body {
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text);
+    background-color: var(--background);
+    margin: 0;
+    padding: var(--spacing);
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5 {
+    color: var(--secondary);
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+/* Links */
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: var(--spacing) 0;
+}
+th, td {
+    border: 1px solid #30363d;
+    padding: 0.5em 0.75em;
+    text-align: left;
+}
+th {
+    background-color: #21262d;
+    color: var(--text);
+}
+tr:nth-child(even) {
+    background-color: #161b22;
+}
+
+/* Code blocks */
+pre, code {
+    background-color: var(--code-bg);
+    padding: 0.5em;
+    border-radius: var(--border-radius);
+    overflow-x: auto;
+    font-family: "Fira Code", Consolas, monospace;
+    color: #c9d1d9;
+}
+
+/* Images: responsive, max 50% width and height, no scrollbars */
+img, figure img, embed {
+    display: block;
+    margin: var(--spacing) auto;
+    max-width: 50%;
+    max-height: 50%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Figures */
+figure {
+    margin: var(--spacing) 0;
+    text-align: center;
+}
+figcaption {
+    font-size: 0.9em;
+    color: #8b949e;
+    margin-top: 0.25em;
+}
+
+/* Disable overflow / scrollbars */
+html, body {
+    overflow-x: hidden;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    img, figure img, embed {
+        max-width: 100%;
+        max-height: auto;
+    }
+    body {
+        padding: 0.5rem;
+    }
+}
+
+/* MathJax styling */
+.MathJax {
+    font-size: 1.1em !important;
+    max-width: 100%;
+    overflow-x: auto;
+}
+</style><style>
+:root {
+    --primary: #1b263b;
+    --secondary: #ff6f61;
+    --accent: #0a9396;
+    --background: #f5f5f5;
+    --text: #111;
+    --code-bg: #e0e0e0;
+    --border-radius: 6px;
+    --spacing: 1rem;
+}
+
+body {
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text);
+    background-color: var(--background);
+    margin: 0;
+    padding: var(--spacing);
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5 {
+    color: var(--primary);
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+/* Links */
+a {
+    color: var(--secondary);
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: var(--spacing) 0;
+}
+th, td {
+    border: 1px solid #ccc;
+    padding: 0.5em 0.75em;
+    text-align: left;
+}
+th {
+    background-color: var(--primary);
+    color: white;
+}
+tr:nth-child(even) {
+    background-color: #e9ecef;
+}
+
+/* Code blocks */
+pre, code {
+    background-color: var(--code-bg);
+    padding: 0.5em;
+    border-radius: var(--border-radius);
+    overflow-x: auto;
+    font-family: "Fira Code", Consolas, monospace;
+}
+
+/* Images: responsive, max 50% width and height, no scrollbars */
+img, figure img, embed {
+    display: block;
+    margin: var(--spacing) auto;
+    max-width: 50%;
+    max-height: 50%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Figures */
+figure {
+    margin: var(--spacing) 0;
+    text-align: center;
+}
+figcaption {
+    font-size: 0.9em;
+    color: #555;
+    margin-top: 0.25em;
+}
+
+/* Disable overflow / scrollbars */
+html, body {
+    overflow-x: hidden;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    img, figure img, embed {
+        max-width: 100%;
+        max-height: auto;
+    }
+    body {
+        padding: 0.5rem;
+    }
+}
+
+/* MathJax styling */
+.MathJax {
+    font-size: 1.1em !important;
+    max-width: 100%;
+    overflow-x: auto;
+}
 </style></head>
 <body>
 <header id="title-block-header">
@@ -456,11 +793,11 @@ violation of this declaration is determined.</p>
 <p>Date: 17-10-2025</p>
 <div class="flushright">
 <p>Name: Ahmed Nasir</p>
-<p>Signature: <img alt="image" src="Ahmed.png" style="display:block;margin:20px auto;width:auto;height:auto;max-width:50%;max-height:50vh;"/></p>
+<p>Signature: <img alt="image" src="Ahmed.png" style="max-width:50%;max-height:50%;width:auto;height:auto;display:block;margin:1rem auto;object-fit:contain;"/></p>
 <p>Name: Aanish Waseem</p>
-<p>Signature: <img alt="image" src="aanish.png" style="display:block;margin:20px auto;width:auto;height:auto;max-width:50%;max-height:50vh;"/></p>
+<p>Signature: <img alt="image" src="aanish.png" style="max-width:50%;max-height:50%;width:auto;height:auto;display:block;margin:1rem auto;object-fit:contain;"/></p>
 <p>Name: Muhammad Salman Amir</p>
-<p>Signature: <img alt="image" src="Salman.png" style="display:block;margin:20px auto;width:auto;height:auto;max-width:50%;max-height:50vh;"/></p>
+<p>Signature: <img alt="image" src="Salman.png" style="max-width:50%;max-height:50%;width:auto;height:auto;display:block;margin:1rem auto;object-fit:contain;"/></p>
 </div>
 <hr/>
 <h1 class="unnumbered" id="authors-declaration">Author’s
@@ -766,7 +1103,7 @@ applicable to smart digital networks in industrial, educational, and
 other areas.<br/>
 </p>
 <figure id="fig:SDG">
-<img src="Figures/SDG 9.jpg" style="display:block;margin:20px auto;width:auto;height:auto;max-width:50%;max-height:50vh;"/>
+<img src="Figures/SDG 9.jpg" style="max-width:50%;max-height:50%;width:auto;height:auto;display:block;margin:1rem auto;object-fit:contain;"/>
 <figcaption>SDG 9. Industry, Innovation and Infrastructure</figcaption>
 </figure>
 <h2 id="constraints">Constraints</h2>
@@ -1783,7 +2120,7 @@ prior belief and new evidence. The Beta-Bernoulli equation supports
 incremental learning without requiring historical data.</p></li>
 </ul>
 <figure id="fig:LTDs">
-<img src="assets/pan_local_trust_flowchart_colorful.png" style="display:block;margin:20px auto;width:auto;height:auto;max-width:50%;max-height:50vh;"/>
+<img src="assets/pan_local_trust_flowchart_colorful.png" style="max-width:50%;max-height:50%;width:auto;height:auto;display:block;margin:1rem auto;object-fit:contain;"/>
 <figcaption>Local Trust Diary Flowchart. Trust is represented as a
 probability distribution and computed on each node.</figcaption>
 </figure>
@@ -1838,7 +2175,7 @@ temporarily.</p></li>
 </ol></li>
 </ul>
 <figure id="fig:PKCertChain_Flowchart">
-<img src="assets/PKCertChain_Node_Registration_Flowchart.png" style="display:block;margin:20px auto;width:auto;height:auto;max-width:50%;max-height:50vh;"/>
+<img src="assets/PKCertChain_Node_Registration_Flowchart.png" style="max-width:50%;max-height:50%;width:auto;height:auto;display:block;margin:1rem auto;object-fit:contain;"/>
 <figcaption>PKCertChain Node Registration Flowchart</figcaption>
 </figure>
 <h4 id="certificate-renewal">Certificate Renewal</h4>
@@ -1848,7 +2185,7 @@ blockchain (like to another node). It will send
 validated then it will be automatically assign another certification by
 preserving the certificate link.</p>
 <figure id="fig:CertificateRenewal">
-<img src="Figures/PKCertChain_CertRenewal-1_page-0001.jpg" style="display:block;margin:20px auto;width:auto;height:auto;max-width:50%;max-height:50vh;"/>
+<img src="Figures/PKCertChain_CertRenewal-1_page-0001.jpg" style="max-width:50%;max-height:50%;width:auto;height:auto;display:block;margin:1rem auto;object-fit:contain;"/>
 <figcaption>Certification Renewal takes place when it has expired. The
 request will be sent to blockchain.</figcaption>
 </figure>
@@ -1890,7 +2227,7 @@ then increment NACK of respective node</p>
 <p>It will verify by using Rolling Signature method and then decrypt the
 message with its Secret Key</p>
 <figure id="fig:RLC">
-<img src="assets/RouteLogChain_Sender_Flowchart-2.png" style="display:block;margin:20px auto;width:auto;height:auto;max-width:50%;max-height:50vh;"/>
+<img src="assets/RouteLogChain_Sender_Flowchart-2.png" style="max-width:50%;max-height:50%;width:auto;height:auto;display:block;margin:1rem auto;object-fit:contain;"/>
 <figcaption>RouteLogChain Packet Routing and Path Trust. Every node
 verifies signatures, and packets are re-transmitted if not received. The
 destination node verifies using Rolling Signature.</figcaption>
@@ -1899,7 +2236,7 @@ destination node verifies using Rolling Signature.</figcaption>
 <p>It is for auditing purpose and dispatches the block to respective
 blockchain.</p>
 <figure id="fig:MetaBlockchain">
-<img src="Figures/Meta_Blockchain_page-0001.jpg" style="display:block;margin:20px auto;width:auto;height:auto;max-width:50%;max-height:50vh;"/>
+<img src="Figures/Meta_Blockchain_page-0001.jpg" style="max-width:50%;max-height:50%;width:auto;height:auto;display:block;margin:1rem auto;object-fit:contain;"/>
 <figcaption>MetaBlockchain is responsible for routing either to PKI
 Blockchain or Route Log Blockchain</figcaption>
 </figure></li>
@@ -2110,31 +2447,31 @@ performs end-to-end encryption and decryption of messages. It also
 applies the rolling digital signatures on packets.</p></li>
 </ul>
 <figure id="fig:blockchain-transaction">
-<img src="Figures/blockchain.PNG" style="display:block;margin:20px auto;width:auto;height:auto;max-width:50%;max-height:50vh;"/>
+<img src="Figures/blockchain.PNG" style="max-width:50%;max-height:50%;width:auto;height:auto;display:block;margin:1rem auto;object-fit:contain;"/>
 <figcaption>Transaction request is generated by Minor. Once broadcasted
 through tokens and verified by Intermediate nodes, it is then stored in
 the blockchain.</figcaption>
 </figure>
 <h3 id="sybil-attack-mitigation">Sybil Attack Mitigation</h3>
 <figure>
-<img src="assets/SybilDFD2.png" style="display:block;margin:20px auto;width:auto;height:auto;max-width:50%;max-height:50vh;"/>
+<img src="assets/SybilDFD2.png" style="max-width:50%;max-height:50%;width:auto;height:auto;display:block;margin:1rem auto;object-fit:contain;"/>
 <figcaption>Level-2 DFD for Sybil Attack Mitigation</figcaption>
 </figure>
 <h3 id="blackhole-attack-mitigation">Blackhole Attack Mitigation</h3>
 <figure>
-<img src="assets/blackhole_attack_DFD.png" style="display:block;margin:20px auto;width:auto;height:auto;max-width:50%;max-height:50vh;"/>
+<img src="assets/blackhole_attack_DFD.png" style="max-width:50%;max-height:50%;width:auto;height:auto;display:block;margin:1rem auto;object-fit:contain;"/>
 <figcaption>Level-2 DFD for Blackhole Attack Mitigation</figcaption>
 </figure>
 <h3 id="wormhole-attack-mitigation">Wormhole Attack Mitigation</h3>
 <figure>
-<img src="assets/wormhole_level2_DFD.png" style="display:block;margin:20px auto;width:auto;height:auto;max-width:50%;max-height:50vh;"/>
+<img src="assets/wormhole_level2_DFD.png" style="max-width:50%;max-height:50%;width:auto;height:auto;display:block;margin:1rem auto;object-fit:contain;"/>
 <figcaption>Level-2 DFD for Wormhole Attack Mitigation</figcaption>
 </figure>
 <h3 id="replay-attacks">Replay Attacks</h3>
 <p>It simply check the data packet duplications in the RouteLogChain and
 decrease trust.</p>
 <figure>
-<img src="assets/replay_level2_DFD.png" style="display:block;margin:20px auto;width:auto;height:auto;max-width:50%;max-height:50vh;"/>
+<img src="assets/replay_level2_DFD.png" style="max-width:50%;max-height:50%;width:auto;height:auto;display:block;margin:1rem auto;object-fit:contain;"/>
 <figcaption>Level-2 DFD for Replay Attack Mitigation</figcaption>
 </figure>
 <h2 id="architectural-strategies">Architectural Strategies</h2>
@@ -2180,7 +2517,7 @@ new route discovery process.</p>
 based on a combination of on-demand character of Dynamic Source Routing
 (DSR) protocol and trust-weighted Dijkstra algorithm.</p>
 <figure id="fig:system-architecture">
-<img src="Figures/architecture.png" style="display:block;margin:20px auto;width:auto;height:auto;max-width:50%;max-height:50vh;"/>
+<img src="Figures/architecture.png" style="max-width:50%;max-height:50%;width:auto;height:auto;display:block;margin:1rem auto;object-fit:contain;"/>
 <figcaption>Flow process from a route request initiation to the final
 packet and compute a optimal path.</figcaption>
 </figure>
@@ -2657,7 +2994,7 @@ algorithm was applied first. After that, the proposed protocol is
 applied on 20 nodes in different security threats. The entire simulation
 consisted of 200 rounds. The nodes distribution is visualized in <a data-reference="fig:simulation_graph" data-reference-type="ref" href="#fig:simulation_graph">8.1</a>.</p>
 <figure id="fig:simulation_graph">
-<img src="Figures/simulation_graph.jpg" style="display:block;margin:20px auto;width:auto;height:auto;max-width:50%;max-height:50vh;"/>
+<img src="Figures/simulation_graph.jpg" style="max-width:50%;max-height:50%;width:auto;height:auto;display:block;margin:1rem auto;object-fit:contain;"/>
 <figcaption>Node distribution scenario where blackholes (blue colored)
 are placed in different locations.</figcaption>
 </figure>
@@ -2672,18 +3009,18 @@ and blackhole occurrence scenario. The rate of packets received was
 increased in both wormhole and blackhole occurrence as shown in Fig. <a data-reference="fig:pdr_wormhole" data-reference-type="ref" href="#fig:pdr_wormhole">8.3</a> and <a data-reference="fig:pdr_blackhole" data-reference-type="ref" href="#fig:pdr_blackhole">8.2</a> respectively, which is much
 better compared to normal DSR.</p>
 <figure id="fig:pdr_blackhole">
-<img src="Figures/pdr_blackhole.png" style="display:block;margin:20px auto;width:auto;height:auto;max-width:50%;max-height:50vh;"/>
+<img src="Figures/pdr_blackhole.png" style="max-width:50%;max-height:50%;width:auto;height:auto;display:block;margin:1rem auto;object-fit:contain;"/>
 <figcaption>More Packets are delivered during blackhole as green curve
 represents the proposed algorithm and red is the normal
 DSR.</figcaption>
 </figure>
 <figure id="fig:pdr_wormhole">
-<img src="Figures/pdr_wormhole.png" style="display:block;margin:20px auto;width:auto;height:auto;max-width:50%;max-height:50vh;"/>
+<img src="Figures/pdr_wormhole.png" style="max-width:50%;max-height:50%;width:auto;height:auto;display:block;margin:1rem auto;object-fit:contain;"/>
 <figcaption>More Packets are delivered to host during wormhole
 occurrence v/s rounds.</figcaption>
 </figure>
 <figure id="fig:pdr_sybil">
-<img src="Figures/pdr_sybil.png" style="display:block;margin:20px auto;width:auto;height:auto;max-width:50%;max-height:50vh;"/>
+<img src="Figures/pdr_sybil.png" style="max-width:50%;max-height:50%;width:auto;height:auto;display:block;margin:1rem auto;object-fit:contain;"/>
 <figcaption>Less Packets are delivered during Sybil occurrence as shown
 in green curve.</figcaption>
 </figure>
