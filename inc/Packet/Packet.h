@@ -12,6 +12,8 @@ public:
     std::vector<uint8_t> hopAddresses; //variable, typically 1 * hopcount bytes
     std::vector<uint8_t> payload; //variable size but will equal to 1489−1×hopcount bytes
 
+    Packet() = default;
+
     Packet(uint16_t src, uint16_t dest, uint32_t seq_num, uint64_t time, const std::vector<uint8_t>& data)
         : source_id(src), destination_id(dest), sequence_number(seq_num), timestamp(time), payload(data) {}
 };

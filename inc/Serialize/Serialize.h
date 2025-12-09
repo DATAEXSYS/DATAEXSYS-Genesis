@@ -4,6 +4,7 @@
 #include <vector>
 #include <cstdint>
 #include <cstring>
+#include <stdexcept>
 
 /**
  * @brief Serializes a Packet object into a byte vector.
@@ -15,4 +16,93 @@
  * @param packet The Packet object to serialize.
  * @return A std::vector<uint8_t> containing the serialized bytes of the packet.
  */
-inline std::vector<uint8_t> serialize_packet(const Packet& packet);
+inline std::vector<uint8_t> serialize_packet(const Packet &packet) {
+    size_t total_size = sizeof(packet.source_id) + sizeof(packet.destination_id) +
+                        sizeof(packet.sequence_number) + sizeof(packet.hopcount) +
+                        sizeof(packet.timestamp) + packet.hopAddresses.size() + packet.payload.size();
+
+    std::vector<uint8_t> bytes(total_size);
+
+    char *current_pos = reinterpret_cast<char *>(bytes.data());
+
+    std::memcpy(current_pos, &packet.source_id, sizeof(packet.source_id));
+    current_pos += sizeof(packet.source_id);
+
+    std::memcpy(current_pos, &packet.destination_id, sizeof(packet.destination_id));
+    current_pos += sizeof(packet.destination_id);
+
+    std::memcpy(current_pos, &packet.sequence_number, sizeof(packet.sequence_number));
+    current_pos += sizeof(packet.sequence_number);
+
+    std::memcpy(current_pos, &packet.timestamp, sizeof(packet.timestamp));
+    current_pos += sizeof(packet.timestamp);
+
+    std::memcpy(current_pos, &packet.hopcount, sizeof(packet.hopcount));
+    current_pos += sizeof(packet.hopcount);
+
+    if(!packet.hopAddresses.empty()) {
+        std::memcpy(current_pos, packet.hopAddresses.data(), packet.hopAddresses.size());
+        current_pos += packet.hopAddresses.size();
+    }
+
+    if (!packet.payload.empty()) {
+        std::memcpy(current_pos, packet.payload.data(), packet.payload.size());
+    }
+
+    return bytes;
+}
+
+/**
+ * @brief Deserializes a byte vector into a Packet object.
+ * 
+ * This function takes a byte vector and converts it back into a Packet object.
+ * It performs checks to ensure the byte vector is not malformed.
+ * 
+ * @param bytes The byte vector to deserialize.
+ * @return The reconstructed Packet object.
+ * @throws std::runtime_error if the byte vector is too small or malformed.
+ */
+inline Packet deserialize_packet(const std::vector<uint8_t>& bytes) {
+    Packet packet;
+    const uint8_t* current_pos = bytes.data();
+    size_t offset = 0;
+
+    auto check_size = [&](size_t needed) {
+        if (offset + needed > bytes.size()) {
+            throw std::runtime_error("Unexpected end of byte stream during deserialization.");
+        }
+    };
+    
+    check_size(sizeof(packet.source_id));
+    std::memcpy(&packet.source_id, current_pos + offset, sizeof(packet.source_id));
+    offset += sizeof(packet.source_id);
+
+    check_size(sizeof(packet.destination_id));
+    std::memcpy(&packet.destination_id, current_pos + offset, sizeof(packet.destination_id));
+    offset += sizeof(packet.destination_id);
+
+    check_size(sizeof(packet.sequence_number));
+    std::memcpy(&packet.sequence_number, current_pos + offset, sizeof(packet.sequence_number));
+    offset += sizeof(packet.sequence_number);
+    
+    check_size(sizeof(packet.timestamp));
+    std::memcpy(&packet.timestamp, current_pos + offset, sizeof(packet.timestamp));
+    offset += sizeof(packet.timestamp);
+    
+    check_size(sizeof(packet.hopcount));
+    std::memcpy(&packet.hopcount, current_pos + offset, sizeof(packet.hopcount));
+    offset += sizeof(packet.hopcount);
+
+    if (packet.hopcount > 0) {
+        check_size(packet.hopcount);
+        packet.hopAddresses.assign(current_pos + offset, current_pos + offset + packet.hopcount);
+        offset += packet.hopcount;
+    }
+
+    size_t payload_size = bytes.size() - offset;
+    if (payload_size > 0) {
+        packet.payload.assign(current_pos + offset, current_pos + offset + payload_size);
+    }
+    
+    return packet;
+}

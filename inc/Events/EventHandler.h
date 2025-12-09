@@ -1,3 +1,4 @@
+#pragma once
 #include <queue>
 #include "Events/Event.h"
 
@@ -12,13 +13,23 @@ public:
         return events.empty();
     }
 
-    Event pop() {
+    /**
+     * @brief Safely pops an event from the front of the queue.
+     * 
+     * If the queue is not empty, this method retrieves the front event,
+     * removes it from the queue, and returns true. If the queue is empty,
+     * it does nothing and returns false.
+     * 
+     * @param out_event A reference to an Event object to store the result.
+     * @return true if an event was successfully popped, false otherwise.
+     */
+    bool try_pop(Event& out_event) {
         if (events.empty()) {
-            return Event();
+            return false;
         }
-        Event e = std::move(events.front());
+        out_event = std::move(events.front());
         events.pop();
-        return e;
+        return true;
     }
 
 private:
