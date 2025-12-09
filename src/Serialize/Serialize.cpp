@@ -1,9 +1,9 @@
-#include "../../inc/Serialize/Serialize.h"
+#include "inc/Serialize/Serialize.h"
 
 inline std::vector<uint8_t> serialize_packet(const Packet &packet) {
   size_t total_size = sizeof(packet.source_id) + sizeof(packet.destination_id) +
-                      sizeof(packet.sequence_number) +
-                      sizeof(packet.timestamp) + packet.payload.size();
+                      sizeof(packet.sequence_number) + sizeof(packet.hopcount) +
+                      sizeof(packet.timestamp) + packet.hopAddresses.size() + packet.payload.size();
 
   std::vector<uint8_t> bytes(total_size);
 
@@ -24,6 +24,15 @@ inline std::vector<uint8_t> serialize_packet(const Packet &packet) {
 
   std::memcpy(current_pos, &packet.timestamp, sizeof(packet.timestamp));
   current_pos += sizeof(packet.timestamp);
+
+  std::memcpy(current_pos, &packet.hopcount, sizeof(packet.hopcount));
+  current_pos += sizeof(packet.hopcount);
+
+  if(!packet.hopAddresses.empty()) {
+    std::memcpy(current_pos, packet.hopAddresses.data(),
+                packet.hopAddresses.size());
+    current_pos += packet.hopAddresses.size();
+  }
 
   // Copy the variable-size payload into the byte vector
   if (!packet.payload.empty()) {
