@@ -21,4 +21,9 @@ file(GLOB_RECURSE SOURCES "src/*.cpp" "src/**/*.cpp")
 add_executable(genesis_app sim.cpp ${SOURCES})
 
 # Print a message indicating where the executable will be created
-message(STATUS "Executable 'genesis_app' will be built in the 'build' directory.")
+
+# Create the test executable
+add_executable(sim_test simTest.cpp ${SOURCES})
+
+# Print a message indicating where the executable will be built
+message(STATUS "Executable 'genesis_app' and 'sim_test' I will be built in the 'build' directory.")

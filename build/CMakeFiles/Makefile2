@@ -64,6 +64,7 @@ CMAKE_BINARY_DIR = "/home/lenovo/Public/FYP Final/DATAEXSYS-Genesis/build"
 
 # The main recursive "all" target.
 all: CMakeFiles/genesis_app.dir/all
+all: CMakeFiles/sim_test.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -72,6 +73,7 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/genesis_app.dir/clean
+clean: CMakeFiles/sim_test.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -99,6 +101,32 @@ genesis_app: CMakeFiles/genesis_app.dir/rule
 CMakeFiles/genesis_app.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/genesis_app.dir/build.make CMakeFiles/genesis_app.dir/clean
 .PHONY : CMakeFiles/genesis_app.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/sim_test.dir
+
+# All Build rule for target.
+CMakeFiles/sim_test.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sim_test.dir/build.make CMakeFiles/sim_test.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sim_test.dir/build.make CMakeFiles/sim_test.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="/home/lenovo/Public/FYP Final/DATAEXSYS-Genesis/build/CMakeFiles" --progress-num=5,6,7,8 "Built target sim_test"
+.PHONY : CMakeFiles/sim_test.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/sim_test.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/lenovo/Public/FYP Final/DATAEXSYS-Genesis/build/CMakeFiles" 4
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/sim_test.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/lenovo/Public/FYP Final/DATAEXSYS-Genesis/build/CMakeFiles" 0
+.PHONY : CMakeFiles/sim_test.dir/rule
+
+# Convenience name for target.
+sim_test: CMakeFiles/sim_test.dir/rule
+.PHONY : sim_test
+
+# clean rule for target.
+CMakeFiles/sim_test.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sim_test.dir/build.make CMakeFiles/sim_test.dir/clean
+.PHONY : CMakeFiles/sim_test.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

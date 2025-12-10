@@ -11,7 +11,7 @@
 #include <ctime>
 #include <chrono>
 #include <thread>
-#include "inc/Node/DSRNode.h" // Note: Adjust path if necessary based on your build system's include paths
+#include "Node/DSRNode.h" 
 
 const int RX_BASE_PORT = 8000;
 const int TX_BASE_PORT = 9000;
@@ -81,9 +81,6 @@ int main(int argc, char* argv[]) {
     std::cout << "Created directory: " << output_dir << std::endl;
 
     // --- Port Generation ---
-    // Ports are now deterministic based on ID:
-    // RX = 8000 + ID
-    // TX = 9000 + ID
     std::filesystem::path ports_filepath = output_dir;
     ports_filepath /= "ports.txt";
     std::ofstream ports_outfile(ports_filepath);
@@ -148,10 +145,8 @@ int main(int argc, char* argv[]) {
                 // Let the simulation run for a bit before starting discovery
                 std::this_thread::sleep_for(std::chrono::seconds(1));
 
-                // Have node 0 initiate a route discovery for the last node
-                if (node.get_node_id() == 0 && num_processes > 1) {
-                    node.start_route_discovery(num_processes - 1);
-                }
+                // Have node 0 initiate a route discovery for the last node if not directly connected?
+                // Actually, just let the send_data logic handle discovery.
 
                 auto start_time = std::chrono::steady_clock::now();
                 int packet_counter = 0;
@@ -159,12 +154,21 @@ int main(int argc, char* argv[]) {
                     node.process_events();
                     
                     // Send a data packet every second if we are node 0
-                    if (node.get_node_id() == 0 && packet_counter < 5) { // Limit to 5 packets
+                    if (node.get_node_id() == 0 && packet_counter < 5) { // Limit to 5 packets for this test
                          static auto last_send_time = std::chrono::steady_clock::now();
                          if (std::chrono::steady_clock::now() - last_send_time > std::chrono::seconds(1)) {
-                             node.send_data(num_processes - 1, "Hello DSR");
-                             last_send_time = std::chrono::steady_clock::now();
-                             packet_counter++;
+                             uint8_t target_node = num_processes - 1;
+                             
+                             if (node.has_route(target_node)) {
+                                 std::cout << "[Node 0] Route available. Sending Packet " << packet_counter + 1 << " to Node " << (int)target_node << std::endl;
+                                 node.send_data(target_node, "Hello DSR Packet " + std::to_string(packet_counter));
+                                 packet_counter++;
+                                 last_send_time = std::chrono::steady_clock::now();
+                             } else {
+                                 std::cout << "[Node 0] No route to " << (int)target_node << ". Triggering discovery..." << std::endl;
+                                 node.send_data(target_node, "Discovery Trigger");
+                                 last_send_time = std::chrono::steady_clock::now(); 
+                             }
                          }
                     }
 

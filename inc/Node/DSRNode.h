@@ -32,6 +32,7 @@ public:
     void process_events(); // Override to check for timeouts
 
     void send_data(uint8_t destination_id, const std::string& message);
+    bool has_route(uint8_t destination_id) const;
 
 private:
     std::unordered_map<uint8_t, std::vector<uint8_t>> dsr_routes;

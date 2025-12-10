@@ -1,5 +1,0 @@
---- Node Statistics ---
-Packets Sent (Originated): 0
-Packets Received: 0
-Packets Forwarded: 0
-Packets Dropped: 0

@@ -107,6 +107,7 @@ void DSRNode::send_data(uint8_t destination_id, const std::string& message) {
     // but for now relying on BaseNode not to overwrite it if we set it? 
     // Actually Packet struct doesn't auto-increment. Let's start with rand or simple counter.
     packet.sequence_number = (uint32_t)std::rand();
+    packet.hopcount = (uint8_t)packet.hopAddresses.size();
     
     // First hop is the second element in the route (first is source)
     if (route.size() > 1) {
@@ -128,6 +129,10 @@ void DSRNode::send_data(uint8_t destination_id, const std::string& message) {
     }
 }
 
+bool DSRNode::has_route(uint8_t destination_id) const {
+    return dsr_routes.find(destination_id) != dsr_routes.end() && !dsr_routes.at(destination_id).empty();
+}
+
 void DSRNode::start_route_discovery(uint8_t destination_id) {
     std::cout << "Node " << (int)get_node_id() << " starting route discovery for " << (int)destination_id << std::endl;
     Packet rreq;
@@ -135,15 +140,25 @@ void DSRNode::start_route_discovery(uint8_t destination_id) {
     rreq.source_id = get_node_id();
     rreq.destination_id = destination_id;
     rreq.hopAddresses.push_back(get_node_id());
+    rreq.hopcount = (uint8_t)rreq.hopAddresses.size();
 
     auto bytes = serialize_packet(rreq);
     broadcast(bytes);
-    increment_packets_sent();
+    // increment_packets_sent(); // Don't count control packets for PDR
 }
 
 void DSRNode::handle_rreq(std::shared_ptr<Packet> packet) {
+    // 0. Loop Detection: Check if we are already in the path
+    for (uint8_t id : packet->hopAddresses) {
+        if (id == get_node_id()) {
+            // Loop detected. Discard.
+            return;
+        }
+    }
+
     // 1. Append current node's ID to the hop address list in the packet.
     packet->hopAddresses.push_back(get_node_id());
+    packet->hopcount = (uint8_t)packet->hopAddresses.size();
     log_packet_event("HANDLE", "RREQ from " + std::to_string(packet->source_id));
     std::cout << "Node " << (int)get_node_id() << " handling RREQ. Path so far: ";
     for(uint8_t id : packet->hopAddresses) {
@@ -160,7 +175,7 @@ void DSRNode::handle_rreq(std::shared_ptr<Packet> packet) {
         
         // Send a Route Reply (RREP) back to the source.
         send_rrep_back(packet->hopAddresses);
-        increment_packets_sent(); // Count RREP as sent
+        // increment_packets_sent(); // Count RREP as sent
 
     } else {
         // 3. If not the destination, broadcast the RREQ to neighbors.
@@ -175,7 +190,11 @@ void DSRNode::handle_rrep(std::shared_ptr<Packet> packet) {
     log_packet_event("HANDLE", "RREP from " + std::to_string(packet->source_id));
 
     // Store the route from the RREP.
-    dsr_routes[packet->source_id] = packet->hopAddresses;
+    // The RREP contains the path from Destination -> Source (reversed for travel).
+    // We need to store Source -> Destination.
+    std::vector<uint8_t> forward_path = packet->hopAddresses;
+    std::reverse(forward_path.begin(), forward_path.end());
+    dsr_routes[packet->source_id] = forward_path;
 
     // If this node is not the original source of the RREQ, forward the RREP.
     if (packet->destination_id != get_node_id()) {
@@ -210,6 +229,7 @@ void DSRNode::send_rrep_back(std::vector<uint8_t> path) {
     rrep.source_id = get_node_id(); // The destination of the RREQ is the source of the RREP.
     rrep.destination_id = path.back();   // The final destination of the RREP is the source of the RREQ.
     rrep.hopAddresses = path;
+    rrep.hopcount = (uint8_t)rrep.hopAddresses.size();
 
     // The first hop for the RREP is the second node in the reversed path.
     if (path.size() > 1) {

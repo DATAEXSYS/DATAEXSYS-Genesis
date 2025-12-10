@@ -318,9 +318,7 @@ private:
         }
 
         int p;
-        if (infile >> p) {
-             // own port, do nothing
-        }
+
 
         while (infile >> p) {
             neighbors.push_back(p);

@@ -19,11 +19,15 @@
 inline std::vector<uint8_t> serialize_packet(const Packet &packet) {
     size_t total_size = sizeof(packet.source_id) + sizeof(packet.destination_id) +
                         sizeof(packet.sequence_number) + sizeof(packet.hopcount) +
-                        sizeof(packet.timestamp) + packet.hopAddresses.size() + packet.payload.size();
+                        sizeof(packet.timestamp) + sizeof(packet.type) + packet.hopAddresses.size() + packet.payload.size();
 
     std::vector<uint8_t> bytes(total_size);
 
     char *current_pos = reinterpret_cast<char *>(bytes.data());
+    
+    // Serialize Packet Type
+    std::memcpy(current_pos, &packet.type, sizeof(packet.type));
+    current_pos += sizeof(packet.type);
 
     std::memcpy(current_pos, &packet.source_id, sizeof(packet.source_id));
     current_pos += sizeof(packet.source_id);
@@ -52,16 +56,6 @@ inline std::vector<uint8_t> serialize_packet(const Packet &packet) {
     return bytes;
 }
 
-/**
- * @brief Deserializes a byte vector into a Packet object.
- * 
- * This function takes a byte vector and converts it back into a Packet object.
- * It performs checks to ensure the byte vector is not malformed.
- * 
- * @param bytes The byte vector to deserialize.
- * @return The reconstructed Packet object.
- * @throws std::runtime_error if the byte vector is too small or malformed.
- */
 inline Packet deserialize_packet(const std::vector<uint8_t>& bytes) {
     Packet packet;
     const uint8_t* current_pos = bytes.data();
@@ -72,6 +66,11 @@ inline Packet deserialize_packet(const std::vector<uint8_t>& bytes) {
             throw std::runtime_error("Unexpected end of byte stream during deserialization.");
         }
     };
+    
+    // Deserialize Packet Type
+    check_size(sizeof(packet.type));
+    std::memcpy(&packet.type, current_pos + offset, sizeof(packet.type));
+    offset += sizeof(packet.type);
     
     check_size(sizeof(packet.source_id));
     std::memcpy(&packet.source_id, current_pos + offset, sizeof(packet.source_id));

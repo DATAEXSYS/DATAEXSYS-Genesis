@@ -129,6 +129,19 @@ genesis_app/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/genesis_app.dir/build.make CMakeFiles/genesis_app.dir/build
 .PHONY : genesis_app/fast
 
+#=============================================================================
+# Target rules for targets named sim_test
+
+# Build rule for target.
+sim_test: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sim_test
+.PHONY : sim_test
+
+# fast build rule for target.
+sim_test/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sim_test.dir/build.make CMakeFiles/sim_test.dir/build
+.PHONY : sim_test/fast
+
 sim.o: sim.cpp.o
 .PHONY : sim.o
 
@@ -153,12 +166,37 @@ sim.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/genesis_app.dir/build.make CMakeFiles/genesis_app.dir/sim.cpp.s
 .PHONY : sim.cpp.s
 
+simTest.o: simTest.cpp.o
+.PHONY : simTest.o
+
+# target to build an object file
+simTest.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sim_test.dir/build.make CMakeFiles/sim_test.dir/simTest.cpp.o
+.PHONY : simTest.cpp.o
+
+simTest.i: simTest.cpp.i
+.PHONY : simTest.i
+
+# target to preprocess a source file
+simTest.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sim_test.dir/build.make CMakeFiles/sim_test.dir/simTest.cpp.i
+.PHONY : simTest.cpp.i
+
+simTest.s: simTest.cpp.s
+.PHONY : simTest.s
+
+# target to generate assembly for a file
+simTest.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sim_test.dir/build.make CMakeFiles/sim_test.dir/simTest.cpp.s
+.PHONY : simTest.cpp.s
+
 src/Node/DSRNode.o: src/Node/DSRNode.cpp.o
 .PHONY : src/Node/DSRNode.o
 
 # target to build an object file
 src/Node/DSRNode.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/genesis_app.dir/build.make CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sim_test.dir/build.make CMakeFiles/sim_test.dir/src/Node/DSRNode.cpp.o
 .PHONY : src/Node/DSRNode.cpp.o
 
 src/Node/DSRNode.i: src/Node/DSRNode.cpp.i
@@ -167,6 +205,7 @@ src/Node/DSRNode.i: src/Node/DSRNode.cpp.i
 # target to preprocess a source file
 src/Node/DSRNode.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/genesis_app.dir/build.make CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sim_test.dir/build.make CMakeFiles/sim_test.dir/src/Node/DSRNode.cpp.i
 .PHONY : src/Node/DSRNode.cpp.i
 
 src/Node/DSRNode.s: src/Node/DSRNode.cpp.s
@@ -175,6 +214,7 @@ src/Node/DSRNode.s: src/Node/DSRNode.cpp.s
 # target to generate assembly for a file
 src/Node/DSRNode.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/genesis_app.dir/build.make CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sim_test.dir/build.make CMakeFiles/sim_test.dir/src/Node/DSRNode.cpp.s
 .PHONY : src/Node/DSRNode.cpp.s
 
 src/Serialize/Serialize.o: src/Serialize/Serialize.cpp.o
@@ -183,6 +223,7 @@ src/Serialize/Serialize.o: src/Serialize/Serialize.cpp.o
 # target to build an object file
 src/Serialize/Serialize.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/genesis_app.dir/build.make CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sim_test.dir/build.make CMakeFiles/sim_test.dir/src/Serialize/Serialize.cpp.o
 .PHONY : src/Serialize/Serialize.cpp.o
 
 src/Serialize/Serialize.i: src/Serialize/Serialize.cpp.i
@@ -191,6 +232,7 @@ src/Serialize/Serialize.i: src/Serialize/Serialize.cpp.i
 # target to preprocess a source file
 src/Serialize/Serialize.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/genesis_app.dir/build.make CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sim_test.dir/build.make CMakeFiles/sim_test.dir/src/Serialize/Serialize.cpp.i
 .PHONY : src/Serialize/Serialize.cpp.i
 
 src/Serialize/Serialize.s: src/Serialize/Serialize.cpp.s
@@ -199,6 +241,7 @@ src/Serialize/Serialize.s: src/Serialize/Serialize.cpp.s
 # target to generate assembly for a file
 src/Serialize/Serialize.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/genesis_app.dir/build.make CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sim_test.dir/build.make CMakeFiles/sim_test.dir/src/Serialize/Serialize.cpp.s
 .PHONY : src/Serialize/Serialize.cpp.s
 
 # Help Target
@@ -210,9 +253,13 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... genesis_app"
+	@echo "... sim_test"
 	@echo "... sim.o"
 	@echo "... sim.i"
 	@echo "... sim.s"
+	@echo "... simTest.o"
+	@echo "... simTest.i"
+	@echo "... simTest.s"
 	@echo "... src/Node/DSRNode.o"
 	@echo "... src/Node/DSRNode.i"
 	@echo "... src/Node/DSRNode.s"
