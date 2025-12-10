@@ -1,4 +1,4 @@
-# Install script for directory: /home/lenovo/Public/FYP Final/DATAEXSYS-Genesis
+# Install script for directory: /home/aanish/DATAEXSYS-Genesis
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/lenovo/Public/FYP Final/DATAEXSYS-Genesis/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/aanish/DATAEXSYS-Genesis/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

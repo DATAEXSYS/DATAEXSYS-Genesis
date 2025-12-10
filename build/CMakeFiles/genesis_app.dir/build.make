@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/home/lenovo/Public/FYP Final/DATAEXSYS-Genesis"
+CMAKE_SOURCE_DIR = /home/aanish/DATAEXSYS-Genesis
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/home/lenovo/Public/FYP Final/DATAEXSYS-Genesis/build"
+CMAKE_BINARY_DIR = /home/aanish/DATAEXSYS-Genesis/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/genesis_app.dir/depend.make
@@ -70,50 +70,65 @@ include CMakeFiles/genesis_app.dir/progress.make
 include CMakeFiles/genesis_app.dir/flags.make
 
 CMakeFiles/genesis_app.dir/sim.cpp.o: CMakeFiles/genesis_app.dir/flags.make
-CMakeFiles/genesis_app.dir/sim.cpp.o: /home/lenovo/Public/FYP\ Final/DATAEXSYS-Genesis/sim.cpp
+CMakeFiles/genesis_app.dir/sim.cpp.o: /home/aanish/DATAEXSYS-Genesis/sim.cpp
 CMakeFiles/genesis_app.dir/sim.cpp.o: CMakeFiles/genesis_app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/home/lenovo/Public/FYP Final/DATAEXSYS-Genesis/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/genesis_app.dir/sim.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/genesis_app.dir/sim.cpp.o -MF CMakeFiles/genesis_app.dir/sim.cpp.o.d -o CMakeFiles/genesis_app.dir/sim.cpp.o -c "/home/lenovo/Public/FYP Final/DATAEXSYS-Genesis/sim.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/aanish/DATAEXSYS-Genesis/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/genesis_app.dir/sim.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/genesis_app.dir/sim.cpp.o -MF CMakeFiles/genesis_app.dir/sim.cpp.o.d -o CMakeFiles/genesis_app.dir/sim.cpp.o -c /home/aanish/DATAEXSYS-Genesis/sim.cpp
 
 CMakeFiles/genesis_app.dir/sim.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/genesis_app.dir/sim.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/lenovo/Public/FYP Final/DATAEXSYS-Genesis/sim.cpp" > CMakeFiles/genesis_app.dir/sim.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/aanish/DATAEXSYS-Genesis/sim.cpp > CMakeFiles/genesis_app.dir/sim.cpp.i
 
 CMakeFiles/genesis_app.dir/sim.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/genesis_app.dir/sim.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/lenovo/Public/FYP Final/DATAEXSYS-Genesis/sim.cpp" -o CMakeFiles/genesis_app.dir/sim.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/aanish/DATAEXSYS-Genesis/sim.cpp -o CMakeFiles/genesis_app.dir/sim.cpp.s
+
+CMakeFiles/genesis_app.dir/src/Consensus/PoW.cpp.o: CMakeFiles/genesis_app.dir/flags.make
+CMakeFiles/genesis_app.dir/src/Consensus/PoW.cpp.o: /home/aanish/DATAEXSYS-Genesis/src/Consensus/PoW.cpp
+CMakeFiles/genesis_app.dir/src/Consensus/PoW.cpp.o: CMakeFiles/genesis_app.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/aanish/DATAEXSYS-Genesis/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/genesis_app.dir/src/Consensus/PoW.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/genesis_app.dir/src/Consensus/PoW.cpp.o -MF CMakeFiles/genesis_app.dir/src/Consensus/PoW.cpp.o.d -o CMakeFiles/genesis_app.dir/src/Consensus/PoW.cpp.o -c /home/aanish/DATAEXSYS-Genesis/src/Consensus/PoW.cpp
+
+CMakeFiles/genesis_app.dir/src/Consensus/PoW.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/genesis_app.dir/src/Consensus/PoW.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/aanish/DATAEXSYS-Genesis/src/Consensus/PoW.cpp > CMakeFiles/genesis_app.dir/src/Consensus/PoW.cpp.i
+
+CMakeFiles/genesis_app.dir/src/Consensus/PoW.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/genesis_app.dir/src/Consensus/PoW.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/aanish/DATAEXSYS-Genesis/src/Consensus/PoW.cpp -o CMakeFiles/genesis_app.dir/src/Consensus/PoW.cpp.s
 
 CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.o: CMakeFiles/genesis_app.dir/flags.make
-CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.o: /home/lenovo/Public/FYP\ Final/DATAEXSYS-Genesis/src/Node/DSRNode.cpp
+CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.o: /home/aanish/DATAEXSYS-Genesis/src/Node/DSRNode.cpp
 CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.o: CMakeFiles/genesis_app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/home/lenovo/Public/FYP Final/DATAEXSYS-Genesis/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.o -MF CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.o.d -o CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.o -c "/home/lenovo/Public/FYP Final/DATAEXSYS-Genesis/src/Node/DSRNode.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/aanish/DATAEXSYS-Genesis/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.o -MF CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.o.d -o CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.o -c /home/aanish/DATAEXSYS-Genesis/src/Node/DSRNode.cpp
 
 CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/lenovo/Public/FYP Final/DATAEXSYS-Genesis/src/Node/DSRNode.cpp" > CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/aanish/DATAEXSYS-Genesis/src/Node/DSRNode.cpp > CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.i
 
 CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/lenovo/Public/FYP Final/DATAEXSYS-Genesis/src/Node/DSRNode.cpp" -o CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/aanish/DATAEXSYS-Genesis/src/Node/DSRNode.cpp -o CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.s
 
 CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.o: CMakeFiles/genesis_app.dir/flags.make
-CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.o: /home/lenovo/Public/FYP\ Final/DATAEXSYS-Genesis/src/Serialize/Serialize.cpp
+CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.o: /home/aanish/DATAEXSYS-Genesis/src/Serialize/Serialize.cpp
 CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.o: CMakeFiles/genesis_app.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/home/lenovo/Public/FYP Final/DATAEXSYS-Genesis/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.o -MF CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.o.d -o CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.o -c "/home/lenovo/Public/FYP Final/DATAEXSYS-Genesis/src/Serialize/Serialize.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/aanish/DATAEXSYS-Genesis/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.o -MF CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.o.d -o CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.o -c /home/aanish/DATAEXSYS-Genesis/src/Serialize/Serialize.cpp
 
 CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/home/lenovo/Public/FYP Final/DATAEXSYS-Genesis/src/Serialize/Serialize.cpp" > CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/aanish/DATAEXSYS-Genesis/src/Serialize/Serialize.cpp > CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.i
 
 CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/home/lenovo/Public/FYP Final/DATAEXSYS-Genesis/src/Serialize/Serialize.cpp" -o CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/aanish/DATAEXSYS-Genesis/src/Serialize/Serialize.cpp -o CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.s
 
 # Object files for target genesis_app
 genesis_app_OBJECTS = \
 "CMakeFiles/genesis_app.dir/sim.cpp.o" \
+"CMakeFiles/genesis_app.dir/src/Consensus/PoW.cpp.o" \
 "CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.o" \
 "CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.o"
 
@@ -121,11 +136,14 @@ genesis_app_OBJECTS = \
 genesis_app_EXTERNAL_OBJECTS =
 
 genesis_app: CMakeFiles/genesis_app.dir/sim.cpp.o
+genesis_app: CMakeFiles/genesis_app.dir/src/Consensus/PoW.cpp.o
 genesis_app: CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.o
 genesis_app: CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.o
 genesis_app: CMakeFiles/genesis_app.dir/build.make
+genesis_app: /usr/lib/x86_64-linux-gnu/libssl.so
+genesis_app: /usr/lib/x86_64-linux-gnu/libcrypto.so
 genesis_app: CMakeFiles/genesis_app.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="/home/lenovo/Public/FYP Final/DATAEXSYS-Genesis/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable genesis_app"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/aanish/DATAEXSYS-Genesis/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable genesis_app"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/genesis_app.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -137,6 +155,6 @@ CMakeFiles/genesis_app.dir/clean:
 .PHONY : CMakeFiles/genesis_app.dir/clean
 
 CMakeFiles/genesis_app.dir/depend:
-	cd "/home/lenovo/Public/FYP Final/DATAEXSYS-Genesis/build" && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" "/home/lenovo/Public/FYP Final/DATAEXSYS-Genesis" "/home/lenovo/Public/FYP Final/DATAEXSYS-Genesis" "/home/lenovo/Public/FYP Final/DATAEXSYS-Genesis/build" "/home/lenovo/Public/FYP Final/DATAEXSYS-Genesis/build" "/home/lenovo/Public/FYP Final/DATAEXSYS-Genesis/build/CMakeFiles/genesis_app.dir/DependInfo.cmake" "--color=$(COLOR)"
+	cd /home/aanish/DATAEXSYS-Genesis/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/aanish/DATAEXSYS-Genesis /home/aanish/DATAEXSYS-Genesis /home/aanish/DATAEXSYS-Genesis/build /home/aanish/DATAEXSYS-Genesis/build /home/aanish/DATAEXSYS-Genesis/build/CMakeFiles/genesis_app.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/genesis_app.dir/depend
 

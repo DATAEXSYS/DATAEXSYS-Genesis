@@ -318,9 +318,7 @@ private:
         }
 
         int p;
-        if (infile >> p) {
-             // own port, do nothing
-        }
+        // Removed incorrect skip of first neighbor
 
         while (infile >> p) {
             neighbors.push_back(p);

@@ -19,11 +19,16 @@
 inline std::vector<uint8_t> serialize_packet(const Packet &packet) {
     size_t total_size = sizeof(packet.source_id) + sizeof(packet.destination_id) +
                         sizeof(packet.sequence_number) + sizeof(packet.hopcount) +
-                        sizeof(packet.timestamp) + packet.hopAddresses.size() + packet.payload.size();
+                        sizeof(packet.timestamp) + sizeof(uint8_t) + packet.hopAddresses.size() + packet.payload.size();
 
     std::vector<uint8_t> bytes(total_size);
 
     char *current_pos = reinterpret_cast<char *>(bytes.data());
+
+    // Serialize Packet Type
+    uint8_t type_byte = static_cast<uint8_t>(packet.type);
+    std::memcpy(current_pos, &type_byte, sizeof(type_byte));
+    current_pos += sizeof(type_byte);
 
     std::memcpy(current_pos, &packet.source_id, sizeof(packet.source_id));
     current_pos += sizeof(packet.source_id);
@@ -73,6 +78,12 @@ inline Packet deserialize_packet(const std::vector<uint8_t>& bytes) {
         }
     };
     
+    check_size(sizeof(uint8_t)); // Type
+    uint8_t type_byte;
+    std::memcpy(&type_byte, current_pos + offset, sizeof(type_byte));
+    packet.type = static_cast<PacketType>(type_byte);
+    offset += sizeof(type_byte);
+
     check_size(sizeof(packet.source_id));
     std::memcpy(&packet.source_id, current_pos + offset, sizeof(packet.source_id));
     offset += sizeof(packet.source_id);
