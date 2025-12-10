@@ -2,6 +2,8 @@
 
 #include <unordered_map>
 #include <cstdint>
+#include <fstream>
+#include <string>
 
 class RouteCache {
 public:
@@ -63,12 +65,49 @@ public:
     }
 
     /**
+     * @brief Removes all routes that use a specific link.
+     * 
+     * In a full implementation, the cache would store full paths.
+     * Since this simple cache only stores (destination -> next_hop),
+     * we will remove any route where the next_hop matches the failed link's target.
+     * 
+     * @param next_hop The node ID of the failed link.
+     */
+    void remove_routes_with_next_hop(uint8_t next_hop) {
+        auto it = cache.begin();
+        while (it != cache.end()) {
+            if (it->second == next_hop) {
+                it = cache.erase(it);
+            } else {
+                ++it;
+            }
+        }
+    }
+
+    /**
      * @brief Gets the current number of routes stored in the cache.
      * 
      * @return The number of entries in the cache.
      */
     size_t size() const {
         return cache.size();
+    }
+
+    /**
+     * @brief Saves the route cache to a text file.
+     * @param filepath The path to the file where the cache will be saved.
+     */
+    void save_to_file(const std::string& filepath) const {
+        std::ofstream outfile(filepath);
+        if (!outfile.is_open()) {
+            return;
+        }
+        outfile << "Destination -> Next Hop\n";
+        outfile << "-----------------------\n";
+        for (const auto& pair : cache) {
+            outfile << (int)pair.first << " -> " << (int)pair.second << "\n";
+        }
+        outfile.close();
     }
 
 private:

@@ -1,8 +1,10 @@
 file(REMOVE_RECURSE
   "CMakeFiles/genesis_app.dir/sim.cpp.o"
   "CMakeFiles/genesis_app.dir/sim.cpp.o.d"
-  "CMakeFiles/genesis_app.dir/src/Helper/Serialize.cpp.o"
-  "CMakeFiles/genesis_app.dir/src/Helper/Serialize.cpp.o.d"
+  "CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.o"
+  "CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.o.d"
+  "CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.o"
+  "CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.o.d"
   "genesis_app"
   "genesis_app.pdb"
 )

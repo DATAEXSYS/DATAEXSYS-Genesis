@@ -153,29 +153,53 @@ sim.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/genesis_app.dir/build.make CMakeFiles/genesis_app.dir/sim.cpp.s
 .PHONY : sim.cpp.s
 
-src/Helper/Serialize.o: src/Helper/Serialize.cpp.o
-.PHONY : src/Helper/Serialize.o
+src/Node/DSRNode.o: src/Node/DSRNode.cpp.o
+.PHONY : src/Node/DSRNode.o
 
 # target to build an object file
-src/Helper/Serialize.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/genesis_app.dir/build.make CMakeFiles/genesis_app.dir/src/Helper/Serialize.cpp.o
-.PHONY : src/Helper/Serialize.cpp.o
+src/Node/DSRNode.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/genesis_app.dir/build.make CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.o
+.PHONY : src/Node/DSRNode.cpp.o
 
-src/Helper/Serialize.i: src/Helper/Serialize.cpp.i
-.PHONY : src/Helper/Serialize.i
+src/Node/DSRNode.i: src/Node/DSRNode.cpp.i
+.PHONY : src/Node/DSRNode.i
 
 # target to preprocess a source file
-src/Helper/Serialize.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/genesis_app.dir/build.make CMakeFiles/genesis_app.dir/src/Helper/Serialize.cpp.i
-.PHONY : src/Helper/Serialize.cpp.i
+src/Node/DSRNode.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/genesis_app.dir/build.make CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.i
+.PHONY : src/Node/DSRNode.cpp.i
 
-src/Helper/Serialize.s: src/Helper/Serialize.cpp.s
-.PHONY : src/Helper/Serialize.s
+src/Node/DSRNode.s: src/Node/DSRNode.cpp.s
+.PHONY : src/Node/DSRNode.s
 
 # target to generate assembly for a file
-src/Helper/Serialize.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/genesis_app.dir/build.make CMakeFiles/genesis_app.dir/src/Helper/Serialize.cpp.s
-.PHONY : src/Helper/Serialize.cpp.s
+src/Node/DSRNode.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/genesis_app.dir/build.make CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.s
+.PHONY : src/Node/DSRNode.cpp.s
+
+src/Serialize/Serialize.o: src/Serialize/Serialize.cpp.o
+.PHONY : src/Serialize/Serialize.o
+
+# target to build an object file
+src/Serialize/Serialize.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/genesis_app.dir/build.make CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.o
+.PHONY : src/Serialize/Serialize.cpp.o
+
+src/Serialize/Serialize.i: src/Serialize/Serialize.cpp.i
+.PHONY : src/Serialize/Serialize.i
+
+# target to preprocess a source file
+src/Serialize/Serialize.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/genesis_app.dir/build.make CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.i
+.PHONY : src/Serialize/Serialize.cpp.i
+
+src/Serialize/Serialize.s: src/Serialize/Serialize.cpp.s
+.PHONY : src/Serialize/Serialize.s
+
+# target to generate assembly for a file
+src/Serialize/Serialize.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/genesis_app.dir/build.make CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.s
+.PHONY : src/Serialize/Serialize.cpp.s
 
 # Help Target
 help:
@@ -189,9 +213,12 @@ help:
 	@echo "... sim.o"
 	@echo "... sim.i"
 	@echo "... sim.s"
-	@echo "... src/Helper/Serialize.o"
-	@echo "... src/Helper/Serialize.i"
-	@echo "... src/Helper/Serialize.s"
+	@echo "... src/Node/DSRNode.o"
+	@echo "... src/Node/DSRNode.i"
+	@echo "... src/Node/DSRNode.s"
+	@echo "... src/Serialize/Serialize.o"
+	@echo "... src/Serialize/Serialize.i"
+	@echo "... src/Serialize/Serialize.s"
 .PHONY : help
 
 

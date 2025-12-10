@@ -5,17 +5,24 @@
 #include "Cache/RouteCache.h"
 #include "Serialize/Serialize.h"
 #include <iostream>
+#include <iomanip>
 #include <memory>
 #include <atomic>
 #include <thread>
 #include <vector>
 #include <stdexcept>
+#include <filesystem>
+#include <fstream>
+#include <string>
+
 
 // Networking headers
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
+#include <sys/types.h>
+
 
 class BaseNode {
 public:
@@ -24,7 +31,7 @@ public:
      * @param id The unique ID for this node.
      * @param port The UDP port this node will listen on.
      */
-    BaseNode(uint8_t id, int p) : node_id(id), port(p), stop_threads(false), socket_fd(-1) {
+    BaseNode(uint8_t id, int p, int loss_p = 0) : node_id(id), port(p), loss_percentage(loss_p), stop_threads(false), socket_fd(-1) {
         // 1. Create UDP socket
         socket_fd = socket(AF_INET, SOCK_DGRAM, 0);
         if (socket_fd < 0) {
@@ -45,6 +52,14 @@ public:
 
         // 3. Start the receiver thread
         receiver_thread = std::thread(&BaseNode::receive_loop, this);
+
+        // 4. Neighbors will be loaded via set_node_dir
+        // load_neighbors();
+    }
+
+    void set_node_dir(const std::string& dir) {
+        node_dir = dir;
+        load_neighbors();
     }
 
     /**
@@ -93,9 +108,11 @@ public:
         forwarding_queue.push(Event(EventType::PACKET_OUTGOING, task));
     }
 
-    void schedule_packet_reception(const std::shared_ptr<Packet>& packet) {
+    virtual void schedule_packet_reception(const std::shared_ptr<Packet>& packet) {
+        packets_received++;
         auto task = [this, packet]() {
             std::cout << "Processing packet from " << (int)packet->source_id << " with seq " << packet->sequence_number << std::endl;
+            log_packet_event("RECEIVE", "Packet from " + std::to_string(packet->source_id) + " Seq: " + std::to_string(packet->sequence_number));
         };
         receiving_queue.push(Event(EventType::PACKET_INCOMING, task));
     }
@@ -114,9 +131,84 @@ public:
         process_queue(route_update_queue);
     }
 
-private:
+    uint8_t get_node_id() const {
+        return node_id;
+    }
+
+    void send_packet(uint8_t next_hop_id, const std::vector<uint8_t>& packet_data) {
+        if (socket_fd < 0) return;
+
+        sockaddr_in dest_address{};
+        dest_address.sin_family = AF_INET;
+        dest_address.sin_port = htons(8080 + next_hop_id); // Assumes port = 8080 + node_id
+        dest_address.sin_addr.s_addr = inet_addr("127.0.0.1");
+
+        // Packet Loss Simulation
+        if (loss_percentage > 0 && (std::rand() % 100) < loss_percentage) {
+            std::cout << "Node " << (int)node_id << " DROPPED packet to " << (int)next_hop_id << " due to loss simulation." << std::endl;
+            log_packet_event("DROP", "Loss simulation to " + std::to_string(next_hop_id));
+            packet_loss_dropped++;
+            return;
+        }
+
+        sendto(socket_fd, packet_data.data(), packet_data.size(), 0, (const struct sockaddr *)&dest_address, sizeof(dest_address));
+        
+        log_packet_event("SEND", "To " + std::to_string(next_hop_id) + " (Bytes: " + std::to_string(packet_data.size()) + ")");
+        
+        // Count as sent only if it's the source (approximation, or add explicit 'originated' flag)
+        // For now, let's assume if we are calling send_packet, we might be forwarding OR sending.
+        // We'll increment packets_sent ONLY if we are the source. This requires deserializing or passing context.
+        // Simplification: In DSRNode/BaseNode, when we create a NEW packet, we should increment.
+    }
+
+    void increment_packets_sent() {
+        packets_sent++;
+    }
+
+    void log_packet_event(const std::string& action, const std::string& info) {
+        if (node_dir.empty()) return;
+        std::ofstream logfile(node_dir + "/PacketLog.txt", std::ios::app);
+        if (logfile.is_open()) {
+            auto now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+            logfile << std::put_time(std::localtime(&now), "%F %T") << " [" << action << "] " << info << "\n";
+            logfile.close();
+        }
+    }
+
+    void save_stats() {
+        if (node_dir.empty()) {
+             // Fallback or error
+             return;
+        }
+        std::string stats_filepath = node_dir + "/Stats.txt";
+        std::ofstream outfile(stats_filepath);
+        if (outfile.is_open()) {
+            outfile << "--- Node Statistics ---\n";
+            outfile << "Packets Sent (Originated): " << packets_sent << "\n";
+            outfile << "Packets Received: " << packets_received << "\n";
+            outfile << "Packets Forwarded: " << packets_forwarded << "\n";
+            outfile << "Packets Dropped: " << (packets_dropped + packet_loss_dropped) << "\n";
+            
+            if (packets_sent > 0) {
+                 double pdr = (double)packets_received / (double)packets_sent; // This is naive PDR (received/sent globally). 
+                 // For a single node, PDR usually means (Packets I received that were for me) / (Packets I sent).
+                 // BaseNode::packets_received counts everything delivered to app layer? 
+                 // schedule_packet_reception is called when dest == me. So yes.
+                 outfile << "Packet Delivery Ratio: " << (pdr * 100.0) << "%\n";
+            }
+
+            outfile.close();
+        }
+
+        std::string cache_filepath = node_dir + "/RouteCache.txt";
+        route_cache.save_to_file(cache_filepath);
+    }
+
+protected:
     uint8_t node_id;
     int port;
+    int loss_percentage;
+    std::string node_dir;
     int socket_fd;
     std::thread receiver_thread;
     std::atomic<bool> stop_threads;
@@ -126,16 +218,35 @@ private:
     EventHandler route_update_queue;
     RouteCache route_cache;
 
+    std::vector<int> neighbors;
+
+    std::atomic<uint64_t> packets_received{0};
     std::atomic<uint64_t> packets_forwarded{0};
     std::atomic<uint64_t> packets_dropped{0};
+    std::atomic<uint64_t> packets_sent{0};
+    std::atomic<uint64_t> packet_loss_dropped{0};
 
     static const uint8_t MAX_HOP_COUNT = 50;
 
-    /**
-     * @brief Main loop for the receiver thread. Listens for and handles incoming packets.
-     */
+    void broadcast(const std::vector<uint8_t>& packet_data) {
+        log_packet_event("BROADCAST", "To all neighbors");
+        for (int neighbor_port : neighbors) {
+            uint8_t neighbor_id = neighbor_port - 8080;
+            send_packet(neighbor_id, packet_data);
+        }
+    }
+
+    virtual void process_received_packet(std::shared_ptr<Packet> packet) {
+        if (packet->destination_id == this->node_id) {
+            schedule_packet_reception(packet);
+        } else {
+            schedule_packet_forwarding(packet);
+        }
+    }
+
+private:
     void receive_loop() {
-        char buffer[2048]; // Buffer for incoming data
+        char buffer[2048];
         sockaddr_in sender_address{};
         socklen_t sender_addr_len = sizeof(sender_address);
 
@@ -143,39 +254,43 @@ private:
             ssize_t bytes_received = recvfrom(socket_fd, buffer, sizeof(buffer), 0, (struct sockaddr *)&sender_address, &sender_addr_len);
             
             if (bytes_received < 0 || stop_threads) {
-                // Error or shutdown signal
                 break;
             }
 
             try {
                 std::vector<uint8_t> received_data(buffer, buffer + bytes_received);
                 auto packet_ptr = std::make_shared<Packet>(deserialize_packet(received_data));
+                process_received_packet(packet_ptr);
 
-                if (packet_ptr->destination_id == this->node_id) {
-                    schedule_packet_reception(packet_ptr);
-                } else {
-                    schedule_packet_forwarding(packet_ptr);
-                }
             } catch (const std::exception& e) {
                 std::cerr << "Error deserializing packet: " << e.what() << std::endl;
             }
         }
     }
 
-    /**
-     * @brief Sends a packet to a specified next-hop node via UDP.
-     * @param next_hop_id The ID of the node to send the packet to.
-     * @param packet_data The serialized byte vector of the packet.
-     */
-    void send_packet(uint8_t next_hop_id, const std::vector<uint8_t>& packet_data) {
-        if (socket_fd < 0) return;
+    void load_neighbors() {
+        if (node_dir.empty()) {
+            std::cerr << "Error: Node directory not set for Node " << (int)node_id << std::endl;
+            return;
+        }
+        std::filesystem::path filepath = node_dir;
+        filepath /= "AccessTable.txt";
+        std::ifstream infile(filepath);
+        if (!infile.is_open()) {
+            std::cerr << "Warning: Could not open access table file: " << filepath << std::endl;
+            return;
+        }
 
-        sockaddr_in dest_address{};
-        dest_address.sin_family = AF_INET;
-        dest_address.sin_port = htons(8080 + next_hop_id); // Assumes port = 8080 + node_id
-        dest_address.sin_addr.s_addr = inet_addr("127.0.0.1");
+        int p;
+        if (infile >> p) {
+             // own port, do nothing
+        }
 
-        sendto(socket_fd, packet_data.data(), packet_data.size(), 0, (const struct sockaddr *)&dest_address, sizeof(dest_address));
+        while (infile >> p) {
+            neighbors.push_back(p);
+        }
+        infile.close();
+        std::cout << "Node " << (int)node_id << " loaded " << neighbors.size() << " neighbors." << std::endl;
     }
 
     void process_queue(EventHandler& queue) {

@@ -9,11 +9,15 @@
 #include <fstream>
 #include <random>
 #include <ctime>
+#include <chrono>
+#include <thread>
+#include "inc/Node/DSRNode.h" // Note: Adjust path if necessary based on your build system's include paths
 
 int main(int argc, char* argv[]) {
     int num_processes = -1;
     int duration = -1;
     int link_percentage = -1;
+    int loss_percentage = 0; // Default 0 loss
 
     // Parse command-line arguments
     for (int i = 1; i < argc; ++i) {
@@ -39,18 +43,28 @@ int main(int argc, char* argv[]) {
                 std::cerr << "Error: Invalid number provided for --links." << std::endl;
                 return 1;
             }
+        } else if (arg == "--loss" && i + 1 < argc) {
+            try {
+                loss_percentage = std::stoi(argv[++i]);
+            } catch (const std::exception& e) {
+                std::cerr << "Error: Invalid number provided for --loss." << std::endl;
+                return 1;
+            }
         }
     }
 
-    if (num_processes <= 0 || duration <= 0 || link_percentage < 0 || link_percentage > 100) {
-        std::cerr << "Usage: " << argv[0] << " --nodes <positive_number> --duration <positive_number> --links <0-100>" << std::endl;
+    if (num_processes <= 0 || duration <= 0 || link_percentage < 0 || link_percentage > 100 || loss_percentage < 0 || loss_percentage > 100) {
+        std::cerr << "Usage: " << argv[0] << " --nodes <positive_number> --duration <positive_number> --links <0-100> --loss <0-100>" << std::endl;
         return 1;
     }
 
     // --- Directory Setup ---
     const std::string output_dir = "simulation_output";
-    std::filesystem::remove_all(output_dir); // Clean up previous run
+    if (std::filesystem::exists(output_dir)) {
+        std::filesystem::remove_all(output_dir);
+    }
     std::filesystem::create_directory(output_dir);
+    std::filesystem::create_directory(output_dir + "/DSR");
     std::cout << "Created directory: " << output_dir << std::endl;
 
     // --- Port Generation ---
@@ -59,7 +73,6 @@ int main(int argc, char* argv[]) {
         ports.push_back(8080 + i);
     }
 
-    // Write all available ports to a file
     std::filesystem::path ports_filepath = output_dir;
     ports_filepath /= "ports.txt";
     std::ofstream ports_outfile(ports_filepath);
@@ -70,11 +83,11 @@ int main(int argc, char* argv[]) {
     std::cout << "List of all available ports written to " << ports_filepath << std::endl;
 
 
-    // --- Topology Generation (Poisson-based random graph) ---
+    // --- Topology Generation (Random Graph) ---
     std::vector<std::vector<int>> adj_list(num_processes);
     double link_prob = link_percentage / 100.0;
     
-    std::mt19937 gen(time(nullptr)); // Seed the random number generator
+    std::mt19937 gen(time(nullptr));
     std::uniform_real_distribution<> distrib(0.0, 1.0);
 
     std::cout << "Generating topology with " << link_percentage << "% link probability..." << std::endl;
@@ -94,7 +107,6 @@ int main(int argc, char* argv[]) {
         pid_t pid = fork();
 
         if (pid < 0) {
-            // Fork failed
             std::cerr << "Failed to fork process " << i + 1 << std::endl;
             for (pid_t child_pid : child_pids) {
                 kill(child_pid, SIGKILL);
@@ -104,36 +116,75 @@ int main(int argc, char* argv[]) {
             // --- Child Process Logic ---
             pid_t my_pid = getpid();
             int port = ports[i];
+            uint8_t node_id = i;
 
-            // Create and write to the access table file
-            std::filesystem::path filepath = output_dir;
-            filepath /= "AccessTablefor_" + std::to_string(my_pid) + ".txt";
+            // Create Node directory
+            std::filesystem::path node_dir = output_dir;
+            node_dir /= "DSR";
+            node_dir /= "Node_" + std::to_string(node_id);
+            std::filesystem::create_directory(node_dir);
+
+            // Create and write to the access table file first, so the node can read it.
+            // Keeping access table in Node dir for cleanliness
+            std::filesystem::path filepath = node_dir;
+            filepath /= "AccessTable.txt";
             std::ofstream outfile(filepath);
-            
-            // First line is the node's own port
             outfile << port << std::endl;
-            
-            // Subsequent lines are the ports of connected neighbors
             for (int neighbor_index : adj_list[i]) {
                 outfile << ports[neighbor_index] << std::endl;
             }
             outfile.close();
 
-            std::cout << "Child process " << i + 1 << " (PID: " << my_pid << ") created, assigned port " << port 
-                      << ". Access table generated. Will run for " << duration << " seconds." << std::endl;
+            std::cout << "Child process " << (int)node_id << " (PID: " << my_pid << ") created, assigned port " << port << ". Access table generated." << std::endl;
             
-            // Simulate work
-            sleep(duration);
+            try {
+                DSRNode node(node_id, port, loss_percentage);
+                node.set_node_dir(node_dir.string());
 
-            std::cout << "Child process " << i + 1 << " (PID: " << my_pid << ") on port " << port << " is finishing." << std::endl;
+                // Let the simulation run for a bit before starting discovery
+                std::this_thread::sleep_for(std::chrono::seconds(1));
+
+                // Have node 0 initiate a route discovery for the last node
+                if (node.get_node_id() == 0 && num_processes > 1) {
+                    node.start_route_discovery(num_processes - 1);
+                }
+
+                auto start_time = std::chrono::steady_clock::now();
+                int packet_counter = 0;
+                while (std::chrono::steady_clock::now() - start_time < std::chrono::seconds(duration)) {
+                    node.process_events();
+                    
+                    // Send a data packet every second if we are node 0
+                    if (node.get_node_id() == 0 && packet_counter < 5) { // Limit to 5 packets
+                         static auto last_send_time = std::chrono::steady_clock::now();
+                         if (std::chrono::steady_clock::now() - last_send_time > std::chrono::seconds(1)) {
+                             node.send_data(num_processes - 1, "Hello DSR");
+                             last_send_time = std::chrono::steady_clock::now();
+                             packet_counter++;
+                         }
+                    }
+
+                    // Sleep for a short duration to prevent busy-waiting
+                    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+                }
+
+                // Save stats at the end of the simulation
+                node.save_stats();
+                node.save_dsr_routes();
+
+                std::cout << "Child process " << (int)node_id << " (PID: " << my_pid << ") on port " << port << " is finishing." << std::endl;
+
+            } catch (const std::exception& e) {
+                std::cerr << "Error in child process " << (int)node_id << ": " << e.what() << std::endl;
+                exit(1);
+            }
+            
             exit(0);
         } else {
-            // Parent process
             child_pids.push_back(pid);
         }
     }
 
-    // Parent process waits for all children to complete
     std::cout << "Parent process is waiting for all child processes to finish." << std::endl;
     for (int i = 0; i < num_processes; ++i) {
         int status;
