@@ -7,5 +7,6 @@ enum class PacketType : uint8_t {
     RREQ, // Route Request
     RREP, // Route Reply
     RERR, // Route Error
-    ACK   // Acknowledgment
+    ACK,  // Acknowledgment
+    IDENTITY // Identity assignment
 };

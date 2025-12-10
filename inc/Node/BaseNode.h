@@ -23,6 +23,15 @@
 #include <unistd.h>
 #include <sys/types.h>
 
+// PKCertChain Integration
+#include "Blockchain/PKCertChain/Crypto.h"
+#include "Blockchain/PKCertChain/Signkeys.h"
+#include "Consensus/PoW.h"
+#include "Helper/CSPRNG.h"
+// RouteLogChain Integration
+#include "Blockchain/RouteLogChain/Receipt.h"
+#include "Blockchain/RouteLogChain/Blockchain.h"
+
 
 class BaseNode {
 public:
@@ -82,6 +91,41 @@ public:
         // load_neighbors();
     }
 
+    /**
+     * @brief Sets up identity keys (Sign & Encrypt) and performs PoW.
+     *        Can be called after ID assignment via socket.
+     */
+    void SetupIdentity(uint32_t assigned_id) {
+        if (assigned_id != node_id) {
+            std::cout << "Node " << (int)node_id << " re-assigned ID to " << assigned_id << std::endl;
+            node_id = (uint8_t)assigned_id; // Keeping node_id as uint8_t for legacy DSR compatibility, but ideally should be 32-bit.
+            // Note: assigned_id is uint32_t from PKCertChain, but BaseNode uses uint8_t.
+        }
+
+        std::cout << "Node " << (int)node_id << " setting up PKCertChain identity..." << std::endl;
+        
+        if (!GenerateAndLogSignKeys(assigned_id)) {
+            std::cerr << "Failed to generate signing keys for Node " << assigned_id << std::endl;
+        }
+
+        if (!GenerateAndLogX25519Key(assigned_id)) {
+            std::cerr << "Failed to generate encryption keys for Node " << assigned_id << std::endl;
+        }
+        
+        // Setup PoW (Example: Self-generated challenge for demonstration)
+        // In real protocol, challenge comes from blockchain/neighbor.
+        std::array<uint8_t, 32> dummyPub = {0};
+        std::array<uint8_t, 64> dummySig = {0};
+        uint16_t shortId = (uint16_t)assigned_id;
+        
+        PowChallenge* challenge = GeneratePoWChallenge(nullptr, shortId, dummyPub, dummySig);
+        std::cout << "Node " << (int)node_id << " solving PoW..." << std::endl;
+        uint64_t nonce = SolvePowChallenge(*challenge);
+        std::cout << "Node " << (int)node_id << " solved PoW. Nonce: " << nonce << std::endl;
+        
+        delete challenge;
+    }
+
     void set_node_dir(const std::string& dir) {
         node_dir = dir;
         load_neighbors();
@@ -125,6 +169,20 @@ public:
 
             uint8_t next_hop_id;
             if (route_cache.get_next_hop(forward_packet->destination_id, next_hop_id)) {
+                // RouteLogChain: Create Receipt for Valid Forwarding
+                // In DSR, route_id could be the full path string or source-dest pair. Using source-dest-seq for now.
+                std::string route_id = std::to_string(forward_packet->source_id) + "-" + std::to_string(forward_packet->destination_id);
+                
+                Receipt receipt(node_id, route_id, "DATA_forwarded", forward_packet->sequence_number);
+                local_receipts.push_back(receipt);
+                
+                // For simulation purpose, we also instantly process it into our local blockchain logic 
+                // to reflect "live metrics" as requested, although in reality it would wait for block mining.
+                local_blockchain.process_receipt(receipt);
+                
+                // Log it
+                log_packet_event("RECEIPT", receipt.ToString());
+
                 auto bytes_to_send = serialize_packet(*forward_packet);
                 send_packet(next_hop_id, bytes_to_send);
                 packets_forwarded++;
@@ -253,6 +311,10 @@ protected:
     EventHandler receiving_queue;
     EventHandler route_update_queue;
     RouteCache route_cache;
+    
+    // RouteLogChain Members
+    Blockchain local_blockchain;
+    std::vector<Receipt> local_receipts;
 
     std::vector<int> neighbors;
 

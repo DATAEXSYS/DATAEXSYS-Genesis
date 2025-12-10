@@ -46,6 +46,11 @@ void DSRNode::process_received_packet(std::shared_ptr<Packet> packet){
                 auto task = [this, packet]() {
                     std::cout << "DSR DATA packet received at final destination " << (int)get_node_id() << std::endl;
                     log_packet_event("RECEIVE", "DSR DATA from " + std::to_string(packet->source_id));
+                    
+                    // RouteLogChain: Record Receipt
+                    std::string rid = std::to_string(packet->source_id) + "->" + std::to_string(packet->destination_id);
+                    Receipt rx(get_node_id(), rid, "PACKET_RECEIVED", packet->sequence_number, "", "");
+                    local_receipts.push_back(rx);
                 };
                 receiving_queue.push(Event(EventType::PACKET_INCOMING, task));
                 packets_received++; 
@@ -59,6 +64,11 @@ void DSRNode::process_received_packet(std::shared_ptr<Packet> packet){
                         std::cout << "Forwarding DSR DATA packet to next hop " << (int)next_hop_id << std::endl;
                         log_packet_event("FORWARD", "DSR DATA to " + std::to_string(next_hop_id));
                         send_packet(next_hop_id, serialize_packet(*packet));
+                        
+                        // RouteLogChain: Record Receipt
+                        std::string rid = std::to_string(packet->source_id) + "->" + std::to_string(packet->destination_id);
+                        Receipt rx(get_node_id(), rid, "DATA_forwarded", packet->sequence_number, "", std::to_string(next_hop_id));
+                        local_receipts.push_back(rx);
                         
                         // Track for ACK
                         PendingAck ack_info;
@@ -313,4 +323,10 @@ void DSRNode::save_dsr_routes() {
         outfile << "\n";
     }
     outfile.close();
+}
+
+std::vector<Receipt> DSRNode::extract_receipts() {
+    std::vector<Receipt> temp = local_receipts;
+    local_receipts.clear();
+    return temp;
 }

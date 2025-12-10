@@ -1,4 +1,3 @@
 /home/aanish/DATAEXSYS-Genesis/build/CMakeFiles/genesis_app.dir
-/home/aanish/DATAEXSYS-Genesis/build/CMakeFiles/pk_test.dir
 /home/aanish/DATAEXSYS-Genesis/build/CMakeFiles/edit_cache.dir
 /home/aanish/DATAEXSYS-Genesis/build/CMakeFiles/rebuild_cache.dir

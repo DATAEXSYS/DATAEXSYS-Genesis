@@ -26,9 +26,5 @@ include_directories(${OPENSSL_INCLUDE_DIR})
 add_executable(genesis_app sim.cpp ${SOURCES})
 target_link_libraries(genesis_app OpenSSL::SSL OpenSSL::Crypto) 
 
-# New PKCertChain Test App
-add_executable(pk_test main.cpp ${SOURCES})
-target_link_libraries(pk_test OpenSSL::SSL OpenSSL::Crypto)
-
 # Print a message indicating where the executable will be created
-message(STATUS "Executables 'genesis_app' and 'pk_test' will be built in the 'build' directory.")
+message(STATUS "Executables 'genesis_app' will be built in the 'build' directory.")

@@ -129,43 +129,6 @@ genesis_app/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/genesis_app.dir/build.make CMakeFiles/genesis_app.dir/build
 .PHONY : genesis_app/fast
 
-#=============================================================================
-# Target rules for targets named pk_test
-
-# Build rule for target.
-pk_test: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 pk_test
-.PHONY : pk_test
-
-# fast build rule for target.
-pk_test/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pk_test.dir/build.make CMakeFiles/pk_test.dir/build
-.PHONY : pk_test/fast
-
-main.o: main.cpp.o
-.PHONY : main.o
-
-# target to build an object file
-main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pk_test.dir/build.make CMakeFiles/pk_test.dir/main.cpp.o
-.PHONY : main.cpp.o
-
-main.i: main.cpp.i
-.PHONY : main.i
-
-# target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pk_test.dir/build.make CMakeFiles/pk_test.dir/main.cpp.i
-.PHONY : main.cpp.i
-
-main.s: main.cpp.s
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pk_test.dir/build.make CMakeFiles/pk_test.dir/main.cpp.s
-.PHONY : main.cpp.s
-
 sim.o: sim.cpp.o
 .PHONY : sim.o
 
@@ -196,7 +159,6 @@ src/Consensus/PoW.o: src/Consensus/PoW.cpp.o
 # target to build an object file
 src/Consensus/PoW.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/genesis_app.dir/build.make CMakeFiles/genesis_app.dir/src/Consensus/PoW.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pk_test.dir/build.make CMakeFiles/pk_test.dir/src/Consensus/PoW.cpp.o
 .PHONY : src/Consensus/PoW.cpp.o
 
 src/Consensus/PoW.i: src/Consensus/PoW.cpp.i
@@ -205,7 +167,6 @@ src/Consensus/PoW.i: src/Consensus/PoW.cpp.i
 # target to preprocess a source file
 src/Consensus/PoW.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/genesis_app.dir/build.make CMakeFiles/genesis_app.dir/src/Consensus/PoW.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pk_test.dir/build.make CMakeFiles/pk_test.dir/src/Consensus/PoW.cpp.i
 .PHONY : src/Consensus/PoW.cpp.i
 
 src/Consensus/PoW.s: src/Consensus/PoW.cpp.s
@@ -214,7 +175,6 @@ src/Consensus/PoW.s: src/Consensus/PoW.cpp.s
 # target to generate assembly for a file
 src/Consensus/PoW.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/genesis_app.dir/build.make CMakeFiles/genesis_app.dir/src/Consensus/PoW.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pk_test.dir/build.make CMakeFiles/pk_test.dir/src/Consensus/PoW.cpp.s
 .PHONY : src/Consensus/PoW.cpp.s
 
 src/Node/DSRNode.o: src/Node/DSRNode.cpp.o
@@ -223,7 +183,6 @@ src/Node/DSRNode.o: src/Node/DSRNode.cpp.o
 # target to build an object file
 src/Node/DSRNode.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/genesis_app.dir/build.make CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pk_test.dir/build.make CMakeFiles/pk_test.dir/src/Node/DSRNode.cpp.o
 .PHONY : src/Node/DSRNode.cpp.o
 
 src/Node/DSRNode.i: src/Node/DSRNode.cpp.i
@@ -232,7 +191,6 @@ src/Node/DSRNode.i: src/Node/DSRNode.cpp.i
 # target to preprocess a source file
 src/Node/DSRNode.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/genesis_app.dir/build.make CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pk_test.dir/build.make CMakeFiles/pk_test.dir/src/Node/DSRNode.cpp.i
 .PHONY : src/Node/DSRNode.cpp.i
 
 src/Node/DSRNode.s: src/Node/DSRNode.cpp.s
@@ -241,7 +199,6 @@ src/Node/DSRNode.s: src/Node/DSRNode.cpp.s
 # target to generate assembly for a file
 src/Node/DSRNode.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/genesis_app.dir/build.make CMakeFiles/genesis_app.dir/src/Node/DSRNode.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pk_test.dir/build.make CMakeFiles/pk_test.dir/src/Node/DSRNode.cpp.s
 .PHONY : src/Node/DSRNode.cpp.s
 
 src/Serialize/Serialize.o: src/Serialize/Serialize.cpp.o
@@ -250,7 +207,6 @@ src/Serialize/Serialize.o: src/Serialize/Serialize.cpp.o
 # target to build an object file
 src/Serialize/Serialize.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/genesis_app.dir/build.make CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pk_test.dir/build.make CMakeFiles/pk_test.dir/src/Serialize/Serialize.cpp.o
 .PHONY : src/Serialize/Serialize.cpp.o
 
 src/Serialize/Serialize.i: src/Serialize/Serialize.cpp.i
@@ -259,7 +215,6 @@ src/Serialize/Serialize.i: src/Serialize/Serialize.cpp.i
 # target to preprocess a source file
 src/Serialize/Serialize.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/genesis_app.dir/build.make CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pk_test.dir/build.make CMakeFiles/pk_test.dir/src/Serialize/Serialize.cpp.i
 .PHONY : src/Serialize/Serialize.cpp.i
 
 src/Serialize/Serialize.s: src/Serialize/Serialize.cpp.s
@@ -268,7 +223,6 @@ src/Serialize/Serialize.s: src/Serialize/Serialize.cpp.s
 # target to generate assembly for a file
 src/Serialize/Serialize.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/genesis_app.dir/build.make CMakeFiles/genesis_app.dir/src/Serialize/Serialize.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/pk_test.dir/build.make CMakeFiles/pk_test.dir/src/Serialize/Serialize.cpp.s
 .PHONY : src/Serialize/Serialize.cpp.s
 
 # Help Target
@@ -280,10 +234,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... genesis_app"
-	@echo "... pk_test"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
 	@echo "... sim.o"
 	@echo "... sim.i"
 	@echo "... sim.s"

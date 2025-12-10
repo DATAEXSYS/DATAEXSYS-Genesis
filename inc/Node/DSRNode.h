@@ -8,6 +8,7 @@
 #include <map>
 #include <chrono>
 #include <string>
+#include "../Blockchain/RouteLogChain/Receipt.h"
 
 struct PendingAck {
     uint32_t sequence_number;
@@ -32,6 +33,9 @@ public:
     void process_events(); // Override to check for timeouts
 
     void send_data(uint8_t destination_id, const std::string& message);
+
+    // RouteLogChain
+    std::vector<Receipt> extract_receipts();
 
 private:
     std::unordered_map<uint8_t, std::vector<uint8_t>> dsr_routes;
