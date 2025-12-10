@@ -9,8 +9,6 @@
 #include <chrono>
 #include <string>
 
-#include "../Blockchain/RouteLogChain/Receipt.h"   // <-- From HEAD branch
-
 struct PendingAck {
     uint32_t sequence_number;
     uint8_t next_hop_id;
@@ -34,11 +32,6 @@ public:
     void process_events(); // Override to check for timeouts
 
     void send_data(uint8_t destination_id, const std::string& message);
-
-    // --- Preserved from HEAD ---
-    std::vector<Receipt> extract_receipts();
-
-    // --- Preserved from main branch ---
     bool has_route(uint8_t destination_id) const;
 
 private:

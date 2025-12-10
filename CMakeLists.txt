@@ -15,16 +15,15 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/build)
 include_directories(inc)
 
 # Automatically find all .cpp source files within the 'src' directory and its subdirectories
-# Automatically find all .cpp source files within the 'src' directory and its subdirectories
 file(GLOB_RECURSE SOURCES "src/*.cpp" "src/**/*.cpp")
 
-# --- OpenSSL Integration ---
-find_package(OpenSSL REQUIRED)
-include_directories(${OPENSSL_INCLUDE_DIR})
-
-# Original Simulation App
+# Create the executable from the collected source files
 add_executable(genesis_app sim.cpp ${SOURCES})
-target_link_libraries(genesis_app OpenSSL::SSL OpenSSL::Crypto) 
 
 # Print a message indicating where the executable will be created
-message(STATUS "Executables 'genesis_app' will be built in the 'build' directory.")
+
+# Create the test executable
+add_executable(sim_test simTest.cpp ${SOURCES})
+
+# Print a message indicating where the executable will be built
+message(STATUS "Executable 'genesis_app' and 'sim_test' I will be built in the 'build' directory.")
