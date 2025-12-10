@@ -8,7 +8,8 @@
 #include <map>
 #include <chrono>
 #include <string>
-#include "../Blockchain/RouteLogChain/Receipt.h"
+
+#include "../Blockchain/RouteLogChain/Receipt.h"   // <-- From HEAD branch
 
 struct PendingAck {
     uint32_t sequence_number;
@@ -34,8 +35,11 @@ public:
 
     void send_data(uint8_t destination_id, const std::string& message);
 
-    // RouteLogChain
+    // --- Preserved from HEAD ---
     std::vector<Receipt> extract_receipts();
+
+    // --- Preserved from main branch ---
+    bool has_route(uint8_t destination_id) const;
 
 private:
     std::unordered_map<uint8_t, std::vector<uint8_t>> dsr_routes;

@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/pk_test.dir/main.cpp.o CMakeFiles/pk_test.dir/src/Consensus/PoW.cpp.o CMakeFiles/pk_test.dir/src/Node/DSRNode.cpp.o CMakeFiles/pk_test.dir/src/Serialize/Serialize.cpp.o -o pk_test  /usr/lib/x86_64-linux-gnu/libssl.so /usr/lib/x86_64-linux-gnu/libcrypto.so 

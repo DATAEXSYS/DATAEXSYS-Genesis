@@ -15,7 +15,6 @@
 #include <fstream>
 #include <string>
 
-
 // Networking headers
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -28,101 +27,70 @@
 #include "Blockchain/PKCertChain/Signkeys.h"
 #include "Consensus/PoW.h"
 #include "Helper/CSPRNG.h"
+
 // RouteLogChain Integration
 #include "Blockchain/RouteLogChain/Receipt.h"
 #include "Blockchain/RouteLogChain/Blockchain.h"
 
-
 class BaseNode {
 public:
-    /**
-     * @brief Constructs a BaseNode, initializes networking.
-     * @param id The unique ID for this node.
-     * @param rx_p The UDP port this node will listen on (Receive Only).
-     * @param tx_p The UDP port this node will send from (Send Only).
-     */
-    BaseNode(uint8_t id, int rx_p, int tx_p, int loss_p = 0) 
-        : node_id(id), rx_port(rx_p), tx_port(tx_p), loss_percentage(loss_p), stop_threads(false), rx_socket_fd(-1), tx_socket_fd(-1) {
-        
-        // 1. Create RX UDP socket
-        rx_socket_fd = socket(AF_INET, SOCK_DGRAM, 0);
-        if (rx_socket_fd < 0) {
-            throw std::runtime_error("Failed to create RX socket.");
-        }
+    BaseNode(uint8_t id, int rx_p, int tx_p, int loss_p = 0)
+        : node_id(id), rx_port(rx_p), tx_port(tx_p), loss_percentage(loss_p),
+          stop_threads(false), rx_socket_fd(-1), tx_socket_fd(-1) {
 
-        // 2. Bind RX socket to the given RX port
+        // RX socket
+        rx_socket_fd = socket(AF_INET, SOCK_DGRAM, 0);
+        if (rx_socket_fd < 0) throw std::runtime_error("Failed to create RX socket.");
+
         sockaddr_in rx_address{};
         rx_address.sin_family = AF_INET;
         rx_address.sin_addr.s_addr = INADDR_ANY;
         rx_address.sin_port = htons(rx_port);
 
-        if (bind(rx_socket_fd, (const struct sockaddr *)&rx_address, sizeof(rx_address)) < 0) {
+        if (bind(rx_socket_fd, (const struct sockaddr*)&rx_address, sizeof(rx_address)) < 0)
             throw std::runtime_error("Failed to bind RX socket to port " + std::to_string(rx_port));
-        }
 
-        // 3. Create TX UDP socket
+        // TX socket
         tx_socket_fd = socket(AF_INET, SOCK_DGRAM, 0);
-        if (tx_socket_fd < 0) {
-            throw std::runtime_error("Failed to create TX socket.");
-        }
-        
-        // Bind TX socket to TX port
+        if (tx_socket_fd < 0) throw std::runtime_error("Failed to create TX socket.");
+
         sockaddr_in tx_address{};
         tx_address.sin_family = AF_INET;
         tx_address.sin_addr.s_addr = INADDR_ANY;
-        // Use INADDR_ANY for binding; in a real scenario we might bind to a specific interface.
-        // Important: We must bind to tx_port so that receivers see traffic coming FROM tx_port? 
-        // OR does it matter? The requirement says "Sending port will send data only".
-        // Binding ensures the source port is constant.
         tx_address.sin_port = htons(tx_port);
-        
-        if (bind(tx_socket_fd, (const struct sockaddr *)&tx_address, sizeof(tx_address)) < 0) {
-             throw std::runtime_error("Failed to bind TX socket to port " + std::to_string(tx_port));
-        }
 
-        std::cout << "Node " << (int)node_id << " initialized. RX: " << rx_port << ", TX: " << tx_port << std::endl;
+        if (bind(tx_socket_fd, (const struct sockaddr*)&tx_address, sizeof(tx_address)) < 0)
+            throw std::runtime_error("Failed to bind TX socket to port " + std::to_string(tx_port));
 
-        std::cout << "Node " << (int)node_id << " listening on RX: " << rx_port << ", Sending on TX: " << tx_port << std::endl;
+        std::cout << "Node " << (int)node_id << " initialized. RX: " << rx_port
+                  << ", TX: " << tx_port << std::endl;
 
-        // 3. Start the receiver thread
         receiver_thread = std::thread(&BaseNode::receive_loop, this);
-
-        // 4. Neighbors will be loaded via set_node_dir
-        // load_neighbors();
     }
 
-    /**
-     * @brief Sets up identity keys (Sign & Encrypt) and performs PoW.
-     *        Can be called after ID assignment via socket.
-     */
+    /** PKCertChain + PoW identity setup **/
     void SetupIdentity(uint32_t assigned_id) {
         if (assigned_id != node_id) {
             std::cout << "Node " << (int)node_id << " re-assigned ID to " << assigned_id << std::endl;
-            node_id = (uint8_t)assigned_id; // Keeping node_id as uint8_t for legacy DSR compatibility, but ideally should be 32-bit.
-            // Note: assigned_id is uint32_t from PKCertChain, but BaseNode uses uint8_t.
+            node_id = (uint8_t)assigned_id;
         }
 
         std::cout << "Node " << (int)node_id << " setting up PKCertChain identity..." << std::endl;
-        
-        if (!GenerateAndLogSignKeys(assigned_id)) {
-            std::cerr << "Failed to generate signing keys for Node " << assigned_id << std::endl;
-        }
 
-        if (!GenerateAndLogX25519Key(assigned_id)) {
-            std::cerr << "Failed to generate encryption keys for Node " << assigned_id << std::endl;
-        }
-        
-        // Setup PoW (Example: Self-generated challenge for demonstration)
-        // In real protocol, challenge comes from blockchain/neighbor.
+        if (!GenerateAndLogSignKeys(assigned_id))
+            std::cerr << "Failed to generate signing keys\n";
+
+        if (!GenerateAndLogX25519Key(assigned_id))
+            std::cerr << "Failed to generate encryption keys\n";
+
         std::array<uint8_t, 32> dummyPub = {0};
         std::array<uint8_t, 64> dummySig = {0};
-        uint16_t shortId = (uint16_t)assigned_id;
-        
-        PowChallenge* challenge = GeneratePoWChallenge(nullptr, shortId, dummyPub, dummySig);
-        std::cout << "Node " << (int)node_id << " solving PoW..." << std::endl;
+        PowChallenge* challenge = GeneratePoWChallenge(nullptr, (uint16_t)assigned_id, dummyPub, dummySig);
+
+        std::cout << "Node " << (int)node_id << " solving PoW...\n";
         uint64_t nonce = SolvePowChallenge(*challenge);
-        std::cout << "Node " << (int)node_id << " solved PoW. Nonce: " << nonce << std::endl;
-        
+
+        std::cout << "Solved PoW. Nonce: " << nonce << std::endl;
         delete challenge;
     }
 
@@ -131,63 +99,55 @@ public:
         load_neighbors();
     }
 
-    /**
-     * @brief Destructor, cleans up network resources.
-     */
     ~BaseNode() {
         stop_threads = true;
+
         if (receiver_thread.joinable()) {
-            // Unblock the recvfrom call by sending a dummy packet to self
-            // This is a common pattern to gracefully shut down a listening thread
             sockaddr_in self_addr{};
             self_addr.sin_family = AF_INET;
             self_addr.sin_port = htons(rx_port);
             self_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
             char dummy = 'q';
-            sendto(tx_socket_fd, &dummy, sizeof(dummy), 0, (struct sockaddr*)&self_addr, sizeof(self_addr));
-            
+            sendto(tx_socket_fd, &dummy, sizeof(dummy), 0,
+                   (struct sockaddr*)&self_addr, sizeof(self_addr));
             receiver_thread.join();
         }
-        if (rx_socket_fd != -1) {
-            close(rx_socket_fd);
-        }
-        if (tx_socket_fd != -1) {
-            close(tx_socket_fd);
-        }
+
+        if (rx_socket_fd != -1) close(rx_socket_fd);
+        if (tx_socket_fd != -1) close(tx_socket_fd);
     }
 
+    /** Packet forwarding with RouteLogChain receipt + blockchain update **/
     void schedule_packet_forwarding(const std::shared_ptr<Packet>& packet) {
         auto task = [this, packet]() {
             auto forward_packet = std::make_shared<Packet>(*packet);
             forward_packet->hopcount++;
 
             if (forward_packet->hopcount > MAX_HOP_COUNT) {
-                std::cout << "Packet dropped: TTL for packet to " << (int)forward_packet->destination_id << std::endl;
+                std::cout << "Packet dropped: TTL expired\n";
                 packets_dropped++;
                 return;
             }
 
             uint8_t next_hop_id;
             if (route_cache.get_next_hop(forward_packet->destination_id, next_hop_id)) {
-                // RouteLogChain: Create Receipt for Valid Forwarding
-                // In DSR, route_id could be the full path string or source-dest pair. Using source-dest-seq for now.
-                std::string route_id = std::to_string(forward_packet->source_id) + "-" + std::to_string(forward_packet->destination_id);
-                
+
+                // RouteLogChain Receipt
+                std::string route_id =
+                    std::to_string(forward_packet->source_id) + "-" +
+                    std::to_string(forward_packet->destination_id);
+
                 Receipt receipt(node_id, route_id, "DATA_forwarded", forward_packet->sequence_number);
                 local_receipts.push_back(receipt);
-                
-                // For simulation purpose, we also instantly process it into our local blockchain logic 
-                // to reflect "live metrics" as requested, although in reality it would wait for block mining.
                 local_blockchain.process_receipt(receipt);
-                
-                // Log it
                 log_packet_event("RECEIPT", receipt.ToString());
 
-                auto bytes_to_send = serialize_packet(*forward_packet);
-                send_packet(next_hop_id, bytes_to_send);
+                auto bytes = serialize_packet(*forward_packet);
+                send_packet(next_hop_id, bytes);
                 packets_forwarded++;
+
             } else {
-                std::cout << "Packet dropped: No route to " << (int)forward_packet->destination_id << std::endl;
+                std::cout << "Packet dropped: No route\n";
                 packets_dropped++;
             }
         };
@@ -197,8 +157,9 @@ public:
     virtual void schedule_packet_reception(const std::shared_ptr<Packet>& packet) {
         packets_received++;
         auto task = [this, packet]() {
-            std::cout << "Processing packet from " << (int)packet->source_id << " with seq " << packet->sequence_number << std::endl;
-            log_packet_event("RECEIVE", "Packet from " + std::to_string(packet->source_id) + " Seq: " + std::to_string(packet->sequence_number));
+            log_packet_event("RECEIVE",
+                "Packet from " + std::to_string(packet->source_id) +
+                " Seq: " + std::to_string(packet->sequence_number));
         };
         receiving_queue.push(Event(EventType::PACKET_INCOMING, task));
     }
@@ -217,83 +178,60 @@ public:
         process_queue(route_update_queue);
     }
 
-    uint8_t get_node_id() const {
-        return node_id;
-    }
+    uint8_t get_node_id() const { return node_id; }
 
-    void send_packet(uint8_t next_hop_id, const std::vector<uint8_t>& packet_data) {
+    void send_packet(uint8_t next_hop_id, const std::vector<uint8_t>& data) {
         if (tx_socket_fd < 0) return;
 
-        // Calculate RX port of the destination
-        // RX_BASE = 8000. dest_rx_port = 8000 + next_hop_id.
-        // We know our RX port is 8000 + node_id.
-        // So dest_rx_port = rx_port - node_id + next_hop_id.
         int dest_rx_port = (rx_port - node_id) + next_hop_id;
 
-        sockaddr_in dest_address{};
-        dest_address.sin_family = AF_INET;
-        dest_address.sin_port = htons(dest_rx_port);
-        dest_address.sin_addr.s_addr = inet_addr("127.0.0.1");
+        sockaddr_in dest{};
+        dest.sin_family = AF_INET;
+        dest.sin_port = htons(dest_rx_port);
+        dest.sin_addr.s_addr = inet_addr("127.0.0.1");
 
-        // Packet Loss Simulation
         if (loss_percentage > 0 && (std::rand() % 100) < loss_percentage) {
-            std::cout << "Node " << (int)node_id << " DROPPED packet to " << (int)next_hop_id << " due to loss simulation." << std::endl;
-            log_packet_event("DROP", "Loss simulation to " + std::to_string(next_hop_id));
+            log_packet_event("DROP", "Loss simulation");
             packet_loss_dropped++;
             return;
         }
 
-        sendto(tx_socket_fd, packet_data.data(), packet_data.size(), 0, (const struct sockaddr *)&dest_address, sizeof(dest_address));
-        
-        log_packet_event("SEND", "To " + std::to_string(next_hop_id) + " (Bytes: " + std::to_string(packet_data.size()) + ")");
-        
-        // Count as sent only if it's the source (approximation, or add explicit 'originated' flag)
-        // For now, let's assume if we are calling send_packet, we might be forwarding OR sending.
-        // We'll increment packets_sent ONLY if we are the source. This requires deserializing or passing context.
-        // Simplification: In DSRNode/BaseNode, when we create a NEW packet, we should increment.
+        sendto(tx_socket_fd, data.data(), data.size(), 0,
+               (struct sockaddr*)&dest, sizeof(dest));
+        log_packet_event("SEND", "To " + std::to_string(next_hop_id));
     }
 
-    void increment_packets_sent() {
-        packets_sent++;
-    }
+    void increment_packets_sent() { packets_sent++; }
 
     void log_packet_event(const std::string& action, const std::string& info) {
         if (node_dir.empty()) return;
+
         std::ofstream logfile(node_dir + "/PacketLog.txt", std::ios::app);
-        if (logfile.is_open()) {
-            auto now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-            logfile << std::put_time(std::localtime(&now), "%F %T") << " [" << action << "] " << info << "\n";
-            logfile.close();
-        }
+        if (!logfile.is_open()) return;
+
+        auto now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+        logfile << std::put_time(std::localtime(&now), "%F %T")
+                << " [" << action << "] " << info << "\n";
     }
 
     void save_stats() {
-        if (node_dir.empty()) {
-             // Fallback or error
-             return;
-        }
-        std::string stats_filepath = node_dir + "/Stats.txt";
-        std::ofstream outfile(stats_filepath);
+        if (node_dir.empty()) return;
+
+        std::ofstream outfile(node_dir + "/Stats.txt");
         if (outfile.is_open()) {
             outfile << "--- Node Statistics ---\n";
-            outfile << "Packets Sent (Originated): " << packets_sent << "\n";
+            outfile << "Packets Sent: " << packets_sent << "\n";
             outfile << "Packets Received: " << packets_received << "\n";
             outfile << "Packets Forwarded: " << packets_forwarded << "\n";
             outfile << "Packets Dropped: " << (packets_dropped + packet_loss_dropped) << "\n";
-            
-            if (packets_sent > 0) {
-                 double pdr = (double)packets_received / (double)packets_sent; // This is naive PDR (received/sent globally). 
-                 // For a single node, PDR usually means (Packets I received that were for me) / (Packets I sent).
-                 // BaseNode::packets_received counts everything delivered to app layer? 
-                 // schedule_packet_reception is called when dest == me. So yes.
-                 outfile << "Packet Delivery Ratio: " << (pdr * 100.0) << "%\n";
-            }
 
-            outfile.close();
+            if (packets_sent > 0) {
+                double pdr = (double)packets_received / (double)packets_sent;
+                outfile << "Packet Delivery Ratio: " << (pdr * 100.0) << "%\n";
+            }
         }
 
-        std::string cache_filepath = node_dir + "/RouteCache.txt";
-        route_cache.save_to_file(cache_filepath);
+        route_cache.save_to_file(node_dir + "/RouteCache.txt");
     }
 
 protected:
@@ -311,8 +249,8 @@ protected:
     EventHandler receiving_queue;
     EventHandler route_update_queue;
     RouteCache route_cache;
-    
-    // RouteLogChain Members
+
+    // RouteLogChain
     Blockchain local_blockchain;
     std::vector<Receipt> local_receipts;
 
@@ -326,75 +264,54 @@ protected:
 
     static const uint8_t MAX_HOP_COUNT = 50;
 
-    void broadcast(const std::vector<uint8_t>& packet_data) {
-        log_packet_event("BROADCAST", "To all neighbors");
-        for (int neighbor_id : neighbors) {
-            // neighbors vector now contains Node IDs, not ports!
-            send_packet(neighbor_id, packet_data);
-        }
+    void broadcast(const std::vector<uint8_t>& data) {
+        log_packet_event("BROADCAST", "To neighbors");
+        for (int n : neighbors) send_packet(n, data);
     }
 
     virtual void process_received_packet(std::shared_ptr<Packet> packet) {
-        if (packet->destination_id == this->node_id) {
+        if (packet->destination_id == node_id)
             schedule_packet_reception(packet);
-        } else {
+        else
             schedule_packet_forwarding(packet);
-        }
     }
 
 private:
     void receive_loop() {
         char buffer[2048];
-        sockaddr_in sender_address{};
-        socklen_t sender_addr_len = sizeof(sender_address);
+        sockaddr_in sender{};
+        socklen_t len = sizeof(sender);
 
         while (!stop_threads) {
-            ssize_t bytes_received = recvfrom(rx_socket_fd, buffer, sizeof(buffer), 0, (struct sockaddr *)&sender_address, &sender_addr_len);
-            
-            if (bytes_received < 0 || stop_threads) {
-                break;
-            }
+            ssize_t received = recvfrom(rx_socket_fd, buffer, sizeof(buffer), 0,
+                                        (struct sockaddr*)&sender, &len);
+            if (received < 0 || stop_threads) break;
 
             try {
-                std::vector<uint8_t> received_data(buffer, buffer + bytes_received);
-                auto packet_ptr = std::make_shared<Packet>(deserialize_packet(received_data));
-                process_received_packet(packet_ptr);
-
-            } catch (const std::exception& e) {
-                std::cerr << "Error deserializing packet: " << e.what() << std::endl;
+                std::vector<uint8_t> data(buffer, buffer + received);
+                auto packet = std::make_shared<Packet>(deserialize_packet(data));
+                process_received_packet(packet);
+            } catch (std::exception& e) {
+                std::cerr << "Deserialize error: " << e.what() << std::endl;
             }
         }
     }
 
     void load_neighbors() {
-        if (node_dir.empty()) {
-            std::cerr << "Error: Node directory not set for Node " << (int)node_id << std::endl;
-            return;
-        }
-        std::filesystem::path filepath = node_dir;
-        filepath /= "AccessTable.txt";
-        std::ifstream infile(filepath);
-        if (!infile.is_open()) {
-            std::cerr << "Warning: Could not open access table file: " << filepath << std::endl;
-            return;
-        }
+        if (node_dir.empty()) return;
 
-        int p;
-        // Removed incorrect skip of first neighbor
+        std::ifstream infile(node_dir + "/AccessTable.txt");
+        if (!infile.is_open()) return;
 
-        while (infile >> p) {
-            neighbors.push_back(p);
-        }
-        infile.close();
-        std::cout << "Node " << (int)node_id << " loaded " << neighbors.size() << " neighbors." << std::endl;
+        int n;
+        while (infile >> n) neighbors.push_back(n);
+
+        std::cout << "Node " << (int)node_id << " loaded "
+                  << neighbors.size() << " neighbors.\n";
     }
 
-    void process_queue(EventHandler& queue) {
+    void process_queue(EventHandler& q) {
         Event e;
-        while (queue.try_pop(e)) {
-            if (e.callback) {
-                e.callback();
-            }
-        }
+        while (q.try_pop(e)) if (e.callback) e.callback();
     }
 };
