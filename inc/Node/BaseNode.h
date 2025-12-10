@@ -29,26 +29,51 @@ public:
     /**
      * @brief Constructs a BaseNode, initializes networking.
      * @param id The unique ID for this node.
-     * @param port The UDP port this node will listen on.
+     * @param rx_p The UDP port this node will listen on (Receive Only).
+     * @param tx_p The UDP port this node will send from (Send Only).
      */
-    BaseNode(uint8_t id, int p, int loss_p = 0) : node_id(id), port(p), loss_percentage(loss_p), stop_threads(false), socket_fd(-1) {
-        // 1. Create UDP socket
-        socket_fd = socket(AF_INET, SOCK_DGRAM, 0);
-        if (socket_fd < 0) {
-            throw std::runtime_error("Failed to create socket.");
+    BaseNode(uint8_t id, int rx_p, int tx_p, int loss_p = 0) 
+        : node_id(id), rx_port(rx_p), tx_port(tx_p), loss_percentage(loss_p), stop_threads(false), rx_socket_fd(-1), tx_socket_fd(-1) {
+        
+        // 1. Create RX UDP socket
+        rx_socket_fd = socket(AF_INET, SOCK_DGRAM, 0);
+        if (rx_socket_fd < 0) {
+            throw std::runtime_error("Failed to create RX socket.");
         }
 
-        // 2. Bind socket to the given port
-        sockaddr_in self_address{};
-        self_address.sin_family = AF_INET;
-        self_address.sin_addr.s_addr = INADDR_ANY;
-        self_address.sin_port = htons(port);
+        // 2. Bind RX socket to the given RX port
+        sockaddr_in rx_address{};
+        rx_address.sin_family = AF_INET;
+        rx_address.sin_addr.s_addr = INADDR_ANY;
+        rx_address.sin_port = htons(rx_port);
 
-        if (bind(socket_fd, (const struct sockaddr *)&self_address, sizeof(self_address)) < 0) {
-            throw std::runtime_error("Failed to bind socket to port " + std::to_string(port));
+        if (bind(rx_socket_fd, (const struct sockaddr *)&rx_address, sizeof(rx_address)) < 0) {
+            throw std::runtime_error("Failed to bind RX socket to port " + std::to_string(rx_port));
         }
 
-        std::cout << "Node " << (int)node_id << " listening on port " << port << std::endl;
+        // 3. Create TX UDP socket
+        tx_socket_fd = socket(AF_INET, SOCK_DGRAM, 0);
+        if (tx_socket_fd < 0) {
+            throw std::runtime_error("Failed to create TX socket.");
+        }
+        
+        // Bind TX socket to TX port
+        sockaddr_in tx_address{};
+        tx_address.sin_family = AF_INET;
+        tx_address.sin_addr.s_addr = INADDR_ANY;
+        // Use INADDR_ANY for binding; in a real scenario we might bind to a specific interface.
+        // Important: We must bind to tx_port so that receivers see traffic coming FROM tx_port? 
+        // OR does it matter? The requirement says "Sending port will send data only".
+        // Binding ensures the source port is constant.
+        tx_address.sin_port = htons(tx_port);
+        
+        if (bind(tx_socket_fd, (const struct sockaddr *)&tx_address, sizeof(tx_address)) < 0) {
+             throw std::runtime_error("Failed to bind TX socket to port " + std::to_string(tx_port));
+        }
+
+        std::cout << "Node " << (int)node_id << " initialized. RX: " << rx_port << ", TX: " << tx_port << std::endl;
+
+        std::cout << "Node " << (int)node_id << " listening on RX: " << rx_port << ", Sending on TX: " << tx_port << std::endl;
 
         // 3. Start the receiver thread
         receiver_thread = std::thread(&BaseNode::receive_loop, this);
@@ -72,15 +97,18 @@ public:
             // This is a common pattern to gracefully shut down a listening thread
             sockaddr_in self_addr{};
             self_addr.sin_family = AF_INET;
-            self_addr.sin_port = htons(port);
+            self_addr.sin_port = htons(rx_port);
             self_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
             char dummy = 'q';
-            sendto(socket_fd, &dummy, sizeof(dummy), 0, (struct sockaddr*)&self_addr, sizeof(self_addr));
+            sendto(tx_socket_fd, &dummy, sizeof(dummy), 0, (struct sockaddr*)&self_addr, sizeof(self_addr));
             
             receiver_thread.join();
         }
-        if (socket_fd != -1) {
-            close(socket_fd);
+        if (rx_socket_fd != -1) {
+            close(rx_socket_fd);
+        }
+        if (tx_socket_fd != -1) {
+            close(tx_socket_fd);
         }
     }
 
@@ -136,11 +164,17 @@ public:
     }
 
     void send_packet(uint8_t next_hop_id, const std::vector<uint8_t>& packet_data) {
-        if (socket_fd < 0) return;
+        if (tx_socket_fd < 0) return;
+
+        // Calculate RX port of the destination
+        // RX_BASE = 8000. dest_rx_port = 8000 + next_hop_id.
+        // We know our RX port is 8000 + node_id.
+        // So dest_rx_port = rx_port - node_id + next_hop_id.
+        int dest_rx_port = (rx_port - node_id) + next_hop_id;
 
         sockaddr_in dest_address{};
         dest_address.sin_family = AF_INET;
-        dest_address.sin_port = htons(8080 + next_hop_id); // Assumes port = 8080 + node_id
+        dest_address.sin_port = htons(dest_rx_port);
         dest_address.sin_addr.s_addr = inet_addr("127.0.0.1");
 
         // Packet Loss Simulation
@@ -151,7 +185,7 @@ public:
             return;
         }
 
-        sendto(socket_fd, packet_data.data(), packet_data.size(), 0, (const struct sockaddr *)&dest_address, sizeof(dest_address));
+        sendto(tx_socket_fd, packet_data.data(), packet_data.size(), 0, (const struct sockaddr *)&dest_address, sizeof(dest_address));
         
         log_packet_event("SEND", "To " + std::to_string(next_hop_id) + " (Bytes: " + std::to_string(packet_data.size()) + ")");
         
@@ -206,10 +240,12 @@ public:
 
 protected:
     uint8_t node_id;
-    int port;
+    int rx_port;
+    int tx_port;
     int loss_percentage;
     std::string node_dir;
-    int socket_fd;
+    int rx_socket_fd;
+    int tx_socket_fd;
     std::thread receiver_thread;
     std::atomic<bool> stop_threads;
 
@@ -230,8 +266,8 @@ protected:
 
     void broadcast(const std::vector<uint8_t>& packet_data) {
         log_packet_event("BROADCAST", "To all neighbors");
-        for (int neighbor_port : neighbors) {
-            uint8_t neighbor_id = neighbor_port - 8080;
+        for (int neighbor_id : neighbors) {
+            // neighbors vector now contains Node IDs, not ports!
             send_packet(neighbor_id, packet_data);
         }
     }
@@ -251,7 +287,7 @@ private:
         socklen_t sender_addr_len = sizeof(sender_address);
 
         while (!stop_threads) {
-            ssize_t bytes_received = recvfrom(socket_fd, buffer, sizeof(buffer), 0, (struct sockaddr *)&sender_address, &sender_addr_len);
+            ssize_t bytes_received = recvfrom(rx_socket_fd, buffer, sizeof(buffer), 0, (struct sockaddr *)&sender_address, &sender_addr_len);
             
             if (bytes_received < 0 || stop_threads) {
                 break;

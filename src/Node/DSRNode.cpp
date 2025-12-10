@@ -6,8 +6,8 @@
 #include <algorithm>
 #include <vector>
 
-DSRNode::DSRNode(uint8_t id, int port, int loss_p)
-    : BaseNode(id, port, loss_p) {
+DSRNode::DSRNode(uint8_t id, int rx_p, int tx_p, int loss_p)
+    : BaseNode(id, rx_p, tx_p, loss_p) {
     std::cout << "DSRNode " << (int)id << " created." << std::endl;
 }
 

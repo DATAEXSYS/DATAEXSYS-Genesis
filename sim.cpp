@@ -13,6 +13,19 @@
 #include <thread>
 #include "inc/Node/DSRNode.h" // Note: Adjust path if necessary based on your build system's include paths
 
+const int RX_BASE_PORT = 8000;
+const int TX_BASE_PORT = 9000;
+
+void create_access_table(int node_id, const std::vector<int>& neighbors, const std::string& output_dir) {
+    std::filesystem::path filepath = output_dir;
+    filepath /= "AccessTable.txt";
+    std::ofstream outfile(filepath);
+    for (int neighbor_id : neighbors) {
+        outfile << neighbor_id << std::endl;
+    }
+    outfile.close();
+}
+
 int main(int argc, char* argv[]) {
     int num_processes = -1;
     int duration = -1;
@@ -68,20 +81,17 @@ int main(int argc, char* argv[]) {
     std::cout << "Created directory: " << output_dir << std::endl;
 
     // --- Port Generation ---
-    std::vector<int> ports;
-    for (int i = 0; i < num_processes; ++i) {
-        ports.push_back(8080 + i);
-    }
-
+    // Ports are now deterministic based on ID:
+    // RX = 8000 + ID
+    // TX = 9000 + ID
     std::filesystem::path ports_filepath = output_dir;
     ports_filepath /= "ports.txt";
     std::ofstream ports_outfile(ports_filepath);
-    for (int port : ports) {
-        ports_outfile << port << std::endl;
+    for (int i = 0; i < num_processes; ++i) {
+        ports_outfile << "Node " << i << ": RX=" << (RX_BASE_PORT + i) << ", TX=" << (TX_BASE_PORT + i) << std::endl;
     }
     ports_outfile.close();
-    std::cout << "List of all available ports written to " << ports_filepath << std::endl;
-
+    std::cout << "Port assignments written to " << ports_filepath << std::endl;
 
     // --- Topology Generation (Random Graph) ---
     std::vector<std::vector<int>> adj_list(num_processes);
@@ -115,8 +125,9 @@ int main(int argc, char* argv[]) {
         } else if (pid == 0) {
             // --- Child Process Logic ---
             pid_t my_pid = getpid();
-            int port = ports[i];
             uint8_t node_id = i;
+            int rx_port = RX_BASE_PORT + node_id;
+            int tx_port = TX_BASE_PORT + node_id;
 
             // Create Node directory
             std::filesystem::path node_dir = output_dir;
@@ -124,21 +135,14 @@ int main(int argc, char* argv[]) {
             node_dir /= "Node_" + std::to_string(node_id);
             std::filesystem::create_directory(node_dir);
 
-            // Create and write to the access table file first, so the node can read it.
-            // Keeping access table in Node dir for cleanliness
-            std::filesystem::path filepath = node_dir;
-            filepath /= "AccessTable.txt";
-            std::ofstream outfile(filepath);
-            outfile << port << std::endl;
-            for (int neighbor_index : adj_list[i]) {
-                outfile << ports[neighbor_index] << std::endl;
-            }
-            outfile.close();
+            // Create Access Table in the specific node directory
+            create_access_table(node_id, adj_list[i], node_dir.string());
 
-            std::cout << "Child process " << (int)node_id << " (PID: " << my_pid << ") created, assigned port " << port << ". Access table generated." << std::endl;
+            std::cout << "Child process " << (int)node_id << " (PID: " << my_pid << ") created. RX: " << rx_port << ", TX: " << tx_port << ". Access table generated." << std::endl;
             
             try {
-                DSRNode node(node_id, port, loss_percentage);
+                // Pass both ports: ID, RX, TX, Loss
+                DSRNode node(node_id, rx_port, tx_port, loss_percentage);
                 node.set_node_dir(node_dir.string());
 
                 // Let the simulation run for a bit before starting discovery
@@ -172,7 +176,7 @@ int main(int argc, char* argv[]) {
                 node.save_stats();
                 node.save_dsr_routes();
 
-                std::cout << "Child process " << (int)node_id << " (PID: " << my_pid << ") on port " << port << " is finishing." << std::endl;
+                std::cout << "Child process " << (int)node_id << " (PID: " << my_pid << ") finishing." << std::endl;
 
             } catch (const std::exception& e) {
                 std::cerr << "Error in child process " << (int)node_id << ": " << e.what() << std::endl;

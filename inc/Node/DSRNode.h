@@ -7,6 +7,7 @@
 #include <unordered_map>
 #include <map>
 #include <chrono>
+#include <string>
 
 struct PendingAck {
     uint32_t sequence_number;
@@ -18,7 +19,7 @@ struct PendingAck {
 
 class DSRNode : public BaseNode {
 public:
-    DSRNode(uint8_t id, int port, int loss_p = 0);
+    DSRNode(uint8_t id, int rx_p, int tx_p, int loss_p = 0);
 
     // --- DSR-Specific Methods ---
     void start_route_discovery(uint8_t destination);
