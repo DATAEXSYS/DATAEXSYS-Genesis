@@ -1,0 +1,4 @@
+/home/lenovo/Public/FYP Final/DATAEXSYS-Genesis/CMakeFiles/genesis_app.dir
+/home/lenovo/Public/FYP Final/DATAEXSYS-Genesis/CMakeFiles/pk_test.dir
+/home/lenovo/Public/FYP Final/DATAEXSYS-Genesis/CMakeFiles/edit_cache.dir
+/home/lenovo/Public/FYP Final/DATAEXSYS-Genesis/CMakeFiles/rebuild_cache.dir
