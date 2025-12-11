@@ -62,7 +62,7 @@ public:
         PowChallenge* challenge = GeneratePoWChallenge(prevBlock, shortId, pubKeyArray, signature);
 
         // Solve PoW
-        uint64_t nonce = SolvePowChallenge(challenge);
+        uint64_t nonce = SolvePowChallenge(*challenge);
         block.challenge = *challenge;
         block.nonce = nonce;
 
