@@ -1,0 +1,9 @@
+[2025-12-11T12:42:09.225Z] [INFO ] ==================================================================
+[2025-12-11T12:42:09.225Z] [INFO ] PKCertChain Node 2 starting
+[2025-12-11T12:42:09.225Z] [INFO ] Log directory: pkcert_data/node_2/logs/node_2
+[2025-12-11T12:42:09.225Z] [INFO ] Crypto directory: pkcert_data/node_2/crypto/node_2
+[2025-12-11T12:42:09.226Z] [INFO ] Debug mode: enabled
+[2025-12-11T12:42:09.226Z] [INFO ] ==================================================================
+[2025-12-11T12:42:09.226Z] [INFO ] PKCertChain initialized for node 2
+[2025-12-11T12:42:09.226Z] [INFO ] Configuration: Data dir: pkcert_data/node_2, Debug: enabled, Max blocks: 1000, Block timeout: 30s
+[2025-12-11T12:42:09.227Z] [INFO ] Registering with genesis node...
