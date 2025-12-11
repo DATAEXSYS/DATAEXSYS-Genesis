@@ -10,7 +10,7 @@ struct nodeReg {
     std::vector<uint8_t> prevHash;
     std::vector<uint8_t> nextHash;
     std::vector<uint8_t> blockHash;
-    std::vector<uint8_t> nonce;
+    uint64_t nonce;
     uint16_t difficulty;
     time_t timestamp;
     certificate cert;

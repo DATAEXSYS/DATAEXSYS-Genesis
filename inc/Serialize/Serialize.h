@@ -150,10 +150,8 @@ inline std::vector<uint8_t> serializeNode(const nodeReg& node) {
     bytes.insert(bytes.end(), node.blockHash.begin(), node.blockHash.end());
 
     // nonce (serialize length first)
-    uint64_t nonceSize = node.nonce.size();
-    std::vector<uint8_t> nonceSizeBE = BE64(nonceSize);
-    bytes.insert(bytes.end(), nonceSizeBE.begin(), nonceSizeBE.end());
-    bytes.insert(bytes.end(), node.nonce.begin(), node.nonce.end());
+    // Serialize nonce (uint64_t)
+    bytes.insert(bytes.end(), (uint8_t*)&node.nonce, (uint8_t*)&node.nonce + sizeof(node.nonce));
 
     // difficulty
     std::vector<uint8_t> diff = BE16(node.difficulty);
