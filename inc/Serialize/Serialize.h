@@ -118,12 +118,12 @@ inline Packet deserialize_packet(const std::vector<uint8_t>& bytes) {
 // ----------- Serialization -----------
 
 // Serialize a certificate
+// Serialize a certificate
 inline std::vector<uint8_t> serializeCertificate(const certificate& cert) {
     std::vector<uint8_t> bytes;
 
-    // nodeID
-    std::vector<uint8_t> nid = BE16(cert.nodeID);
-    bytes.insert(bytes.end(), nid.begin(), nid.end());
+    // nodeID (now uint8_t)
+    bytes.push_back(cert.nodeID);  // Directly push the uint8_t
 
     // publicKey
     bytes.insert(bytes.end(), cert.publicKey.begin(), cert.publicKey.end());

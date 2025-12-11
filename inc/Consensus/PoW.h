@@ -1,14 +1,58 @@
 #pragma once
 #include <iostream>
 #include <stdint.h>
-#include <array>
+#include <vector>
+#include <thread>
+#include <atomic>
 #include "Blockchain/PKCertChain/nodeReg.h"
-#include "Helper/Serialize.h"
+#include "Helper/BigEndian.h"
 #include "Helper/Hash.h"
 #include "Helper/CSPRNG.h"
 #include "Consensus/PoWchallenge.h"
+#include "Serialize/Serialize.h"
 
-//----------------helper function ---------------------------
+//----------------helper functions ---------------------------
+
+/**
+ * @brief Creates a new PoW challenge based on the previous block and node information
+ * 
+ * @param prevBlock The previous block in the chain
+ * @param id Node ID
+ * @param PKSign Node's public signing key
+ * @param PKEncrypt Node's public encryption key
+ * @return PowChallenge The generated challenge with difficulty
+ */
+inline PowChallenge SendChallenge(const nodeReg& prevBlock, 
+                                const std::vector<uint8_t>& id,
+                                const std::vector<uint8_t>& PKSign,
+                                const std::vector<uint8_t>& PKEncrypt) {
+    // 1. Serialize the previous block
+    std::vector<uint8_t> serializedBlock = serializeNode(prevBlock);
+    
+    // 2. Combine all the data
+    std::vector<uint8_t> combined;
+    combined.reserve(serializedBlock.size() + id.size() + PKSign.size() + PKEncrypt.size());
+    
+    combined.insert(combined.end(), serializedBlock.begin(), serializedBlock.end());
+    combined.insert(combined.end(), id.begin(), id.end());
+    combined.insert(combined.end(), PKSign.begin(), PKSign.end());
+    combined.insert(combined.end(), PKEncrypt.begin(), PKEncrypt.end());
+    
+    // 3. Compute SHA256 hash of the combined data
+    std::vector<uint8_t> challenge = sha256(combined);
+    
+    // 4. Generate 2-byte random difficulty using CSPRNG16_t
+    uint16_t rand_val = CSPRNG16_t();
+    std::vector<uint8_t> difficulty = {
+        static_cast<uint8_t>(rand_val >> 8),
+        static_cast<uint8_t>(rand_val & 0xFF)
+    };
+    
+    // 5. Create and return the challenge
+    return {challenge, difficulty};
+}
+
+//---------------------------------------------------------
 
 bool isSolved(const PowChallenge& chal, uint64_t nonce)
 {
