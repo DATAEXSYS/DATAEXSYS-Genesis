@@ -5,6 +5,13 @@
 #include <cstdint>
 #include <cstring>
 #include <stdexcept>
+#include <thread>
+#include <array>
+#include <ctime>
+#include <arpa/inet.h> // for htons, htonl
+#include <Blockchain/PKCertChain/Certificate.h>
+#include <Blockchain/PKCertChain/nodeReg.h>
+#include <Consensus/PoWchallenge.h>
 
 /**
  * @brief Serializes a Packet object into a byte vector.
@@ -104,4 +111,73 @@ inline Packet deserialize_packet(const std::vector<uint8_t>& bytes) {
     }
     
     return packet;
+}
+
+#include "Helper/BigEndian.h"
+
+// ----------- Serialization -----------
+
+// Serialize a certificate
+inline std::vector<uint8_t> serializeCertificate(const certificate& cert) {
+    std::vector<uint8_t> bytes;
+
+    // nodeID
+    std::vector<uint8_t> nid = BE16(cert.nodeID);
+    bytes.insert(bytes.end(), nid.begin(), nid.end());
+
+    // publicKey
+    bytes.insert(bytes.end(), cert.publicKey.begin(), cert.publicKey.end());
+
+    // signature
+    bytes.insert(bytes.end(), cert.signature.begin(), cert.signature.end());
+
+    // notBefore, notAfter
+    std::vector<uint8_t> nb = BE_time(cert.notBefore);
+    std::vector<uint8_t> na = BE_time(cert.notAfter);
+    bytes.insert(bytes.end(), nb.begin(), nb.end());
+    bytes.insert(bytes.end(), na.begin(), na.end());
+
+    return bytes;
+}
+
+// Serialize a nodeReg (excluding pointers)
+inline std::vector<uint8_t> serializeNode(const nodeReg& node) {
+    std::vector<uint8_t> bytes;
+
+    // prevHash, nextHash, blockHash
+    bytes.insert(bytes.end(), node.prevHash.begin(), node.prevHash.end());
+    bytes.insert(bytes.end(), node.nextHash.begin(), node.nextHash.end());
+    bytes.insert(bytes.end(), node.blockHash.begin(), node.blockHash.end());
+
+    // nonce (serialize length first)
+    uint64_t nonceSize = node.nonce.size();
+    std::vector<uint8_t> nonceSizeBE = BE64(nonceSize);
+    bytes.insert(bytes.end(), nonceSizeBE.begin(), nonceSizeBE.end());
+    bytes.insert(bytes.end(), node.nonce.begin(), node.nonce.end());
+
+    // difficulty
+    std::vector<uint8_t> diff = BE16(node.difficulty);
+    bytes.insert(bytes.end(), diff.begin(), diff.end());
+
+    // timestamp
+    std::vector<uint8_t> ts = BE_time(node.timestamp);
+    bytes.insert(bytes.end(), ts.begin(), ts.end());
+
+    // certificate
+    std::vector<uint8_t> certBytes = serializeCertificate(node.cert);
+    bytes.insert(bytes.end(), certBytes.begin(), certBytes.end());
+
+    return bytes;
+}
+
+inline std::vector<uint8_t> serializePowChallenge(const PowChallenge& chal) {
+    std::vector<uint8_t> bytes;
+    
+    // Append R (32 bytes)
+    bytes.insert(bytes.end(), chal.challenge.begin(), chal.challenge.end());
+
+    // Append T (2 bytes)
+    bytes.insert(bytes.end(), chal.difficulty.begin(), chal.difficulty.end());
+
+    return bytes;
 }
