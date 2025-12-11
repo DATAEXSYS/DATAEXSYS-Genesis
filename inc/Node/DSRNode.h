@@ -6,8 +6,11 @@
 #include <vector>
 #include <unordered_map>
 #include <map>
+#include <set>
+#include <utility>
 #include <chrono>
 #include <string>
+#include "Blockchain/RouteLogChain/Blockchain.h"
 
 struct PendingAck {
     uint32_t sequence_number;
@@ -30,15 +33,18 @@ public:
 
     void save_dsr_routes();
     void process_events(); // Override to check for timeouts
+    void save_local_blockchain();
 
     void send_data(uint8_t destination_id, const std::string& message);
     bool has_route(uint8_t destination_id) const;
 
 private:
     std::unordered_map<uint8_t, std::vector<uint8_t>> dsr_routes;
+    Blockchain local_chain;
     
     // ACK and Route Maintenance
     std::map<uint32_t, PendingAck> pending_acks; // Key: Packet Sequence Number
+    std::set<std::pair<uint8_t, uint32_t>> seen_packets; // Source ID, Sequence Number
     static const int MAX_ACK_RETRIES = 3;
     static const int ACK_TIMEOUT_MS = 1000; // 1 second timeout for simulation
 

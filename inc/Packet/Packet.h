@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <vector>
 #include "PacketType.h"
+#include "../Blockchain/RouteLogChain/Receipt.h"
 
 class Packet {
 public:
@@ -13,6 +14,7 @@ public:
     uint8_t hopcount = 0; //  1 byte
     std::vector<uint8_t> hopAddresses; //variable, typically 1 * hopcount bytes
     std::vector<uint8_t> payload; //variable size but will equal to 1489−1×hopcount bytes
+    std::vector<Receipt> receipts; // RouteLogChain receipts
 
     Packet() = default;
 

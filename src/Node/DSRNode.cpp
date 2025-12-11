@@ -5,6 +5,7 @@
 #include <memory>
 #include <algorithm>
 #include <vector>
+#include <sstream>
 
 DSRNode::DSRNode(uint8_t id, int rx_p, int tx_p, int loss_p)
     : BaseNode(id, rx_p, tx_p, loss_p) {
@@ -26,6 +27,15 @@ void DSRNode::process_received_packet(std::shared_ptr<Packet> packet){
             handle_ack(packet);
             break;
         case PacketType::DATA: {
+            // Replay Mitigation: Check if we have seen this (Source, Seq) pair before
+            if (seen_packets.count({packet->source_id, packet->sequence_number})) {
+                std::cout << "Node " << (int)get_node_id() << " REPLAY ATTACK DETECTED: Dropping duplicate packet from " 
+                          << (int)packet->source_id << " Seq: " << packet->sequence_number << std::endl;
+                log_packet_event("DROP_REPLAY", "From " + std::to_string(packet->source_id) + " Seq: " + std::to_string(packet->sequence_number));
+                return;
+            }
+            seen_packets.insert({packet->source_id, packet->sequence_number});
+
             // ACK the previous hop if it's unicast
             if (packet->destination_id == get_node_id() || packet->hopAddresses.size() > 0) {
                  // Find pure previous hop for ACK
@@ -45,7 +55,45 @@ void DSRNode::process_received_packet(std::shared_ptr<Packet> packet){
             if (packet->destination_id == get_node_id()) {
                 auto task = [this, packet]() {
                     std::cout << "DSR DATA packet received at final destination " << (int)get_node_id() << std::endl;
-                    log_packet_event("RECEIVE", "DSR DATA from " + std::to_string(packet->source_id));
+                    
+                    // RouteLogChain: Add Receipt
+                    Receipt rx(get_node_id(), "Route-" + std::to_string(packet->source_id) + "-" + std::to_string(packet->destination_id), 
+                               "PACKET_RECEIVED", packet->sequence_number, "", "");
+                    packet->receipts.push_back(rx);
+
+                    std::cout << "--- RouteLogChain Verification ---" << std::endl;
+                    
+                    std::stringstream ss_path;
+                    ss_path << "Path: ";
+                    for(auto hop : packet->hopAddresses) ss_path << (int)hop << " ";
+                    std::cout << ss_path.str() << std::endl;
+
+                    std::stringstream ss_receipts;
+                    ss_receipts << "Receipts(" << packet->receipts.size() << "): ";
+                    for (const auto& r : packet->receipts) {
+                        std::cout << "  [" << r.action << "] Node:" << r.node_id << " Seq:" << r.packet_seq << " ID:" << r.id.substr(0, 8) << "..." << std::endl;
+                        ss_receipts << "[" << r.action << ":" << r.node_id << "] ";
+                        
+                         // Update Local Blockchain
+                        local_chain.process_receipt(r);
+                    }
+                    std::cout << "----------------------------------" << std::endl;
+                   
+                    // Mine a block with these receipts
+                    local_chain.mine_block();
+                    
+                    // Mine a block with these receipts
+                    local_chain.mine_block();
+                    
+                    // Log Metrics via standard event log
+                    for(auto const& [id, m] : local_chain.node_history) {
+                        log_packet_event("METRICS", "Node " + std::to_string(id) + " Trust: " + std::to_string(m.trust));
+                    }
+                    
+                    // Dump full chain copy
+                    save_local_blockchain();
+
+                    log_packet_event("RECEIVE", "DSR DATA from " + std::to_string(packet->source_id) + " | " + ss_path.str() + " | " + ss_receipts.str());
                 };
                 receiving_queue.push(Event(EventType::PACKET_INCOMING, task));
                 packets_received++; 
@@ -57,6 +105,27 @@ void DSRNode::process_received_packet(std::shared_ptr<Packet> packet){
                     if (it != packet->hopAddresses.end() && std::next(it) != packet->hopAddresses.end()) {
                         uint8_t next_hop_id = *std::next(it);
                         std::cout << "Forwarding DSR DATA packet to next hop " << (int)next_hop_id << std::endl;
+                        
+                        // RouteLogChain: Add Receipt
+                        std::string prev = (it == packet->hopAddresses.begin()) ? "Source" : std::to_string(*std::prev(it));
+                        Receipt rx(get_node_id(), "Route-" + std::to_string(packet->source_id) + "-" + std::to_string(packet->destination_id),
+                                   "DATA_forwarded", packet->sequence_number, prev, std::to_string(next_hop_id));
+                        packet->receipts.push_back(rx);
+
+                        // Update Local Blockchain (Forwarder also sees receipt it created)
+                        local_chain.process_receipt(rx);
+                        local_chain.mine_block(); // Mine immediately
+
+                        // Log Metrics via standard event log
+                        for(auto const& [id, m] : local_chain.node_history) {
+                             if(m.trust != 0.8) { // Only log interesting changes
+                                log_packet_event("METRICS", "Node " + std::to_string(id) + " Trust: " + std::to_string(m.trust));
+                             }
+                        }
+                        
+                        // Dump full chain copy
+                        save_local_blockchain();
+
                         log_packet_event("FORWARD", "DSR DATA to " + std::to_string(next_hop_id));
                         send_packet(next_hop_id, serialize_packet(*packet));
                         
@@ -113,6 +182,27 @@ void DSRNode::send_data(uint8_t destination_id, const std::string& message) {
     if (route.size() > 1) {
         uint8_t next_hop = route[1];
         std::cout << "Sending DATA to " << (int)destination_id << " via " << (int)next_hop << std::endl;
+        
+        // RouteLogChain: Source adds receipt
+        Receipt rx(get_node_id(), "Route-" + std::to_string(packet.source_id) + "-" + std::to_string(packet.destination_id),
+                   "DATA_sent", packet.sequence_number, "", std::to_string(next_hop));
+        packet.receipts.push_back(rx);
+        
+        // Update Local Blockchain (Source)
+        local_chain.process_receipt(rx);
+        local_chain.mine_block();
+        
+        // Log Metrics
+        for(auto const& [id, m] : local_chain.node_history) {
+             if(m.trust != 0.8) {
+                log_packet_event("METRICS", "Node " + std::to_string(id) + " Trust: " + std::to_string(m.trust));
+                std::cout << "Node " << (int)id << " Trust: " << m.trust << std::endl;
+             }
+        }
+        
+        // Dump full chain copy
+        save_local_blockchain();
+
         send_packet(next_hop, serialize_packet(packet));
         increment_packets_sent();
         
@@ -333,4 +423,21 @@ void DSRNode::save_dsr_routes() {
         outfile << "\n";
     }
     outfile.close();
+}
+
+void DSRNode::save_local_blockchain() {
+    if (node_dir.empty()) return;
+    std::string filepath = node_dir + "/LocalBlockchain.txt";
+    std::ofstream chain_file(filepath); // Overwrite mode
+    if(chain_file.is_open()) {
+        chain_file << "--- Local Blockchain Dump ---\n";
+        for(size_t i=0; i<local_chain.chain.size(); ++i) {
+            const auto& b = local_chain.chain[i];
+            chain_file << "Block " << i << " [Hash: " << b.hash.substr(0,8) << "...] Prev: " << b.prev_hash.substr(0,8) << "...\n";
+            for(const auto& tx : b.transactions) {
+                    chain_file << "   Receipt: " << tx.action << " Node: " << tx.node_id << " Seq:" << tx.packet_seq << "\n";
+            }
+        }
+        chain_file.close();
+    }
 }

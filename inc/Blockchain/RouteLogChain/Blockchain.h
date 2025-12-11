@@ -27,6 +27,8 @@ public:
         chain.emplace_back("0", genesis_txs);
     }
 
+    std::vector<Receipt> pending_receipts;
+
     void add_block(const Block& block) {
         if (block.prev_hash != chain.back().hash) {
             std::cerr << "Blockchain Error: Invalid prev_hash. Block rejected." << std::endl;
@@ -34,10 +36,16 @@ public:
         }
         chain.push_back(block);
         
-        // Process receipts to update node_history
-        for (const auto& rx : block.transactions) {
-            process_receipt(rx);
-        }
+        // Process receipts to update node_history which is done incrementally now, but we keep this consistent.
+    }
+
+    void mine_block() {
+        if (pending_receipts.empty()) return;
+        
+        std::string prev = chain.empty() ? "0" : chain.back().hash;
+        Block new_block(prev, pending_receipts);
+        chain.push_back(new_block);
+        pending_receipts.clear();
     }
 
     double get_trust_score(uint32_t node_id) {
@@ -55,6 +63,8 @@ public:
     // So we should expose a way to update metrics directly or via receipt processing.
     
     void process_receipt(const Receipt& rx) {
+        pending_receipts.push_back(rx);
+
         if (node_history.find(rx.node_id) == node_history.end()) {
             node_history[rx.node_id] = NodeMetrics();
         }
