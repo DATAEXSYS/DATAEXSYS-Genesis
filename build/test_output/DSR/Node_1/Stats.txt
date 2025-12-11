@@ -1,0 +1,6 @@
+--- Node Statistics ---
+Packets Sent (Originated): 12
+Packets Received: 10
+Packets Forwarded: 0
+Packets Dropped: 0
+Packet Delivery Ratio: 83.3333%
