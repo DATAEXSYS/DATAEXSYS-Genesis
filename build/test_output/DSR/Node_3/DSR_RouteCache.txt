@@ -1,5 +1,0 @@
---- DSR Route Cache ---
-Destination: 0 Path: 4 -> 3 -> 2 -> 1 -> 0
-Destination: 1 Path: 3 -> 2 -> 1
-Destination: 2 Path: 3 -> 2
-Destination: 4 Path: 0 -> 1 -> 2 -> 3 -> 4
