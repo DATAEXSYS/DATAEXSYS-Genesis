@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/sim_pkcert_chain.dir/simPKCertChain.cpp.o CMakeFiles/sim_pkcert_chain.dir/src/Node/DSRNode.cpp.o CMakeFiles/sim_pkcert_chain.dir/src/Serialize/Serialize.cpp.o -o build/sim_pkcert_chain  /usr/lib/x86_64-linux-gnu/libssl.so /usr/lib/x86_64-linux-gnu/libcrypto.so 
