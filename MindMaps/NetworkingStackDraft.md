@@ -1,8 +1,4 @@
-Great problem. If you want to build a **real, working ad-hoc networking stack on Ubuntu/Linux** (for PCs + IoT), the key is to decompose it **cleanly** *and* align with how Linux actually works (netlink, sockets, drivers), not just textbook OSI.
 
-Below is a **practical, buildable decomposition**, layer by layer, with **responsibilities, components, Linux hooks, and example technologies**.
-
----
 
 # 0️⃣ First: Your Design Philosophy (Important)
 
@@ -254,6 +250,10 @@ Handles **who can I talk to right now**.
 * **Link Metrics**
 
   * RSSI
+
+# 0️⃣ First: Your Design Philosophy (Important)
+
+For
   * ETX
   * Packet loss
 * **Medium Access Control**
@@ -375,15 +375,3 @@ Hardware
 * BLE / LoRa
 * Power-aware routing
 
----
-
-# 8️⃣ If You Want, I Can Also:
-
-* Design **your routing protocol**
-* Map this to **kernel modules vs user-space**
-* Show **exact Ubuntu commands**
-* Propose **IoT-friendly stack**
-* Compare **BATMAN vs OLSR vs custom**
-* Draw **full data-flow diagram**
-
-Just tell me your **target devices**, **radio tech**, and **use case**.
