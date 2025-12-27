@@ -11,8 +11,14 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU")
     )
 endif()
 
-# Collect all .cpp files under src/
+# Collect all .cpp files under src/ recursively
 file(GLOB_RECURSE SRC_FILES "${PROJECT_SOURCE_DIR}/src/*.cpp")
+
+# Collect all .cpp files under test/ recursively
+file(GLOB_RECURSE TEST_FILES "${PROJECT_SOURCE_DIR}/test/*.cpp")
+
+# Combine all source files
+list(APPEND SRC_FILES ${TEST_FILES})
 
 # Create executable
 add_executable(${PROJECT_NAME} ${SRC_FILES})

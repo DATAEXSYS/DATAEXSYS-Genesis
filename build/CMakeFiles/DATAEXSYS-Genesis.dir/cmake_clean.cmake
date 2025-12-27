@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/DATAEXSYS-Genesis.dir/src/adhoc/net/ControlPlane/RouteCache.cpp.o"
   "CMakeFiles/DATAEXSYS-Genesis.dir/src/adhoc/net/ControlPlane/RouteCache.cpp.o.d"
+  "CMakeFiles/DATAEXSYS-Genesis.dir/test/unit/adhoc/net/ControlPlane/routecache_test.cpp.o"
+  "CMakeFiles/DATAEXSYS-Genesis.dir/test/unit/adhoc/net/ControlPlane/routecache_test.cpp.o.d"
   "DATAEXSYS-Genesis"
   "DATAEXSYS-Genesis.pdb"
 )

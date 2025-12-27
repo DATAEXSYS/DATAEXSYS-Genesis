@@ -153,6 +153,30 @@ src/adhoc/net/ControlPlane/RouteCache.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/DATAEXSYS-Genesis.dir/build.make CMakeFiles/DATAEXSYS-Genesis.dir/src/adhoc/net/ControlPlane/RouteCache.cpp.s
 .PHONY : src/adhoc/net/ControlPlane/RouteCache.cpp.s
 
+test/unit/adhoc/net/ControlPlane/routecache_test.o: test/unit/adhoc/net/ControlPlane/routecache_test.cpp.o
+.PHONY : test/unit/adhoc/net/ControlPlane/routecache_test.o
+
+# target to build an object file
+test/unit/adhoc/net/ControlPlane/routecache_test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DATAEXSYS-Genesis.dir/build.make CMakeFiles/DATAEXSYS-Genesis.dir/test/unit/adhoc/net/ControlPlane/routecache_test.cpp.o
+.PHONY : test/unit/adhoc/net/ControlPlane/routecache_test.cpp.o
+
+test/unit/adhoc/net/ControlPlane/routecache_test.i: test/unit/adhoc/net/ControlPlane/routecache_test.cpp.i
+.PHONY : test/unit/adhoc/net/ControlPlane/routecache_test.i
+
+# target to preprocess a source file
+test/unit/adhoc/net/ControlPlane/routecache_test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DATAEXSYS-Genesis.dir/build.make CMakeFiles/DATAEXSYS-Genesis.dir/test/unit/adhoc/net/ControlPlane/routecache_test.cpp.i
+.PHONY : test/unit/adhoc/net/ControlPlane/routecache_test.cpp.i
+
+test/unit/adhoc/net/ControlPlane/routecache_test.s: test/unit/adhoc/net/ControlPlane/routecache_test.cpp.s
+.PHONY : test/unit/adhoc/net/ControlPlane/routecache_test.s
+
+# target to generate assembly for a file
+test/unit/adhoc/net/ControlPlane/routecache_test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/DATAEXSYS-Genesis.dir/build.make CMakeFiles/DATAEXSYS-Genesis.dir/test/unit/adhoc/net/ControlPlane/routecache_test.cpp.s
+.PHONY : test/unit/adhoc/net/ControlPlane/routecache_test.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -165,6 +189,9 @@ help:
 	@echo "... src/adhoc/net/ControlPlane/RouteCache.o"
 	@echo "... src/adhoc/net/ControlPlane/RouteCache.i"
 	@echo "... src/adhoc/net/ControlPlane/RouteCache.s"
+	@echo "... test/unit/adhoc/net/ControlPlane/routecache_test.o"
+	@echo "... test/unit/adhoc/net/ControlPlane/routecache_test.i"
+	@echo "... test/unit/adhoc/net/ControlPlane/routecache_test.s"
 .PHONY : help
 
 

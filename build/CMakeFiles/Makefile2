@@ -81,12 +81,12 @@ clean: CMakeFiles/DATAEXSYS-Genesis.dir/clean
 CMakeFiles/DATAEXSYS-Genesis.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/DATAEXSYS-Genesis.dir/build.make CMakeFiles/DATAEXSYS-Genesis.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/DATAEXSYS-Genesis.dir/build.make CMakeFiles/DATAEXSYS-Genesis.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/binaryhive/Public/DATAEXSYS-Genesis/build/CMakeFiles --progress-num=1,2 "Built target DATAEXSYS-Genesis"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/binaryhive/Public/DATAEXSYS-Genesis/build/CMakeFiles --progress-num=1,2,3 "Built target DATAEXSYS-Genesis"
 .PHONY : CMakeFiles/DATAEXSYS-Genesis.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/DATAEXSYS-Genesis.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/binaryhive/Public/DATAEXSYS-Genesis/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/binaryhive/Public/DATAEXSYS-Genesis/build/CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/DATAEXSYS-Genesis.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/binaryhive/Public/DATAEXSYS-Genesis/build/CMakeFiles 0
 .PHONY : CMakeFiles/DATAEXSYS-Genesis.dir/rule
