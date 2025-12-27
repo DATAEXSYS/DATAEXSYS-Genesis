@@ -3,10 +3,11 @@
     {
       "name": "linux-clang-x64",
       "includePath": [
-        "${workspaceFolder}/**",
-        "/usr/include",
-        "/usr/local/include",
-        "/usr/include/c++/13",
+        "${workspaceFolder}/**",            
+        "${workspaceFolder}/inc",           
+        "/usr/include",                     
+        "/usr/local/include",               
+        "/usr/include/c++/13",              
         "/usr/include/x86_64-linux-gnu/c++/13",
         "/usr/include/x86_64-linux-gnu"
       ],
@@ -18,6 +19,7 @@
       "browse": {
         "path": [
           "${workspaceFolder}/**",
+          "${workspaceFolder}/inc",
           "/usr/include",
           "/usr/local/include",
           "/usr/include/c++/13",
