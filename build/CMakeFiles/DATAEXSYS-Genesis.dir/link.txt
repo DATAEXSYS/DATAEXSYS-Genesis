@@ -1,0 +1,1 @@
+/usr/bin/c++ "CMakeFiles/DATAEXSYS-Genesis.dir/test.cpp.o" -o DATAEXSYS-Genesis 
