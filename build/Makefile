@@ -130,30 +130,6 @@ dataexsys_genesis/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/dataexsys_genesis.dir/build.make CMakeFiles/dataexsys_genesis.dir/build
 .PHONY : dataexsys_genesis/fast
 
-BABE/SDK/inc/App/c.o: BABE/SDK/inc/App/c.cpp.o
-.PHONY : BABE/SDK/inc/App/c.o
-
-# target to build an object file
-BABE/SDK/inc/App/c.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dataexsys_genesis.dir/build.make CMakeFiles/dataexsys_genesis.dir/BABE/SDK/inc/App/c.cpp.o
-.PHONY : BABE/SDK/inc/App/c.cpp.o
-
-BABE/SDK/inc/App/c.i: BABE/SDK/inc/App/c.cpp.i
-.PHONY : BABE/SDK/inc/App/c.i
-
-# target to preprocess a source file
-BABE/SDK/inc/App/c.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dataexsys_genesis.dir/build.make CMakeFiles/dataexsys_genesis.dir/BABE/SDK/inc/App/c.cpp.i
-.PHONY : BABE/SDK/inc/App/c.cpp.i
-
-BABE/SDK/inc/App/c.s: BABE/SDK/inc/App/c.cpp.s
-.PHONY : BABE/SDK/inc/App/c.s
-
-# target to generate assembly for a file
-BABE/SDK/inc/App/c.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/dataexsys_genesis.dir/build.make CMakeFiles/dataexsys_genesis.dir/BABE/SDK/inc/App/c.cpp.s
-.PHONY : BABE/SDK/inc/App/c.cpp.s
-
 BABE/SDK/src/App/AppLayer.o: BABE/SDK/src/App/AppLayer.cpp.o
 .PHONY : BABE/SDK/src/App/AppLayer.o
 
@@ -187,9 +163,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... dataexsys_genesis"
-	@echo "... BABE/SDK/inc/App/c.o"
-	@echo "... BABE/SDK/inc/App/c.i"
-	@echo "... BABE/SDK/inc/App/c.s"
 	@echo "... BABE/SDK/src/App/AppLayer.o"
 	@echo "... BABE/SDK/src/App/AppLayer.i"
 	@echo "... BABE/SDK/src/App/AppLayer.s"

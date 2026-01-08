@@ -78,8 +78,7 @@
 			},
 			"sourceIndexes" : 
 			[
-				3,
-				4
+				5
 			]
 		}
 	],
@@ -114,15 +113,16 @@
 			[
 				0,
 				1,
-				2
+				2,
+				3,
+				4
 			]
 		},
 		{
 			"name" : "Source Files",
 			"sourceIndexes" : 
 			[
-				3,
-				4
+				5
 			]
 		}
 	],
@@ -135,19 +135,23 @@
 		},
 		{
 			"backtrace" : 3,
-			"path" : "BABE/SDK/inc/App/Message.h",
+			"path" : "BABE/SDK/inc/App/Classes/File.h",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 3,
-			"path" : "BABE/SDK/inc/App/MessageChunksList.h",
+			"path" : "BABE/SDK/inc/App/Classes/Message.h",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 3,
-			"compileGroupIndex" : 0,
-			"path" : "BABE/SDK/inc/App/c.cpp",
-			"sourceGroupIndex" : 1
+			"path" : "BABE/SDK/inc/App/Classes/MessageChunkNode.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 3,
+			"path" : "BABE/SDK/inc/App/Classes/MessageChunksList.h",
+			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 3,
