@@ -12,10 +12,9 @@ Author: Salman
 2. [Architecture Overview](#architecture-overview)  
 3. [Getting Started](#getting-started)  
 4. [SDK Documentation](#sdk-documentation)  
-5. [Rust Tooling](#rust-tooling)  
-6. [Testing and Simulation](#testing-and-simulation)  
-7. [Best Practices](#best-practices)  
-8. [Reference](#reference)  
+5. [Testing and Simulation](#testing-and-simulation)  
+6. [Best Practices](#best-practices)  
+7. [Reference](#reference)  
 
 ---
 
@@ -25,13 +24,12 @@ Author: Salman
 
 **Key Features:**
 - A professional C++23 SDK for system-level ad-hoc network programming.
-- Comprehensive Rust-based tooling for debugging, analysis, performance monitoring, and security checks.
 - Modular architecture: App | Link | Trans | Net  
 - Designed for heterogeneous networks (PCs, MCUs)  
 - Provides FFI/IPC interfaces for observation and control  
 
 **Purpose:**  
-BABE acts as a foundational "bare-metal" engine, providing developers with the essential components to build and experiment with custom networking stacks. It is designed to serve as the runtime for advanced protocols such as the **Blockchain-Enhanced DSR** implemented in the DATAEXSYS project. It facilitates practical deployment, research, and network simulations via a layer-by-layer breakdown of its tooling and architecture, without embedding application-specific logic.  
+BABE acts as a foundational "bare-metal" engine, providing developers with the essential components to build and experiment with custom networking stacks. It is designed to serve as the runtime for advanced protocols such as the **Blockchain-Enhanced DSR** implemented in the DATAEXSYS project. It facilitates practical deployment, research, and network simulations without embedding application-specific logic.  
 
 ---
 
@@ -47,15 +45,7 @@ BABE is organized into two main layers:
   - Control: Node sessions, authentication hooks  
   - Data: Reliable/unreliable messaging  
 
-### 2.2 Rust Tooling
-- Observes and interacts with BABE SDK via FFI or IPC  
-- Provides a comprehensive suite for:
-  - **Debugging & Analysis:** Deep packet inspection, event tracing, and replay.
-  - **Performance:** Metrics collection, logging, and performance profiling.
-  - **Simulation:** Multi-node orchestration and network condition modeling.
-  - **Security:** Pluggable hooks for monitoring and security checks.  
-
-### 2.3 Communication
+### 2.2 Communication
 - **FFI Interface:** Minimal C ABI for lifecycle control (`create_node`, `tick`, `destroy`)  
 - **IPC / Shared Memory:** For logs, metrics, network events  
 
@@ -64,11 +54,9 @@ BABE is organized into two main layers:
 
 [ BABE Engine ]
 │
-├─ SDK (C++): App | Link | Trans | Net
-│       │
-│       └─ C ABI
-│
-└─ Rust Tooling: logging, simulation, monitoring
+└─ SDK (C++): App | Link | Trans | Net
+    │
+    └─ C ABI
 ```
 
 ---
@@ -82,25 +70,17 @@ cmake -S . -B build
 cmake --build build
 ````
 
-### 3.2 Building Rust Tooling
-
-```bash
-cd BABE/Tools
-cargo build
-```
-
-### 3.3 Running TestEngine
+### 3.2 Running TestEngine
 
 ```bash
 cd BABE/TestEngine
 ./node_main --config node1.toml
 ```
 
-### 3.4 Hello Node Example
+### 3.3 Hello Node Example
 
 * Create a single node
 * Tick it in a loop
-* Observe logs via Rust tooling
 
 ---
 
@@ -134,64 +114,37 @@ void be_engine_destroy(be_engine_t* engine);
 
 ### 4.5 FFI / C ABI
 
-* Allows Rust tooling to control SDK nodes
+* Allows external tools to control SDK nodes
 * Observability hooks for metrics, events, and logs
 
 ---
 
-## 5. Rust Tooling
+## 5. Testing and Simulation
 
-### 5.1 Tooling Modules
-
-* Mirrors SDK structure: app, link, trans, net
-* Provides observability without modifying SDK behavior
-
-### 5.2 Key Features
-
-* **Debugging & Analysis:** Deep packet inspection, event tracing, and replay.
-* **Performance:** Metrics collection, logging, and performance profiling.
-* **Simulation:** Multi-node orchestration and network condition modeling.
-* **Security:** Pluggable hooks for monitoring and security checks for applications like DATAEXSYS.
-
-### 5.3 Example Rust FFI Usage
-
-```rust
-let mut engine = EngineHandle::new(config);
-engine.tick(0.016); // tick node
-engine.subscribe_logs(|log_event| println!("{:?}", log_event));
-```
-
----
-
-## 6. Testing and Simulation
-
-### 6.1 Unit Testing
+### 5.1 Unit Testing
 
 * `TestSDK` for module-level tests
 * Validate message delivery, transport reliability
 
-### 6.2 Network Simulation
+### 5.2 Network Simulation
 
 * `TestEngine` allows multiple nodes to run on one host
 * Heterogeneous simulation (PCs + MCU nodes)
-* Logging and monitoring via Rust tooling
 
 ---
 
-## 7. Best Practices
+## 6. Best Practices
 
 * Keep SDK minimal and modular
 * Avoid application-specific logic in BABE
-* Use Rust tooling for analysis, not core functionality
 * Use FFI/IPC for safe, controlled interaction
 * Add new transports as modular extensions
 
 ---
 
-## 8. Reference
+## 7. Reference
 
 * **C++ SDK APIs**: lifecycle, networking, messaging
-* **Rust Tooling APIs**: logging, metrics, multi-node control
 * **IPC / Shared Memory Formats**: events, logs, messages
 * **Example Configurations**: node parameters, logging options
 

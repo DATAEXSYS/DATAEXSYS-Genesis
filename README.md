@@ -42,7 +42,6 @@ The system is split into a high-level security and application layer (DATAEXSYS)
 
 - **Key Features:**
   - A professional C++23 SDK for system-level ad-hoc network programming.
-  - Comprehensive Rust-based tooling for debugging, simulation, and analysis.
   - A modular architecture (`App | Link | Trans | Net`) for maximum flexibility.
 
 > For detailed information, see the [**BABE Engine Documentation**](./BABE/docs/BABE-Engine.md).
@@ -56,8 +55,8 @@ The system architecture is designed in layers, with DATAEXSYS providing the secu
 |      DATAEXSYS (Security & Application Layer)   |
 | (Blockchain, Trust Model, Secure Routing Logic) |
 +-------------------------------------------------+
-|        BABE (Networking Engine & Tooling)       |
-|    (Peer Discovery, Transport, C++ SDK, Rust)   |
+|        BABE (Networking Engine)                 |
+|    (Peer Discovery, Transport, C++ SDK)         |
 +-------------------------------------------------+
 ```
 
@@ -72,7 +71,7 @@ To build and run the system, you must build the components in order.
 
 ## Directory Structure
 
-- **/BABE/**: Contains the source code, tooling, and documentation for the BABE networking engine.
+- **/BABE/**: Contains the source code and documentation for the BABE networking engine.
 - **/DATAEXSYS/**: Contains the source code and documentation for the DATAEXSYS security system.
 - **/F25_079/**: Contains the LaTeX source code for the associated academic research paper.
 - `README.md`: This file.
