@@ -1,6 +1,6 @@
 #pragma once
 #include "MessageChunkNode.h"
-struct MessageChunkList{
+struct MessageChunksList{
     MessageChunkNode* head;
     MessageChunkNode* tail;
 };

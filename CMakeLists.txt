@@ -31,6 +31,8 @@ target_sources(dataexsys_genesis PRIVATE ${SOURCE_FILES})
 # Add include directories to the target. This is the modern way.
 target_include_directories(dataexsys_genesis PUBLIC
     "${CMAKE_CURRENT_SOURCE_DIR}/BABE/SDK/inc"
+    "${CMAKE_CURRENT_SOURCE_DIR}/BABE/SDK/inc/App"
+    "${CMAKE_CURRENT_SOURCE_DIR}/BABE/SDK/inc/App/Classes"
     "${CMAKE_CURRENT_SOURCE_DIR}/BABE"
     "${CMAKE_CURRENT_SOURCE_DIR}/DATAEXSYS"
 )
