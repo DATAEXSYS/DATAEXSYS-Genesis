@@ -1,8 +1,14 @@
 [
 {
   "directory": "/home/binaryhive/Public/DATAEXSYS-Genesis/build",
-  "command": "/usr/bin/clang++-16  -I/home/binaryhive/Public/DATAEXSYS-Genesis/BABE/SDK/inc -I/home/binaryhive/Public/DATAEXSYS-Genesis/BABE -I/home/binaryhive/Public/DATAEXSYS-Genesis/DATAEXSYS -g -std=gnu++2b -o CMakeFiles/dataexsys_genesis.dir/BABE/SDK/src/App/AppLayer.cpp.o -c /home/binaryhive/Public/DATAEXSYS-Genesis/BABE/SDK/src/App/AppLayer.cpp",
+  "command": "/usr/bin/clang++-16  -I/home/binaryhive/Public/DATAEXSYS-Genesis/BABE/SDK/inc -I/home/binaryhive/Public/DATAEXSYS-Genesis/BABE/SDK/inc/App -I/home/binaryhive/Public/DATAEXSYS-Genesis/BABE/SDK/inc/App/Classes -I/home/binaryhive/Public/DATAEXSYS-Genesis/BABE -I/home/binaryhive/Public/DATAEXSYS-Genesis/DATAEXSYS -g -std=gnu++2b -o CMakeFiles/dataexsys_genesis.dir/BABE/SDK/src/App/AppLayer.cpp.o -c /home/binaryhive/Public/DATAEXSYS-Genesis/BABE/SDK/src/App/AppLayer.cpp",
   "file": "/home/binaryhive/Public/DATAEXSYS-Genesis/BABE/SDK/src/App/AppLayer.cpp",
   "output": "CMakeFiles/dataexsys_genesis.dir/BABE/SDK/src/App/AppLayer.cpp.o"
+},
+{
+  "directory": "/home/binaryhive/Public/DATAEXSYS-Genesis/build",
+  "command": "/usr/bin/clang++-16  -I/home/binaryhive/Public/DATAEXSYS-Genesis/BABE/SDK/inc -I/home/binaryhive/Public/DATAEXSYS-Genesis/BABE/SDK/inc/App -I/home/binaryhive/Public/DATAEXSYS-Genesis/BABE/SDK/inc/App/Classes -I/home/binaryhive/Public/DATAEXSYS-Genesis/BABE -I/home/binaryhive/Public/DATAEXSYS-Genesis/DATAEXSYS -g -std=gnu++2b -o CMakeFiles/dataexsys_genesis.dir/BABE/SDK/src/Helper/BE.cpp.o -c /home/binaryhive/Public/DATAEXSYS-Genesis/BABE/SDK/src/Helper/BE.cpp",
+  "file": "/home/binaryhive/Public/DATAEXSYS-Genesis/BABE/SDK/src/Helper/BE.cpp",
+  "output": "CMakeFiles/dataexsys_genesis.dir/BABE/SDK/src/Helper/BE.cpp.o"
 }
 ]

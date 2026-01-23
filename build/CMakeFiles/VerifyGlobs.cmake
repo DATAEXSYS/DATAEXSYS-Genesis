@@ -6,6 +6,7 @@ cmake_policy(SET CMP0009 NEW)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "/home/binaryhive/Public/DATAEXSYS-Genesis/BABE/*.cpp")
 set(OLD_GLOB
   "/home/binaryhive/Public/DATAEXSYS-Genesis/BABE/SDK/src/App/AppLayer.cpp"
+  "/home/binaryhive/Public/DATAEXSYS-Genesis/BABE/SDK/src/Helper/BE.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
@@ -15,11 +16,13 @@ endif()
 # BABE_FILES at CMakeLists.txt:10 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "/home/binaryhive/Public/DATAEXSYS-Genesis/BABE/*.h")
 set(OLD_GLOB
+  "/home/binaryhive/Public/DATAEXSYS-Genesis/BABE/SDK/inc/App/Adapters/FileToRaw.h"
   "/home/binaryhive/Public/DATAEXSYS-Genesis/BABE/SDK/inc/App/AppLayer.h"
   "/home/binaryhive/Public/DATAEXSYS-Genesis/BABE/SDK/inc/App/Classes/File.h"
   "/home/binaryhive/Public/DATAEXSYS-Genesis/BABE/SDK/inc/App/Classes/Message.h"
   "/home/binaryhive/Public/DATAEXSYS-Genesis/BABE/SDK/inc/App/Classes/MessageChunkNode.h"
   "/home/binaryhive/Public/DATAEXSYS-Genesis/BABE/SDK/inc/App/Classes/MessageChunksList.h"
+  "/home/binaryhive/Public/DATAEXSYS-Genesis/BABE/SDK/inc/Helper/BE.h"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")

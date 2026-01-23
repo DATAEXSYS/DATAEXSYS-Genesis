@@ -154,6 +154,30 @@ BABE/SDK/src/App/AppLayer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/dataexsys_genesis.dir/build.make CMakeFiles/dataexsys_genesis.dir/BABE/SDK/src/App/AppLayer.cpp.s
 .PHONY : BABE/SDK/src/App/AppLayer.cpp.s
 
+BABE/SDK/src/Helper/BE.o: BABE/SDK/src/Helper/BE.cpp.o
+.PHONY : BABE/SDK/src/Helper/BE.o
+
+# target to build an object file
+BABE/SDK/src/Helper/BE.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dataexsys_genesis.dir/build.make CMakeFiles/dataexsys_genesis.dir/BABE/SDK/src/Helper/BE.cpp.o
+.PHONY : BABE/SDK/src/Helper/BE.cpp.o
+
+BABE/SDK/src/Helper/BE.i: BABE/SDK/src/Helper/BE.cpp.i
+.PHONY : BABE/SDK/src/Helper/BE.i
+
+# target to preprocess a source file
+BABE/SDK/src/Helper/BE.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dataexsys_genesis.dir/build.make CMakeFiles/dataexsys_genesis.dir/BABE/SDK/src/Helper/BE.cpp.i
+.PHONY : BABE/SDK/src/Helper/BE.cpp.i
+
+BABE/SDK/src/Helper/BE.s: BABE/SDK/src/Helper/BE.cpp.s
+.PHONY : BABE/SDK/src/Helper/BE.s
+
+# target to generate assembly for a file
+BABE/SDK/src/Helper/BE.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dataexsys_genesis.dir/build.make CMakeFiles/dataexsys_genesis.dir/BABE/SDK/src/Helper/BE.cpp.s
+.PHONY : BABE/SDK/src/Helper/BE.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -166,6 +190,9 @@ help:
 	@echo "... BABE/SDK/src/App/AppLayer.o"
 	@echo "... BABE/SDK/src/App/AppLayer.i"
 	@echo "... BABE/SDK/src/App/AppLayer.s"
+	@echo "... BABE/SDK/src/Helper/BE.o"
+	@echo "... BABE/SDK/src/Helper/BE.i"
+	@echo "... BABE/SDK/src/Helper/BE.s"
 .PHONY : help
 
 

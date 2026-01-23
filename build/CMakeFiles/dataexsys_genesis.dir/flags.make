@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/clang++-16
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/binaryhive/Public/DATAEXSYS-Genesis/BABE/SDK/inc -I/home/binaryhive/Public/DATAEXSYS-Genesis/BABE -I/home/binaryhive/Public/DATAEXSYS-Genesis/DATAEXSYS
+CXX_INCLUDES = -I/home/binaryhive/Public/DATAEXSYS-Genesis/BABE/SDK/inc -I/home/binaryhive/Public/DATAEXSYS-Genesis/BABE/SDK/inc/App -I/home/binaryhive/Public/DATAEXSYS-Genesis/BABE/SDK/inc/App/Classes -I/home/binaryhive/Public/DATAEXSYS-Genesis/BABE -I/home/binaryhive/Public/DATAEXSYS-Genesis/DATAEXSYS
 
 CXX_FLAGS = -g -std=gnu++2b
 

@@ -2,7 +2,8 @@
 #include <cstdint>
 #include <stddef.h>
 #include "Classes/MessageChunksList.h"
+#include "Classes/File.h"
 
-MessageChunksList* sendData(void* data, uint64_t size, uint8_t senderID, uint8_t receiverID);
+MessageChunksList* sendData(File& file, uint8_t senderID, uint8_t receiverID);
 
 

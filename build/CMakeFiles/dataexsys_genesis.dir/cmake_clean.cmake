@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/dataexsys_genesis.dir/BABE/SDK/src/App/AppLayer.cpp.o"
   "CMakeFiles/dataexsys_genesis.dir/BABE/SDK/src/App/AppLayer.cpp.o.d"
+  "CMakeFiles/dataexsys_genesis.dir/BABE/SDK/src/Helper/BE.cpp.o"
+  "CMakeFiles/dataexsys_genesis.dir/BABE/SDK/src/Helper/BE.cpp.o.d"
   "dataexsys_genesis"
   "dataexsys_genesis.pdb"
 )
