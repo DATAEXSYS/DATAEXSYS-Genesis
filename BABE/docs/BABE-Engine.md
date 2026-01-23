@@ -1,764 +1,365 @@
-Below is a **properly organized, production-grade documentation structure** for your project, including **all strategies, third-party libraries, integrations, and deployment plans**.
-This is written as a **complete documentation spec** (you can copy it into your repo as `README.md` or a `docs/` structure).
+# Babe (Base Adhoc Base Engine) — Documentation
+
+This repository contains **Babe**, the **Base Adhoc Base Engine** — a high-performance, Linux-first ad-hoc networking platform built for **production**, **simulation**, and **research**.
+
+Babe is composed of two primary systems:
+
+* **Babe LDK (Local Development Kit)**: local runtime + SDK
+* **Babe NaaS (Network-as-a-Service)**: Kubernetes-first distributed control plane + governance
 
 ---
 
-# **Basic Adhic Base Engine — Documentation (LDK + NaaS)**
+# Table of Contents
 
----
-
-## **Table of Contents**
-
-1. [Project Overview](#project-overview)
-2. [System Architecture](#system-architecture)
-3. [Core Engine Design](#core-engine-design)
-4. [Local Development Kit (LDK)](#local-development-kit-ldk)
-5. [Network-as-a-Service (NaaS)](#network-as-a-service-naas)
+1. [Overview](#overview)
+2. [Architecture](#architecture)
+3. [Engine Core](#engine-core)
+4. [Babe LDK (Local Development Kit)](#babe-ldk-local-development-kit)
+5. [Babe NaaS (Network-as-a-Service)](#babe-naas-network-as-a-service)
 6. [Shared Runtime & Binary](#shared-runtime--binary)
 7. [Performance Strategy](#performance-strategy)
-8. [Third-Party Libraries & Integration](#third-party-libraries--integration)
-9. [Simulation & Research Tools](#simulation--research-tools)
-10. [DevSecOps & CI/CD Strategy](#devsecops--cicd-strategy)
-11. [Deployment Strategy (Kubernetes-first)](#deployment-strategy-kubernetes-first)
-12. [Glossary & Definitions](#glossary--definitions)
+8. [Third-Party Integrations](#third-party-integrations)
+9. [Simulation & Research](#simulation--research)
+10. [DevSecOps & CI/CD](#devsecops--cicd)
+11. [Deployment (Kubernetes-first)](#deployment-kubernetes-first)
+12. [API & Interfaces](#api--interfaces)
+13. [Glossary](#glossary)
 
 ---
 
-# 1. Project Overview
+## Overview
 
-**Basic Adhic Base Engine** is a high-performance, Linux-first ad-hoc networking engine built for:
+### Vision
 
-* **Production**
-* **Simulation**
-* **Research**
+Babe is a scalable, high-performance ad-hoc networking platform where **DSR is first-class**, built for real-world production and research-grade simulation.
 
-It is:
+### Principles
 
-* **Event-driven**
-* **Parallel**
-* **Zero-copy**
-* **Fixed-buffer**
-* **DSR-native (Dynamic Source Routing)**
-* **Headless (no GUI)**
+* **Performance-first**: zero-copy, fixed buffers, lock-free, kernel-bypass options
+* **No reinventing wheels**: integrate best-of-breed OSS tools
+* **Same runtime core** for Babe LDK and Babe NaaS
+* **Offline-first ad-hoc** operation
+* **Deterministic simulation and replay**
 
-This project is split into:
+### Core Differentiator
 
-* **LDK (Local Development Kit)**: local runtime for dev + research + production
-* **NaaS (Network-as-a-Service)**: Kubernetes-first distributed control plane + governance layer
+Babe LDK and Babe NaaS run the **same engine core**, but differ in control plane and operational scope.
 
 ---
 
-# 2. System Architecture
+## Architecture
 
-## 2.1 Architectural Layers
+### 2.1 Layers
 
-### Data Plane (LDK)
+**Data Plane (Engine Core)**
 
 * Packet processing
 * DSR routing
-* Fixed-buffer
+* Fixed-buffer + zero-copy
 * Event-driven runtime
-* Zero-copy memory model
+* Parallelism
 
-### Control Plane (NaaS)
+**Control Plane (Babe NaaS)**
 
-* Policy enforcement
-* Compliance auditing
-* Telemetry aggregation
-* Service orchestration
-* Multi-tenant management
+* Policy distribution
+* Compliance
+* Multi-tenant governance
+* Observability
+* Orchestration
+
+### 2.2 Modes
+
+* **LDK mode**: local runtime, developer-owned
+* **NaaS mode**: managed control plane + distributed management
+
+### 2.3 Offline-first Design
+
+* Policy bundles distributed ahead of time
+* Local execution continues even when disconnected
+* Event logs stored locally and synced when connected
 
 ---
 
-## 2.2 Design Philosophy
+## Engine Core
 
-### **High-Performance First**
+### 3.1 Runtime Model
 
-* No allocations in hot paths
-* Zero copy
+* Event-driven loop (libuv or Boost.Asio)
+* Non-blocking IO (epoll / io_uring)
+* Per-core workers
 * Lock-free queues
-* Per-core buffer pools
-* Kernel bypass (DPDK / AF_XDP)
 
-### **No Reinventing Wheels**
+### 3.2 Buffer Model
 
-Use best-in-class third-party tools for:
+* Fixed-size buffer pools
+* No heap allocation in hot path
+* Ownership transfer
+* Per-thread cache
 
-* networking
-* logging
-* observability
-* orchestration
-* simulation
-* security
-
-### **Same Engine Core**
-
-LDK and NaaS use **the same binary** and **same runtime core**.
-
----
-
-# 3. Core Engine Design
-
-## 3.1 Runtime
-
-### Event-Driven
-
-* Event loop using **libuv** or **Boost.Asio**
-* Non-blocking sockets using **epoll / io_uring**
-* Message passing between modules
-
-### Parallelism
-
-* Per-core worker threads
-* Work-stealing thread pool
-* Lock-free queue architecture
-
-### Buffer Management
-
-* Fixed-size buffer slabs
-* No heap allocations in hot path
-* Buffer ownership transfer (no copying)
-* Per-thread buffer pools
-
----
-
-## 3.2 DSR Routing
-
-Core DSR components:
+### 3.3 DSR Module
 
 * Route discovery
 * Route cache
 * Route maintenance
 * Route error handling
 * Full path header
-* Packet forwarding
 
-### Performance Optimization
+### 3.4 Transport Layer
 
-* Cache-friendly data structures
-* Minimal header overhead
-* Inline path validation
-* Route pre-computation
+* Lightweight reliability (optional)
+* Segment/reassemble
+* App-level reliability policies
 
 ---
 
-# 4. Local Development Kit (LDK)
+## Babe LDK (Local Development Kit)
 
-LDK is the **local runtime** and SDK.
+### 4.1 Features
 
-## 4.1 Features
+* Local runtime
+* SDK APIs (C/C++)
+* Simulation harness
+* Performance profiling tools
 
-* Local mesh runtime
-* Event-driven SDK
-* Simulation support
-* High-performance packet processing
-* Local policy enforcement (if needed)
+### 4.2 Build System
 
-## 4.2 SDK Components
-
-* C/C++ API bindings
-* Zero-copy buffers
-* Event model
-* Route events
-* Transport APIs
-
-## 4.3 Build System
-
-* **CMake** as canonical build system
+* **CMake** (canonical)
 * **Make**
-* **Qt** for tooling + IDE integration
-* **C/C++** runtime
+* **Qt** for tooling (not GUI)
+* **C/C++** core
+
+### 4.3 Developer Workflow
+
+* Build
+* Run simulation
+* Run local mesh
+* Export artifacts
+* Deploy to Babe NaaS (optional)
 
 ---
 
-# 5. Network-as-a-Service (NaaS)
+## Babe NaaS (Network-as-a-Service)
 
-NaaS is the distributed governance layer.
-
-## 5.1 NaaS Features
+### 5.1 Responsibilities
 
 * Policy-as-a-Service
 * Compliance-as-a-Service
 * Multi-tenant management
-* Telemetry & monitoring
-* Orchestration + lifecycle
-* Offline-first support
+* Observability
+* Orchestration
 
-## 5.2 Offline-First Ad-Hoc Behavior
+### 5.2 Control Plane Components
 
-NaaS does not require constant connectivity:
+* Policy engine
+* Compliance engine
+* Telemetry collector
+* Service catalog
+* Node registry
 
-* **Policy bundles are pre-distributed**
-* Nodes continue running offline
-* Logs are locally stored
-* Sync occurs when connectivity returns
+### 5.3 Offline-first Operation
 
----
-
-# 6. Shared Runtime & Binary
-
-Both LDK and NaaS use the **same runtime binary**:
-
-```
-Engine Core (C/C++ runtime)
-   ├─ LDK mode (local runtime)
-   └─ NaaS mode (distributed control plane)
-```
-
-### Mode Selection
-
-* Runtime mode is selected at startup via:
-
-  * configuration file
-  * environment variables
-  * CLI flag
+* Pre-distributed policies
+* Local enforcement
+* Event log replay
 
 ---
 
-# 7. Performance Strategy
+## Shared Runtime & Binary
 
-## 7.1 Core Principles
+### 6.1 Single Binary Strategy
 
-* **No allocations in hot path**
-* **No copying**
-* **No locks**
-* **Per-core pools**
-* **Kernel bypass**
+* One engine core binary
+* Mode selected via config/CLI
 
-## 7.2 Network Optimization
+### 6.2 Configuration
 
-* AF_XDP / DPDK for high throughput
-* eBPF for packet filtering
-* Zero-copy sockets
-
-## 7.3 Profiling Tools
-
-* `perf`
-* `BPFTrace`
-* `Valgrind` (debug mode only)
-* `Google Benchmark`
+* YAML/JSON configuration
+* Environment variables
+* CLI flags
 
 ---
 
-# 8. Third-Party Libraries & Integration
+## Performance Strategy
 
-### Networking
+### 7.1 Performance Rules
 
-* **Boost.Asio** (event loop)
-* **libuv** (alternative event loop)
-* **DPDK** (high-performance packet IO)
-* **AF_XDP** (kernel bypass)
-* **eBPF** (packet filtering / tracing)
-
-### Messaging & Control Plane
-
-* **NATS** (event bus)
-* **Kafka** (high throughput stream)
-* **gRPC** (control APIs)
-
-### Observability
-
-* **Prometheus**
-* **Grafana**
-* **Loki**
-
-### Storage & DB
-
-* **PostgreSQL**
-* **Redis**
-* **Cassandra** (optional for huge scale)
-
-### Security & DevSecOps
-
-* **Semgrep**
-* **Cppcheck**
-* **SonarQube**
-* **Trivy**
-* **Syft**
-
-### Simulation
-
-* **ns-3**
-* **Mininet**
-* **OMNeT++**
-
----
-
-# 9. Simulation & Research Tools
-
-## 9.1 Simulation Support
-
-* Use **ns-3** / **Mininet** for network simulation
-* Use custom simulation harness based on LDK engine
-* Support deterministic time and replay
-
-## 9.2 Research Tools
-
-* Jupyter notebooks
-* Python (NumPy / Pandas)
-* Plotting (Matplotlib)
-* Data versioning
-
----
-
-# 10. DevSecOps & CI/CD Strategy
-
-## 10.1 Pipeline Stages
-
-* Build
-* Unit tests
-* Static analysis
-* Security scan
-* Performance benchmarks
-* Deployment
-
-## 10.2 Tools
-
-* **GitHub Actions** or **GitLab CI**
-* **CMake + CTest**
-* **Semgrep / Cppcheck**
-* **Trivy**
-* **SonarQube**
-
----
-
-# 11. Deployment Strategy (Kubernetes-first)
-
-## 11.1 NaaS Deployment
-
-NaaS is Kubernetes-native:
-
-* Helm charts
-* StatefulSets for control plane
-* DaemonSets for edge nodes
-* Ingress / service mesh
-
-### Recommended Cloud Stack
-
-* Kubernetes
-* Helm
-* ArgoCD (GitOps)
-* Prometheus
-* Grafana
-* Loki
-* NATS / Kafka
-
-## 11.2 LDK Deployment
-
-LDK is deployable as:
-
-* Static binaries
-* Container images
-* Edge deployments
-
----
-
-# 12. Glossary & Definitions
-
-| Term              | Definition                                       |
-| ----------------- | ------------------------------------------------ |
-| **LDK**           | Local Development Kit (local runtime)            |
-| **NaaS**          | Network-as-a-Service (distributed control plane) |
-| **DSR**           | Dynamic Source Routing                           |
-| **Zero-copy**     | No buffer copy in hot path                       |
-| **Fixed-buffer**  | Pre-allocated buffer pools                       |
-| **AF_XDP**        | Linux kernel bypass for high perf                |
-| **DPDK**          | Data Plane Development Kit                       |
-| **Policy bundle** | Pre-distributed policy package                   |
-
----
-
-# 🚀 Next Step
-
-If you want, I can now generate:
-
-✅ **A full documentation folder** (`docs/`)
-✅ **Detailed API specs** for the LDK
-✅ **Policy & compliance schema**
-✅ **Kubernetes manifests + Helm charts skeleton**
-✅ **Performance benchmark plans**
-
-Just say the word.
-
-
-Below is a **properly organized, production-grade documentation structure** for your project, including **all strategies, third-party libraries, integrations, and deployment plans**.
-This is written as a **complete documentation spec** (you can copy it into your repo as `README.md` or a `docs/` structure).
-
----
-
-# **Basic Adhic Base Engine — Documentation (LDK + NaaS)**
-
----
-
-## **Table of Contents**
-
-1. [Project Overview](#project-overview)
-2. [System Architecture](#system-architecture)
-3. [Core Engine Design](#core-engine-design)
-4. [Local Development Kit (LDK)](#local-development-kit-ldk)
-5. [Network-as-a-Service (NaaS)](#network-as-a-service-naas)
-6. [Shared Runtime & Binary](#shared-runtime--binary)
-7. [Performance Strategy](#performance-strategy)
-8. [Third-Party Libraries & Integration](#third-party-libraries--integration)
-9. [Simulation & Research Tools](#simulation--research-tools)
-10. [DevSecOps & CI/CD Strategy](#devsecops--cicd-strategy)
-11. [Deployment Strategy (Kubernetes-first)](#deployment-strategy-kubernetes-first)
-12. [Glossary & Definitions](#glossary--definitions)
-
----
-
-# 1. Project Overview
-
-**Basic Adhic Base Engine** is a high-performance, Linux-first ad-hoc networking engine built for:
-
-* **Production**
-* **Simulation**
-* **Research**
-
-It is:
-
-* **Event-driven**
-* **Parallel**
-* **Zero-copy**
-* **Fixed-buffer**
-* **DSR-native (Dynamic Source Routing)**
-* **Headless (no GUI)**
-
-This project is split into:
-
-* **LDK (Local Development Kit)**: local runtime for dev + research + production
-* **NaaS (Network-as-a-Service)**: Kubernetes-first distributed control plane + governance layer
-
----
-
-# 2. System Architecture
-
-## 2.1 Architectural Layers
-
-### Data Plane (LDK)
-
-* Packet processing
-* DSR routing
-* Fixed-buffer
-* Event-driven runtime
-* Zero-copy memory model
-
-### Control Plane (NaaS)
-
-* Policy enforcement
-* Compliance auditing
-* Telemetry aggregation
-* Service orchestration
-* Multi-tenant management
-
----
-
-## 2.2 Design Philosophy
-
-### **High-Performance First**
-
-* No allocations in hot paths
-* Zero copy
-* Lock-free queues
+* No allocations in hot path
+* No copying
+* No locks
+* Kernel bypass (DPDK/AF_XDP)
 * Per-core buffer pools
-* Kernel bypass (DPDK / AF_XDP)
 
-### **No Reinventing Wheels**
+### 7.2 Networking Stack Options
 
-Use best-in-class third-party tools for:
+* Raw sockets
+* AF_XDP
+* DPDK
+* eBPF filtering
 
-* networking
-* logging
-* observability
-* orchestration
-* simulation
-* security
+### 7.3 Profiling
 
-### **Same Engine Core**
-
-LDK and NaaS use **the same binary** and **same runtime core**.
+* perf
+* BPFTrace
+* Google Benchmark
+* Wireshark / tcpdump
 
 ---
 
-# 3. Core Engine Design
+## Third-Party Integrations
 
-## 3.1 Runtime
+### 8.1 Networking & IO
 
-### Event-Driven
+* Boost.Asio / libuv
+* DPDK
+* AF_XDP
+* eBPF
 
-* Event loop using **libuv** or **Boost.Asio**
-* Non-blocking sockets using **epoll / io_uring**
-* Message passing between modules
+### 8.2 Messaging / Event Bus
 
-### Parallelism
+* NATS
+* Kafka
+* gRPC
 
-* Per-core worker threads
-* Work-stealing thread pool
-* Lock-free queue architecture
+### 8.3 Observability
 
-### Buffer Management
+* Prometheus
+* Grafana
+* Loki
 
-* Fixed-size buffer slabs
-* No heap allocations in hot path
-* Buffer ownership transfer (no copying)
-* Per-thread buffer pools
+### 8.4 Storage
 
----
+* PostgreSQL
+* Redis
+* Cassandra (optional)
 
-## 3.2 DSR Routing
+### 8.5 DevSecOps
 
-Core DSR components:
+* Semgrep
+* Cppcheck
+* SonarQube
+* Trivy
+* Syft
 
-* Route discovery
-* Route cache
-* Route maintenance
-* Route error handling
-* Full path header
-* Packet forwarding
+### 8.6 Simulation
 
-### Performance Optimization
-
-* Cache-friendly data structures
-* Minimal header overhead
-* Inline path validation
-* Route pre-computation
+* ns-3
+* Mininet
+* OMNeT++
 
 ---
 
-# 4. Local Development Kit (LDK)
+## Simulation & Research
 
-LDK is the **local runtime** and SDK.
+### 9.1 Simulation Goals
 
-## 4.1 Features
+* Deterministic time
+* Reproducible scenarios
+* Replayable logs
 
-* Local mesh runtime
-* Event-driven SDK
-* Simulation support
-* High-performance packet processing
-* Local policy enforcement (if needed)
+### 9.2 Tools
 
-## 4.2 SDK Components
-
-* C/C++ API bindings
-* Zero-copy buffers
-* Event model
-* Route events
-* Transport APIs
-
-## 4.3 Build System
-
-* **CMake** as canonical build system
-* **Make**
-* **Qt** for tooling + IDE integration
-* **C/C++** runtime
+* ns-3
+* Mininet
+* OMNeT++
+* Jupyter
+* Python (NumPy/Pandas)
 
 ---
 
-# 5. Network-as-a-Service (NaaS)
+## DevSecOps & CI/CD
 
-NaaS is the distributed governance layer.
-
-## 5.1 NaaS Features
-
-* Policy-as-a-Service
-* Compliance-as-a-Service
-* Multi-tenant management
-* Telemetry & monitoring
-* Orchestration + lifecycle
-* Offline-first support
-
-## 5.2 Offline-First Ad-Hoc Behavior
-
-NaaS does not require constant connectivity:
-
-* **Policy bundles are pre-distributed**
-* Nodes continue running offline
-* Logs are locally stored
-* Sync occurs when connectivity returns
-
----
-
-# 6. Shared Runtime & Binary
-
-Both LDK and NaaS use the **same runtime binary**:
-
-```
-Engine Core (C/C++ runtime)
-   ├─ LDK mode (local runtime)
-   └─ NaaS mode (distributed control plane)
-```
-
-### Mode Selection
-
-* Runtime mode is selected at startup via:
-
-  * configuration file
-  * environment variables
-  * CLI flag
-
----
-
-# 7. Performance Strategy
-
-## 7.1 Core Principles
-
-* **No allocations in hot path**
-* **No copying**
-* **No locks**
-* **Per-core pools**
-* **Kernel bypass**
-
-## 7.2 Network Optimization
-
-* AF_XDP / DPDK for high throughput
-* eBPF for packet filtering
-* Zero-copy sockets
-
-## 7.3 Profiling Tools
-
-* `perf`
-* `BPFTrace`
-* `Valgrind` (debug mode only)
-* `Google Benchmark`
-
----
-
-# 8. Third-Party Libraries & Integration
-
-### Networking
-
-* **Boost.Asio** (event loop)
-* **libuv** (alternative event loop)
-* **DPDK** (high-performance packet IO)
-* **AF_XDP** (kernel bypass)
-* **eBPF** (packet filtering / tracing)
-
-### Messaging & Control Plane
-
-* **NATS** (event bus)
-* **Kafka** (high throughput stream)
-* **gRPC** (control APIs)
-
-### Observability
-
-* **Prometheus**
-* **Grafana**
-* **Loki**
-
-### Storage & DB
-
-* **PostgreSQL**
-* **Redis**
-* **Cassandra** (optional for huge scale)
-
-### Security & DevSecOps
-
-* **Semgrep**
-* **Cppcheck**
-* **SonarQube**
-* **Trivy**
-* **Syft**
-
-### Simulation
-
-* **ns-3**
-* **Mininet**
-* **OMNeT++**
-
----
-
-# 9. Simulation & Research Tools
-
-## 9.1 Simulation Support
-
-* Use **ns-3** / **Mininet** for network simulation
-* Use custom simulation harness based on LDK engine
-* Support deterministic time and replay
-
-## 9.2 Research Tools
-
-* Jupyter notebooks
-* Python (NumPy / Pandas)
-* Plotting (Matplotlib)
-* Data versioning
-
----
-
-# 10. DevSecOps & CI/CD Strategy
-
-## 10.1 Pipeline Stages
+### 10.1 Pipeline Stages
 
 * Build
 * Unit tests
 * Static analysis
 * Security scan
-* Performance benchmarks
+* Benchmark tests
 * Deployment
 
-## 10.2 Tools
+### 10.2 Tools
 
-* **GitHub Actions** or **GitLab CI**
-* **CMake + CTest**
-* **Semgrep / Cppcheck**
-* **Trivy**
-* **SonarQube**
+* GitHub Actions / GitLab CI
+* CTest
+* Semgrep
+* Trivy
+* SonarQube
 
 ---
 
-# 11. Deployment Strategy (Kubernetes-first)
+## Deployment (Kubernetes-first)
 
-## 11.1 NaaS Deployment
+### 11.1 Babe NaaS Deployment
 
-NaaS is Kubernetes-native:
-
+* Kubernetes cluster
 * Helm charts
-* StatefulSets for control plane
-* DaemonSets for edge nodes
-* Ingress / service mesh
-
-### Recommended Cloud Stack
-
-* Kubernetes
-* Helm
 * ArgoCD (GitOps)
-* Prometheus
-* Grafana
-* Loki
-* NATS / Kafka
+* Prometheus/Grafana/Loki
+* NATS/Kafka
 
-## 11.2 LDK Deployment
-
-LDK is deployable as:
+### 11.2 Babe LDK Deployment
 
 * Static binaries
-* Container images
-* Edge deployments
+* Docker images
+* Edge node deployment
 
 ---
 
-# 12. Glossary & Definitions
+## API & Interfaces
 
-| Term              | Definition                                       |
-| ----------------- | ------------------------------------------------ |
-| **LDK**           | Local Development Kit (local runtime)            |
-| **NaaS**          | Network-as-a-Service (distributed control plane) |
-| **DSR**           | Dynamic Source Routing                           |
-| **Zero-copy**     | No buffer copy in hot path                       |
-| **Fixed-buffer**  | Pre-allocated buffer pools                       |
-| **AF_XDP**        | Linux kernel bypass for high perf                |
-| **DPDK**          | Data Plane Development Kit                       |
-| **Policy bundle** | Pre-distributed policy package                   |
+### 12.1 Event API
+
+* NetEvent
+* RouteEvent
+* LinkEvent
+* AppEvent
+* TimerEvent
+
+### 12.2 Policy API
+
+* Policy bundle format
+* Enforcement hooks
+
+### 12.3 Control API (Babe NaaS)
+
+* gRPC endpoints
+* REST endpoints
 
 ---
 
-# 🚀 Next Step
+## Glossary
 
-If you want, I can now generate:
+* **Babe**: Base Adhoc Base Engine
+* **LDK**: Local Development Kit
+* **NaaS**: Network-as-a-Service
+* **DSR**: Dynamic Source Routing
+* **Zero-copy**: No buffer copying in hot path
+* **Fixed-buffer**: Pre-allocated buffer pools
+* **AF_XDP**: Linux kernel bypass for high perf
+* **DPDK**: Data Plane Development Kit
 
-✅ **A full documentation folder** (`docs/`)
-✅ **Detailed API specs** for the LDK
-✅ **Policy & compliance schema**
-✅ **Kubernetes manifests + Helm charts skeleton**
-✅ **Performance benchmark plans**
+---
 
-Just say the word.
+# Next Steps
+
+1. Create the docs folder structure (`docs/`)
+2. Add architecture diagrams (Mermaid/PlantUML)
+3. Fill in detailed API specs
+4. Create Helm chart skeleton
+5. Create CI pipeline templates
+
+---
+
+If you want, I can generate the following as separate files:
+
+* `docs/architecture.md`
+* `docs/ldk.md`
+* `docs/naas.md`
+* `docs/performance.md`
+* `docs/deployment.md`
+* `docs/ci-cd.md`
+* `docs/api.md`
+* `helm/` chart skeleton
+* `k8s/` manifests
+
+Just say which ones you want first.
